@@ -1,0 +1,121 @@
+public class ValueConverter {
+
+    public static double airPressure(short rawValue) {
+        double air = (rawValue / 100.0) * 3.386;
+        return air;
+    }
+
+    public static double Temperature(short rawValue) {
+        double outsidetemperature = (((rawValue / 10.0)) - 32.0) * 5.0 / 9.0;
+        return outsidetemperature;
+    }
+
+    public static double windSpeed(short rawValue) {
+        double windspeed = rawValue * 1.609;
+        return windspeed;
+    }
+
+    public static String windDirection(short rawValue) {
+        String winddir = "";
+        if (rawValue >= 0 && rawValue <= 22.5) {
+            winddir = "N/NO";
+            return winddir;
+        } else if (rawValue > 22.5 && rawValue <= 45) {
+            winddir = "NO";
+            return winddir;
+        } else if (rawValue > 45 && rawValue <= 67.5) {
+            winddir = "O/NO";
+            return winddir;
+        } else if (rawValue > 67.5 && rawValue <= 90) {
+            winddir = "O";
+            return winddir;
+        } else if (rawValue > 90 && rawValue <= 135) {
+            winddir = "ZO";
+            return winddir;
+        } else if (rawValue > 135 && rawValue <= 157.5) {
+            winddir = "Z/ZO";
+            return winddir;
+        } else if (rawValue > 157.5 && rawValue <= 180) {
+            winddir = "Z";
+            return winddir;
+        } else if (rawValue > 180 && rawValue <= 202.5) {
+            winddir = "Z/ZW";
+            return winddir;
+        } else if (rawValue > 202.5 && rawValue <= 225) {
+            winddir = "ZW";
+            return winddir;
+        } else if (rawValue > 225 && rawValue <= 247.5) {
+            winddir = "W/ZW";
+            return winddir;
+        } else if (rawValue > 247.5 && rawValue <= 270) {
+            winddir = "W";
+            return winddir;
+        } else if (rawValue > 270 && rawValue <= 292.5) {
+            winddir = "W/NW";
+            return winddir;
+        } else if (rawValue > 292.5 && rawValue <= 315) {
+            winddir = "NW";
+            return winddir;
+        } else if (rawValue > 315 && rawValue <= 337.5) {
+            winddir = "N/NW";
+            return winddir;
+        } else if (rawValue > 337.5 && rawValue <= 360) {
+            winddir = "N";
+            return winddir;
+        }
+        return winddir;
+    }
+
+    public static double rainMeter(short rawValue) {
+        double rainrate = rawValue / 5.0;
+        return rainrate;
+    }
+
+    public static double uvIndex(short rawValue) {
+        double uvIndex = rawValue / 10;
+        return uvIndex;
+    }
+
+    public static String Time(short rawValue) {
+        //in this method we use string manipulation to change any normal number into military time
+        String sunrise = "" + rawValue;
+        //in this loop we make sure we have 4 characters in the string and the next manipulation works
+        while (sunrise.length() <= 3) {
+            sunrise = ("0" + sunrise);
+        }
+        //here we split the string and put a ":" in the middle to make it a time
+        sunrise = sunrise.substring(0, 2) + ":" + sunrise.substring(2);
+
+        return sunrise;
+    }
+
+    public static double windChill(double windspeed, double temperaturevalue) {
+        double outsidetemperaturevalue = temperaturevalue / 10.0;
+        double windchillvalue = 35.74 + (0.6215 * outsidetemperaturevalue) - 35.75 * (Math.pow(windspeed, 0.16)) + 0.4275 * outsidetemperaturevalue * (Math.pow(windspeed, 0.16));
+        double windchill = (windchillvalue - 32.0) * 5.0 / 9.0;
+        return windchill;
+    }
+
+    public static double dewPoint(double outsidetemperature, double outsidehumvalue) {
+        double dewpoint = outsidetemperature - ((100 - outsidehumvalue) / 5);
+        return dewpoint;
+    }
+
+    public static double heatIndex(double outsidetemperature, double outsidehumvalue) {
+        double c1 = -42.379;
+        double c2 = -2.04901523;
+        double c3 = -10.14333127;
+        double c4 = -0.22475541;
+        double c5 = 6.83783 * Math.pow(10, -3);
+        double c6 = -5.481717 * Math.pow(10, -2);
+        double c7 = -1.22874 * Math.pow(10, -3);
+        double c8 = 8.5282 * Math.pow(10, -4);
+        double c9 = -1.99 * Math.pow(10, -6);
+        double heatindex = c1 + c2 * outsidetemperature + c3 * outsidehumvalue + c4 * outsidetemperature * outsidehumvalue + c5 * Math.pow(outsidetemperature, 2) + c6 * Math.pow(outsidehumvalue, 2) + c7 * Math.pow(outsidetemperature, 2) * outsidehumvalue + c8 * outsidetemperature * Math.pow(outsidehumvalue, 2) + c9 * Math.pow(outsidetemperature, 2) * Math.pow(outsidehumvalue, 2);
+        return heatindex;
+    }
+
+}
+
+
+
