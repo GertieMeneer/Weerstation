@@ -141,5 +141,9 @@ public class Measurement {
         return heatIndex;
     }
 
+    public boolean isValid() {
+        return true;
+    }
+
 
 }
