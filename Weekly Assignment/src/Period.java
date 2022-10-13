@@ -109,7 +109,7 @@ public class Period {
 		ArrayList<Measurement> measurements = getMeasurements();
 
 		//calculate average outside temperature and return it
-		return measurements.get(0).getTemperature();
+		return measurements.get(0).getOutsideTemperature();
 	}
 
 	/**
