@@ -2,8 +2,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.xml.bind.DataBindingException;
-
 public class GuiBoardDemos {
 
     public void main(String[] args) {

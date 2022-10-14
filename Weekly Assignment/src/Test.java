@@ -11,7 +11,7 @@ public class Test {
     LocalDate startdatelocaldate = LocalDate.parse(startdate);
     LocalDate enddatelocaldate = LocalDate.parse(enddate);
       Period test = new Period(startdatelocaldate, enddatelocaldate);
-      System.out.println(test.lowestOutsideTemp(startdatelocaldate, enddatelocaldate));
+      System.out.println(test.getAverageOutsideTemperature(startdatelocaldate, enddatelocaldate));
       
     }
 

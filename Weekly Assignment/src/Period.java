@@ -1,4 +1,4 @@
-import java.security.acl.LastOwnerException;
+
 import java.time.*;
 import java.time.temporal.*;
 import java.util.ArrayList;
@@ -108,12 +108,73 @@ public class Period {
 	 * todo
 	 * @return
 	 */
-	public double getAverageOutsideTemperature()
-	{
-		ArrayList<Measurement> measurements = getMeasurements();
+	public double getAverageOutsideTemperature(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = 0;
+		int measurementCount = measurements.size();
+		for (Measurement measurement : measurements) {
+			if (measurement.getOutsideTemperature() < 50) {
+				value += measurement.getOutsideTemperature();
+			} else {
+				measurementCount--;
+			}
 
-		//calculate average outside temperature and return it
-		return measurements.get(0).getOutsideTemperature();
+		}
+		value /= measurementCount;
+		return Utilities.rounder(value);
+	}
+
+	public double getAverageInsideTemperature(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = 0;
+		int measurementCount = measurements.size();
+		for (Measurement measurement : measurements) {
+			System.out.println(measurement.getOutsideTemperature());
+			if (measurement.getInsideTemperature() < 50) {
+				value += measurement.getInsideTemperature();
+			} else {
+				measurementCount--;
+			}
+		}
+		value /= measurementCount;
+		return Utilities.rounder(value);
+	}
+	public double getAverageInsideHumidity(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = 0;
+		for (Measurement measurement : measurements) {
+				value += measurement.getInsideHum();
+		}
+		value /= measurements.size();
+		return Utilities.rounder(value);
+	}
+	public double getAverageOutsideHumidity(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = 0;
+		for (Measurement measurement : measurements) {
+			value += measurement.getOutsideHum();
+		}
+		value /= measurements.size();
+		return Utilities.rounder(value);
+	}
+	public double getAverageAirPressure(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = 0;
+		for (Measurement measurement : measurements) {
+			value += measurement.getAirPressure();
+		}
+		value /= measurements.size();
+		return Utilities.rounder(value);
 	}
 
 	/**
