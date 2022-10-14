@@ -1,9 +1,18 @@
+import java.time.LocalDate;
+import java.util.Scanner;
+
 public class Test {
   public static void main(String[] args) {
-    IO.init();
-    GuiBoardDemos.sus();
-   //   Utilities util = new Utilities();
-   //   System.out.println(util.toString());
+    Scanner reader = new Scanner(System.in);
+    System.out.println("Geef een beginwaarde (yyyy-mm-dd): ");
+    String startdate = reader.nextLine();
+    System.out.println("Geef een eindwaarde (yyyy-mm-dd): ");
+    String enddate = reader.nextLine();
+    LocalDate startdatelocaldate = LocalDate.parse(startdate);
+    LocalDate enddatelocaldate = LocalDate.parse(enddate);
+      Period test = new Period(startdatelocaldate, enddatelocaldate);
+      System.out.println(test.lowestOutsideValue(startdatelocaldate, enddatelocaldate));
+      
     }
 
 

@@ -1,6 +1,9 @@
+import java.security.acl.LastOwnerException;
 import java.time.*;
 import java.time.temporal.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A class to contain a period of time
@@ -11,6 +14,7 @@ import java.util.ArrayList;
 public class Period {
 	private LocalDate beginPeriod;
 	private LocalDate endPeriod;
+	private ArrayList<Measurement> measurements;
 
 	/**
 	 * default constructor, sets the period to today
@@ -88,7 +92,7 @@ public class Period {
 	 * @return a filtered list of measurements
 	 */
 	public ArrayList<Measurement> getMeasurements() {
-		ArrayList<Measurement> measurements = new ArrayList<>();
+		measurements = new ArrayList<>();
 		ArrayList<RawMeasurement> rawMeasurements = getRawMeasurements();
 		for (RawMeasurement rawMeasurement : rawMeasurements) {
 			Measurement measurement = new Measurement(rawMeasurement);
@@ -124,6 +128,66 @@ public class Period {
 	 */
 	public Period longestDraught() {
 		return new Period();
+	}
+
+	public double lowestOutsideValue(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = measurements.get(0).getOutsideTemperature();
+		for(Measurement measures : measurements) {
+			if(measures.getOutsideTemperature() < value) {
+				value = measures.getOutsideTemperature();
+			} else {
+				value = value;
+			}
+		}
+		return Utilities.rounder(value);
+	}
+
+	public double highestOutsideValue(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = measurements.get(0).getOutsideTemperature();
+		for(Measurement measures : measurements) {
+			if(measures.getOutsideTemperature() > value) {
+				value = measures.getOutsideTemperature();
+			} else {
+				value = value;
+			}
+		}
+		return Utilities.rounder(value);
+	}
+
+	public double lowestInsideValue(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = measurements.get(0).getInsideTemperature();
+		for(Measurement measures : measurements) {
+			if(measures.getInsideTemperature() < value) {
+				value = measures.getInsideTemperature();
+			} else {
+				value = value;
+			}
+		}
+		return Utilities.rounder(value);
+	}
+
+	public double highestInsideValue(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = measurements.get(0).getInsideTemperature();
+		for(Measurement measures : measurements) {
+			if(measures.getInsideTemperature() > value) {
+				value = measures.getInsideTemperature();
+			} else {
+				value = value;
+			}
+		}
+		return Utilities.rounder(value);
 	}
 
 	/**
