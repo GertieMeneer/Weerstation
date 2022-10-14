@@ -358,6 +358,28 @@ public class Period {
 		}
 		return outsideCount + insideCount;
 	}
+	public String windChillAndOutsideTemperatureDifference(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double outsideTemperature = measurements.get(0).getOutsideTemperature();
+		double windChill = measurements.get(0).getWindChill();
+		double windSpeed = measurements.get(0).getWindSpeed();
+		LocalDate date = beginPeriod;
+		double difference = 0.0;
+		double highestDifference = 0.0;
+		int j = 0;
+		for(int i = 0; i < measurements.size(); i++) {
+			outsideTemperature = measurements.get(i).getOutsideTemperature();
+			windChill = measurements.get(i).getWindChill();
+			difference = Math.abs(outsideTemperature - windChill);
+			if(difference > highestDifference && outsideTemperature < 50 && windSpeed < 205) {
+				highestDifference = difference;
+				date = beginPeriod.plusDays((int)Math.floor(i / 1440));
+			}
+		}
+		return "Grootste verschil tussen outsideTemperature en windChill = " + Utilities.rounder(highestDifference) + "\nDate = " + date;
+	}
 
 	public double getMedianOutsideTemperature(LocalDate beginPeriod, LocalDate endPeriod) {
 		this.beginPeriod = beginPeriod;
