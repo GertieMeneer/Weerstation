@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Weekly Assignment/lib/commons-collections4-4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Weekly Assignment/lib/poi-ooxml-schemas-3.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Weekly Assignment/lib/poi-ooxml-3.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Weekly Assignment/lib/xmlbeans-2.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Weekly Assignment/lib/poi-3.17.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
