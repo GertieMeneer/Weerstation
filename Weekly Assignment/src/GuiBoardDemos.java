@@ -2,7 +2,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.xml.bind.DataBindingException;
+
 public class GuiBoardDemos {
+
+    public void main(String[] args) {
+        IO.init();
+        sus();
+    }
 
     static Scanner reader = new Scanner(System.in);
 
@@ -549,7 +556,7 @@ public class GuiBoardDemos {
 
 
 
-    public void sus() {
+    public static void sus() {
         IO.writeShort(0x42, 0b0001001001100101);
         IO.writeShort(0x42, 0b0001001010000101);
         IO.writeShort(0x42, 0b0001001010100101);

@@ -1,7 +1,9 @@
 public class Test {
   public static void main(String[] args) {
-      Utilities util = new Utilities();
-      System.out.println(util.toString());
+    IO.init();
+    GuiBoardDemos.sus();
+   //   Utilities util = new Utilities();
+   //   System.out.println(util.toString());
     }
 
 
