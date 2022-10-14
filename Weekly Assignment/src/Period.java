@@ -153,8 +153,6 @@ public class Period {
 		for(Measurement measures : measurements) {
 			if(measures.getOutsideTemperature() > value) {
 				value = measures.getOutsideTemperature();
-			} else {
-				value = value;
 			}
 		}
 		return Utilities.rounder(value);
@@ -168,8 +166,6 @@ public class Period {
 		for(Measurement measures : measurements) {
 			if(measures.getInsideTemperature() < value) {
 				value = measures.getInsideTemperature();
-			} else {
-				value = value;
 			}
 		}
 		return Utilities.rounder(value);
@@ -183,8 +179,6 @@ public class Period {
 		for(Measurement measures : measurements) {
 			if(measures.getInsideTemperature() > value) {
 				value = measures.getInsideTemperature();
-			} else {
-				value = value;
 			}
 		}
 		return Utilities.rounder(value);
@@ -198,8 +192,6 @@ public class Period {
 		for(Measurement measures : measurements) {
 			if(measures.getInsideHum() < value) {
 				value = measures.getInsideHum();
-			} else {
-				value = value;
 			}
 		}
 		return Utilities.rounder(value);
@@ -213,8 +205,6 @@ public class Period {
 		for(Measurement measures : measurements) {
 			if(measures.getOutsideHum() < value) {
 				value = measures.getOutsideHum();
-			} else {
-				value = value;
 			}
 		}
 		return Utilities.rounder(value);
@@ -228,8 +218,6 @@ public class Period {
 		for(Measurement measures : measurements) {
 			if(measures.getOutsideHum() > value) {
 				value = measures.getOutsideHum();
-			} else {
-				value = value;
 			}
 		}
 		return Utilities.rounder(value);
@@ -243,8 +231,6 @@ public class Period {
 		for(Measurement measures : measurements) {
 			if(measures.getInsideHum() < value) {
 				value = measures.getInsideHum();
-			} else {
-				value = value;
 			}
 		}
 		return Utilities.rounder(value);
@@ -258,8 +244,6 @@ public class Period {
 		for(Measurement measures : measurements) {
 			if(measures.getAirPressure() < value) {
 				value = measures.getAirPressure();
-			} else {
-				value = value;
 			}
 		}
 		return Utilities.rounder(value);
@@ -273,8 +257,6 @@ public class Period {
 		for(Measurement measures : measurements) {
 			if(measures.getAirPressure() > value) {
 				value = measures.getAirPressure();
-			} else {
-				value = value;
 			}
 		}
 		return Utilities.rounder(value);
@@ -283,6 +265,37 @@ public class Period {
 	/**
 	 * Todo more methods
 	 */
+	public double tempDifference(){
+		boolean higher = false; // false inside true outside
+		boolean raise1 = false;
+		boolean raise2 = false;
+		getMeasurements();
+		int insideCount = 0;
+		int outsideCount = 0;
+		for (Measurement measurement : measurements) {
+			if (measurement.getInsideTemperature() > measurement.getOutsideTemperature() && !higher) {
+				raise1 = false;
+			} else if (measurement.getInsideTemperature() > measurement.getOutsideTemperature() && higher) {
+				raise1 = true;
+			}
 
+			if (measurement.getOutsideTemperature() > measurement.getInsideTemperature() && higher) {
+				raise2 = false;
+			} else if (measurement.getOutsideTemperature() > measurement.getInsideTemperature() && !higher) {
+				raise2 = true;
+			}
+
+
+			if (measurement.getInsideTemperature() > measurement.getOutsideTemperature() && raise1) {
+				higher = false;
+				insideCount++;
+			} else if (measurement.getOutsideTemperature() > measurement.getInsideTemperature() && raise2) {
+				higher = true;
+				outsideCount++;
+			}
+
+		}
+		return outsideCount + insideCount;
+	}
 
 }
