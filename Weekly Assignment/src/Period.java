@@ -130,7 +130,7 @@ public class Period {
 		return new Period();
 	}
 
-	public double lowestOutsideValue(LocalDate beginPeriod, LocalDate endPeriod) {
+	public double lowestOutsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
 		this.beginPeriod = beginPeriod;
 		this.endPeriod = endPeriod;
 		getMeasurements();
@@ -145,7 +145,7 @@ public class Period {
 		return Utilities.rounder(value);
 	}
 
-	public double highestOutsideValue(LocalDate beginPeriod, LocalDate endPeriod) {
+	public double highestOutsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
 		this.beginPeriod = beginPeriod;
 		this.endPeriod = endPeriod;
 		getMeasurements();
@@ -160,7 +160,7 @@ public class Period {
 		return Utilities.rounder(value);
 	}
 
-	public double lowestInsideValue(LocalDate beginPeriod, LocalDate endPeriod) {
+	public double lowestInsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
 		this.beginPeriod = beginPeriod;
 		this.endPeriod = endPeriod;
 		getMeasurements();
@@ -175,7 +175,7 @@ public class Period {
 		return Utilities.rounder(value);
 	}
 
-	public double highestInsideValue(LocalDate beginPeriod, LocalDate endPeriod) {
+	public double highestInsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
 		this.beginPeriod = beginPeriod;
 		this.endPeriod = endPeriod;
 		getMeasurements();
@@ -183,6 +183,96 @@ public class Period {
 		for(Measurement measures : measurements) {
 			if(measures.getInsideTemperature() > value) {
 				value = measures.getInsideTemperature();
+			} else {
+				value = value;
+			}
+		}
+		return Utilities.rounder(value);
+	}
+
+	public double lowestInsideHum(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = measurements.get(0).getInsideHum();
+		for(Measurement measures : measurements) {
+			if(measures.getInsideHum() < value) {
+				value = measures.getInsideHum();
+			} else {
+				value = value;
+			}
+		}
+		return Utilities.rounder(value);
+	}
+
+	public double lowestOutsideHum(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = measurements.get(0).getOutsideHum();
+		for(Measurement measures : measurements) {
+			if(measures.getOutsideHum() < value) {
+				value = measures.getOutsideHum();
+			} else {
+				value = value;
+			}
+		}
+		return Utilities.rounder(value);
+	}
+
+	public double highestOutsideHum(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = measurements.get(0).getOutsideHum();
+		for(Measurement measures : measurements) {
+			if(measures.getOutsideHum() > value) {
+				value = measures.getOutsideHum();
+			} else {
+				value = value;
+			}
+		}
+		return Utilities.rounder(value);
+	}
+
+	public double highestInsideHum(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = measurements.get(0).getInsideHum();
+		for(Measurement measures : measurements) {
+			if(measures.getInsideHum() < value) {
+				value = measures.getInsideHum();
+			} else {
+				value = value;
+			}
+		}
+		return Utilities.rounder(value);
+	}
+
+	public double lowestAirpressure(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = measurements.get(0).getAirPressure();
+		for(Measurement measures : measurements) {
+			if(measures.getAirPressure() < value) {
+				value = measures.getAirPressure();
+			} else {
+				value = value;
+			}
+		}
+		return Utilities.rounder(value);
+	}
+
+	public double highestAirpressure(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		double value = measurements.get(0).getAirPressure();
+		for(Measurement measures : measurements) {
+			if(measures.getAirPressure() > value) {
+				value = measures.getAirPressure();
 			} else {
 				value = value;
 			}
