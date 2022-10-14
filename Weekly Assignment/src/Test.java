@@ -2,7 +2,6 @@ public class Test {
   public static void main(String[] args) {
       Utilities util = new Utilities();
       System.out.println(util.toString());
-      ReadExcelFile.excelToDotMatrix();
     }
 
 
