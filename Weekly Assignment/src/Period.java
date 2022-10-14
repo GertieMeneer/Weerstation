@@ -359,4 +359,78 @@ public class Period {
 		return outsideCount + insideCount;
 	}
 
+	public double getMedianOutsideTemperature(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+
+		if (measurements.size() % 2 == 0) {
+			return Utilities.rounder(((measurements.get(measurements.size() / 2).getOutsideTemperature()) + (measurements.get(measurements.size() / 2 + 1).getOutsideTemperature())) / 2);
+		} else {
+			return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getOutsideTemperature());
+		}
+	}
+
+	public double getMedianInsideTemperature(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+
+		if (measurements.size() % 2 == 0) {
+			return Utilities.rounder(((measurements.get(measurements.size() / 2).getInsideTemperature()) + (measurements.get(measurements.size() / 2 + 1).getInsideTemperature())) / 2);
+		} else {
+			return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getInsideTemperature());
+		}
+	}
+
+	public double getMedianOutsideHumidity(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+
+		if (measurements.size() % 2 == 0) {
+			return Utilities.rounder(((measurements.get(measurements.size() / 2).getOutsideHum()) + (measurements.get(measurements.size() / 2 + 1).getOutsideHum())) / 2);
+		} else {
+			return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getOutsideHum());
+		}
+	}
+
+	public double getMedianInsideHumidity(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+
+		if (measurements.size() % 2 == 0) {
+			return Utilities.rounder(((measurements.get(measurements.size() / 2).getInsideHum()) + (measurements.get(measurements.size() / 2 + 1).getInsideHum())) / 2);
+		} else {
+			return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getInsideHum());
+		}
+	}
+
+	public double getMedianAirPressure(LocalDate beginPeriod, LocalDate endPeriod) {
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+
+		if (measurements.size() % 2 == 0) {
+			return Utilities.rounder(((measurements.get(measurements.size() / 2).getAirPressure()) + (measurements.get(measurements.size() / 2 + 1).getAirPressure())) / 2);
+		} else {
+			return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getAirPressure());
+		}
+	}
+
+	public double aantalgraaddagen() {
+		ArrayList<Measurement> measurements = getMeasurements();
+		RawMeasurement rawMeasurement = DatabaseConnection.getMostRecentMeasurement();
+		Measurement measures = new Measurement(rawMeasurement);
+		double insideTemp = measures.getInsideTemperature();
+		double averageOutsideTemp = getAverageOutsideTemperature(beginPeriod, endPeriod);
+		double amount = 0;
+		if(averageOutsideTemp > 18.0) {
+			amount = 0;
+		} else if (averageOutsideTemp < 18.0) {
+			amount = insideTemp - averageOutsideTemp;
+		}
+		return amount;
+	}
 }

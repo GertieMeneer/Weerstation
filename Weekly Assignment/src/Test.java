@@ -4,14 +4,21 @@ import java.util.Scanner;
 public class Test {
   public static void main(String[] args) {
     Scanner reader = new Scanner(System.in);
-    System.out.println("Geef een beginwaarde (yyyy-mm-dd): ");
-    String startdate = reader.nextLine();
-    System.out.println("Geef een eindwaarde (yyyy-mm-dd): ");
-    String enddate = reader.nextLine();
-    LocalDate startdatelocaldate = LocalDate.parse(startdate);
-    LocalDate enddatelocaldate = LocalDate.parse(enddate);
-      Period test = new Period(startdatelocaldate, enddatelocaldate);
-      System.out.println(test.getAverageOutsideTemperature(startdatelocaldate, enddatelocaldate));
+//    System.out.println("Geef een beginwaarde (yyyy-mm-dd): ");
+//    String startdate = reader.nextLine();
+//    System.out.println("Geef een eindwaarde (yyyy-mm-dd): ");
+//    String enddate = reader.nextLine();
+//    LocalDate startdatelocaldate = LocalDate.parse(startdate);
+//    LocalDate enddatelocaldate = LocalDate.parse(enddate);
+//      Period test = new Period(startdatelocaldate, enddatelocaldate);
+//      System.out.println(test.getMedianOutsideTemperature(startdatelocaldate, enddatelocaldate));
+
+      System.out.println("Geef een aantal dagen op:");
+      int inputperiode = Integer.parseInt(reader.nextLine());
+      Period period = new Period(inputperiode);
+
+      System.out.print("Het aantal graaddagen: ");
+      System.out.print(Utilities.rounder(period.aantalgraaddagen()));
       
     }
 
