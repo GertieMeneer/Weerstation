@@ -67,13 +67,11 @@ public class ValueConverter {
     }
 
     public static double rainMeter(short rawValue) {
-        double rainrate = rawValue / 5.0;
-        return rainrate;
+        return rawValue / 5.0;
     }
 
-    public static double uvIndex(short rawValue) {
-        double uvIndex = rawValue / 10;
-        return uvIndex;
+    public static double uvIndex(double rawValue) {
+        return rawValue / 10;
     }
 
     public static String Time(short rawValue) {

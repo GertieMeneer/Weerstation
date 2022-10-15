@@ -1,3 +1,4 @@
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -13,12 +14,17 @@ public class Test {
 //      Period test = new Period(startdatelocaldate, enddatelocaldate);
 //      System.out.println(test.getMedianOutsideTemperature(startdatelocaldate, enddatelocaldate));
 
-      System.out.println("Geef een aantal dagen op:");
-      int inputperiode = Integer.parseInt(reader.nextLine());
-      Period period = new Period(inputperiode);
+//      System.out.println("Geef een aantal dagen op:");
+//      LocalDate inputperiode = LocalDate.parse(reader.nextLine());
+//      Period period = new Period(inputperiode);
+//
+//      System.out.print("Het aantal graaddagen: ");
+//      System.out.print(Utilities.rounder(period.aantalGraaddagen()));
+      System.out.print("Enter a year: ");
+      String year = reader.nextLine();
+      Period yearToCheck = new Period(year);
+      System.out.println(yearToCheck.mostRainInGivenYear());
 
-      System.out.print("Het aantal graaddagen: ");
-      System.out.print(Utilities.rounder(period.aantalgraaddagen()));
       
     }
 
