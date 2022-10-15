@@ -440,6 +440,145 @@ public class Period {
 			return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getAirPressure());
 		}
 	}
+	public double modeOutsideTemp(LocalDate beginPeriod, LocalDate endPeriod){
+		ArrayList<Integer> counter = new ArrayList<>();
+		ArrayList<Double> values = new ArrayList<>();
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		int bigger = 0;
+		for (Measurement measures : measurements) {
+			double rawValue = Utilities.rounder(measures.getOutsideTemperature());
+			if (values.contains(rawValue)){
+				int index = values.indexOf(rawValue);
+				counter.set(index, (counter.get(index) + 1));
+
+			} else{
+				values.add(rawValue);
+				counter.add(1);
+			}
+		}
+		for (int i:counter) {
+			if (i > bigger){
+				bigger = i;
+			}
+		}
+		int index2 = counter.indexOf(bigger);
+		double value = values.get(index2);
+
+		return value;
+	}
+	public double modeInsideTemp(LocalDate beginPeriod, LocalDate endPeriod){
+		ArrayList<Integer> counter = new ArrayList<>();
+		ArrayList<Double> values = new ArrayList<>();
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		int bigger = 0;
+		for (Measurement measures : measurements) {
+			double rawValue = Utilities.rounder(measures.getInsideTemperature());
+			if (values.contains(rawValue)){
+				int index = values.indexOf(rawValue);
+				counter.set(index, (counter.get(index) + 1));
+
+			} else{
+				values.add(rawValue);
+				counter.add(1);
+			}
+		}
+		for (int i:counter) {
+			if (i > bigger){
+				bigger = i;
+			}
+		}
+		int index2 = counter.indexOf(bigger);
+		double value = values.get(index2);
+
+		return value;
+	}
+	public double modeOutsideHum(LocalDate beginPeriod, LocalDate endPeriod){
+		ArrayList<Integer> counter = new ArrayList<>();
+		ArrayList<Double> values = new ArrayList<>();
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		int bigger = 0;
+		for (Measurement measures : measurements) {
+			double rawValue = Utilities.rounder(measures.getOutsideHum());
+			if (values.contains(rawValue)){
+				int index = values.indexOf(rawValue);
+				counter.set(index, (counter.get(index) + 1));
+
+			} else{
+				values.add(rawValue);
+				counter.add(1);
+			}
+		}
+		for (int i:counter) {
+			if (i > bigger){
+				bigger = i;
+			}
+		}
+		int index2 = counter.indexOf(bigger);
+		double value = values.get(index2);
+
+		return value;
+	}
+	public double modeInsideHum(LocalDate beginPeriod, LocalDate endPeriod){
+		ArrayList<Integer> counter = new ArrayList<>();
+		ArrayList<Double> values = new ArrayList<>();
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		int bigger = 0;
+		for (Measurement measures : measurements) {
+			double rawValue = Utilities.rounder(measures.getInsideHum());
+			if (values.contains(rawValue)){
+				int index = values.indexOf(rawValue);
+				counter.set(index, (counter.get(index) + 1));
+
+			} else{
+				values.add(rawValue);
+				counter.add(1);
+			}
+		}
+		for (int i:counter) {
+			if (i > bigger){
+				bigger = i;
+			}
+		}
+		int index2 = counter.indexOf(bigger);
+		double value = values.get(index2);
+
+		return value;
+	}
+	public double modeAirpressure(LocalDate beginPeriod, LocalDate endPeriod){
+		ArrayList<Integer> counter = new ArrayList<>();
+		ArrayList<Double> values = new ArrayList<>();
+		this.beginPeriod = beginPeriod;
+		this.endPeriod = endPeriod;
+		getMeasurements();
+		int bigger = 0;
+		for (Measurement measures : measurements) {
+			double rawValue = Utilities.rounder(measures.getAirPressure());
+			if (values.contains(rawValue)){
+				int index = values.indexOf(rawValue);
+				counter.set(index, (counter.get(index) + 1));
+
+			} else{
+				values.add(rawValue);
+				counter.add(1);
+			}
+		}
+		for (int i:counter) {
+			if (i > bigger){
+				bigger = i;
+			}
+		}
+		int index2 = counter.indexOf(bigger);
+		double value = values.get(index2);
+
+		return value;
 
 	public double aantalgraaddagen() {
 		ArrayList<Measurement> measurements = getMeasurements();
