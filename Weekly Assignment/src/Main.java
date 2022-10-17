@@ -88,9 +88,9 @@ public class Main {
     public static void selectTemp() {
         GuiBoardDemos.clrDMDisplay();
 
-        String outsideTemp = "outside";
-        String insideTemp = "inside";
-        String both = "both";
+        String outsideTemp = "Outside";
+        String insideTemp = "Inside";
+        String both = "Both";
 
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
