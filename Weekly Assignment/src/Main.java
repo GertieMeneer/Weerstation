@@ -13,9 +13,9 @@ public class Main {
     }
 
     public static void firstPage() {
-        String temp = "temperature";
-        String hum = "humidity";
-        String wind = "wind";
+        String temp = "Temperature";
+        String hum = "Humidity";
+        String wind = "Wind";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
         for (int i = 0; i < temp.length(); i++) {
