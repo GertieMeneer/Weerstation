@@ -18,34 +18,34 @@ public class ValueConverter {
     public static String windDirection(short rawValue) {
         String winddir = "";
         if (rawValue >= 0 && rawValue <= 22.5) {
-            winddir = "N/NO";
+            winddir = "N/NE";
             return winddir;
         } else if (rawValue > 22.5 && rawValue <= 45) {
-            winddir = "NO";
+            winddir = "NE";
             return winddir;
         } else if (rawValue > 45 && rawValue <= 67.5) {
-            winddir = "O/NO";
+            winddir = "E/NE";
             return winddir;
         } else if (rawValue > 67.5 && rawValue <= 90) {
-            winddir = "O";
+            winddir = "E";
             return winddir;
         } else if (rawValue > 90 && rawValue <= 135) {
-            winddir = "ZO";
+            winddir = "SE";
             return winddir;
         } else if (rawValue > 135 && rawValue <= 157.5) {
-            winddir = "Z/ZO";
+            winddir = "S/SE";
             return winddir;
         } else if (rawValue > 157.5 && rawValue <= 180) {
-            winddir = "Z";
+            winddir = "S";
             return winddir;
         } else if (rawValue > 180 && rawValue <= 202.5) {
-            winddir = "Z/ZW";
+            winddir = "S/SW";
             return winddir;
         } else if (rawValue > 202.5 && rawValue <= 225) {
-            winddir = "ZW";
+            winddir = "SW";
             return winddir;
         } else if (rawValue > 225 && rawValue <= 247.5) {
-            winddir = "W/ZW";
+            winddir = "W/SW";
             return winddir;
         } else if (rawValue > 247.5 && rawValue <= 270) {
             winddir = "W";
