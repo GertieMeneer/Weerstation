@@ -42,7 +42,8 @@ public class Main {
             if (IO.readShort(0x80) == 1) {
                 selectTemp();
                 i = -1;
-            } else if (IO.readShort(0x100) == 1) {
+            }
+            else if (IO.readShort(0x100) == 1) {
                 noSelection();
                 secondPos();
                 i = -1;
