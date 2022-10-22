@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f6c4b544-5e0f-4fe7-b49f-c315ab6b7609" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f6c4b544-5e0f-4fe7-b49f-c315ab6b7609" name="Default Changelist" comment="yes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Weerstation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Weerstation.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +29,9 @@
         <option value="$PROJECT_DIR$/Weekly Assignment/src/Main.java" />
       </list>
     </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="260" />
@@ -72,15 +74,20 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/GertieMeneer/Documents/Coding/IntelliJ/Other school/Weerstation",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/GertieMeneer/Documents/Coding/IntelliJ/Other school/Weerstation&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -114,7 +121,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666005444388</updated>
-      <workItem from="1666270062038" duration="22000" />
+      <workItem from="1666270062038" duration="443000" />
+      <workItem from="1666270521936" duration="17000" />
+      <workItem from="1666338339457" duration="121000" />
+      <workItem from="1666358961115" duration="477000" />
+      <workItem from="1666365587138" duration="695000" />
+      <workItem from="1666425379987" duration="3142000" />
     </task>
     <task id="LOCAL-00001" summary="yes">
       <created>1666005657038</created>
@@ -144,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666013554178</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="yes">
+      <created>1666270191649</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1666270191649</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -227,72 +246,64 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="yes" />
     <MESSAGE value="deleted testvalueconverter in test klasse want overbodig ja doei" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted testvalueconverter in test klasse want overbodig ja doei" />
+    <MESSAGE value="yes" />
+    <option name="LAST_COMMIT_MESSAGE" value="yes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>38</line>
-          <properties class="Main" method="firstPageSelector">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>73</line>
-          <properties class="Main">
+          <line>146</line>
+          <properties class="Main" method="noSelection">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>85</line>
-          <properties class="Main">
+          <line>158</line>
+          <properties class="Main" method="firstPos">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>91</line>
-          <properties class="Main">
+          <line>169</line>
+          <properties class="Main" method="secondPos">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>97</line>
-          <properties class="Main">
+          <line>175</line>
+          <properties class="Main" method="thirdPos">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>103</line>
-          <properties class="Main">
+          <line>181</line>
+          <properties class="Main" method="selectTemp">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>284</line>
-          <properties class="Main">
+          <line>362</line>
+          <properties class="Main" method="selectWind">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>326</line>
+          <line>429</line>
           <properties class="Main" method="secondDigit">
             <option name="EMULATED" value="true" />
           </properties>
@@ -300,7 +311,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>12</line>
+          <line>23</line>
           <properties class="Main" method="firstPage">
             <option name="EMULATED" value="true" />
           </properties>
