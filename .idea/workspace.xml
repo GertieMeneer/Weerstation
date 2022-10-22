@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f6c4b544-5e0f-4fe7-b49f-c315ab6b7609" name="Default Changelist" comment="tiny tweaks">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f6c4b544-5e0f-4fe7-b49f-c315ab6b7609" name="Default Changelist" comment="newer version">
       <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +128,7 @@
       <workItem from="1666365587138" duration="695000" />
       <workItem from="1666425379987" duration="4924000" />
       <workItem from="1666439449642" duration="2077000" />
-      <workItem from="1666441560756" duration="10278000" />
+      <workItem from="1666441560756" duration="10672000" />
     </task>
     <task id="LOCAL-00001" summary="yes">
       <created>1666005657038</created>
@@ -208,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666454219052</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="newer version">
+      <created>1666459395892</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1666459395892</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -294,7 +300,8 @@
     <MESSAGE value="deleted testvalueconverter in test klasse want overbodig ja doei" />
     <MESSAGE value="yes" />
     <MESSAGE value="tiny tweaks" />
-    <option name="LAST_COMMIT_MESSAGE" value="tiny tweaks" />
+    <MESSAGE value="newer version" />
+    <option name="LAST_COMMIT_MESSAGE" value="newer version" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Weekly Assignment/src/RawMeasurement.java">

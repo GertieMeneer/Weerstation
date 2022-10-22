@@ -363,9 +363,8 @@ public class Main {
         String avgwindspeed = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getAvgWindSpeed());
 
         if (Double.parseDouble(avgwindspeed) < 10 && Double.parseDouble(avgwindspeed) >= 0) {
-            IO.writeShort(0x34, 0);
-            IO.writeShort(0x32, 0x100 | secondDigit("" + avgwindspeed.charAt(0)));
-            IO.writeShort(0x30, avgwindspeed.charAt(2));
+            IO.writeShort(0x34, 0x100 | secondDigit("" + avgwindspeed.charAt(0)));
+            IO.writeShort(0x32, avgwindspeed.charAt(2));
         } else {
             IO.writeShort(0x34, avgwindspeed.charAt(0));
             IO.writeShort(0x32, 0x100 | secondDigit("" + avgwindspeed.charAt(1)));
@@ -373,9 +372,8 @@ public class Main {
         }
 
         if (Double.parseDouble(windSpeed) < 10 && Double.parseDouble(windSpeed) >= 0) {
-            IO.writeShort(0x24, 0);
-            IO.writeShort(0x22, 0x100 | secondDigit("" + windSpeed.charAt(0)));
-            IO.writeShort(0x20, windSpeed.charAt(2));
+            IO.writeShort(0x24, 0x100 | secondDigit("" + windSpeed.charAt(0)));
+            IO.writeShort(0x22, windSpeed.charAt(2));
         } else {
             IO.writeShort(0x24, windSpeed.charAt(0));
             IO.writeShort(0x22, 0x100 | secondDigit("" + windSpeed.charAt(1)));
@@ -423,9 +421,8 @@ public class Main {
         ArrayList<Measurement> measurements = now.getMeasurements();
         String rainrate = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getRainRate());
         if (Double.parseDouble(rainrate) < 10 && Double.parseDouble(rainrate) >= 0) {
-            IO.writeShort(0x24, 0);
-            IO.writeShort(0x22, 0x100 | secondDigit("" + rainrate.charAt(0)));
-            IO.writeShort(0x20, rainrate.charAt(2));
+            IO.writeShort(0x24, 0x100 | secondDigit("" + rainrate.charAt(0)));
+            IO.writeShort(0x22, rainrate.charAt(2));
         } else {
             IO.writeShort(0x24, rainrate.charAt(0));
             IO.writeShort(0x22, 0x100 | secondDigit("" + rainrate.charAt(1)));
@@ -446,9 +443,8 @@ public class Main {
         ArrayList<Measurement> measurements = now.getMeasurements();
         String UVIndex = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getUVLevel());
         if (Double.parseDouble(UVIndex) < 10 && Double.parseDouble(UVIndex) >= 0) {
-            IO.writeShort(0x24, 0);
-            IO.writeShort(0x22, 0x100 | secondDigit("" + UVIndex.charAt(0)));
-            IO.writeShort(0x20, UVIndex.charAt(2));
+            IO.writeShort(0x24, 0x100 | secondDigit("" + UVIndex.charAt(0)));
+            IO.writeShort(0x22, UVIndex.charAt(2));
         } else {
             IO.writeShort(0x24, UVIndex.charAt(0));
             IO.writeShort(0x22, 0x100 | secondDigit("" + UVIndex.charAt(1)));
@@ -469,13 +465,23 @@ public class Main {
         ArrayList<Measurement> measurements = now.getMeasurements();
         String solarrad = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getSolarRad());
         if (Double.parseDouble(solarrad) < 10 && Double.parseDouble(solarrad) >= 0) {
-            IO.writeShort(0x24, 0);
-            IO.writeShort(0x22, 0x100 | secondDigit("" + solarrad.charAt(0)));
-            IO.writeShort(0x20, solarrad.charAt(2));
+            IO.writeShort(0x18, 0x100 | secondDigit("" + solarrad.charAt(0)));
+            IO.writeShort(0x16, solarrad.charAt(2));
+        } else if (Double.parseDouble(solarrad) >= 10 && Double.parseDouble(solarrad) < 100){
+            IO.writeShort(0x18, solarrad.charAt(0));
+            IO.writeShort(0x16, 0x100 | secondDigit("" + solarrad.charAt(1)));
+            IO.writeShort(0x14, solarrad.charAt(3));
+        } else if (Double.parseDouble(solarrad) >= 100 && Double.parseDouble(solarrad) < 1000) {
+            IO.writeShort(0x18, solarrad.charAt(0));
+            IO.writeShort(0x16, solarrad.charAt(1));
+            IO.writeShort(0x14, 0x100 | secondDigit("" + solarrad.charAt(2)));
+            IO.writeShort(0x12, solarrad.charAt(4));
         } else {
-            IO.writeShort(0x24, solarrad.charAt(0));
-            IO.writeShort(0x22, 0x100 | secondDigit("" + solarrad.charAt(1)));
-            IO.writeShort(0x20, solarrad.charAt(3));
+            IO.writeShort(0x18, solarrad.charAt(0));
+            IO.writeShort(0x16, solarrad.charAt(1));
+            IO.writeShort(0x14, solarrad.charAt(2));
+            IO.writeShort(0x12, 0x100 | secondDigit("" +solarrad.charAt(3)));
+            IO.writeShort(0x10, solarrad.charAt(5));
         }
         String SolarradDMD = "Showing current solar \n radiation in W/M2";
         for (int i = 0; i < SolarradDMD.length(); i++) {
