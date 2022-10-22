@@ -100,13 +100,12 @@ public class Main {
 
     public static void secondPageSelector() {
         firstPos();
-        IO.delay(1000);
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
                 selectAirpressure();
                 i = -1;
             }
-            else if (IO.readShort(0x100) == 1) {
+            else if (IO.readShort(0x100) == 0) {
                 noSelection();
                 secondPos();
                 i = -1;
@@ -116,7 +115,7 @@ public class Main {
             if (IO.readShort(0x80) == 1) {
                 selectRainraite();
                 i = -1;
-            } else if (IO.readShort(0x100) == 0) {
+            } else if (IO.readShort(0x100) == 1) {
                 noSelection();
                 thirdPos();
                 i = -1;
@@ -126,7 +125,7 @@ public class Main {
             if (IO.readShort(0x80) == 1) {
                 selectUV();
                 i = -1;
-            } else if (IO.readShort(0x100) == 1) {
+            } else if (IO.readShort(0x100) == 0) {
                 noSelection();
                 firstPos();
                 i = -1;
@@ -190,9 +189,15 @@ public class Main {
             if (IO.readShort(0x80) == 0) {
                 selectBothTemps();
                 return;
+            }   else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                IO.delay(1000);
+                firstPos();
+                j = -1;
+            }
             }
         }
-    }
+
 
     public static void selectOutsideTemp() {
         GuiBoardDemos.clrDMDisplay();
@@ -358,6 +363,7 @@ public class Main {
         for (int i = 0; i < windDirection.length(); i++) {
             IO.writeShort(0x40, windDirection.charAt(i));
         }
+        returnToFirstPage();
     }
 
     private static void printInsideOutsideBoth() {
@@ -396,8 +402,9 @@ public class Main {
         IO.writeShort(0x18, airPressure.charAt(0));
         IO.writeShort(0x16, airPressure.charAt(1));
         IO.writeShort(0x14, airPressure.charAt(2));
-        IO.writeShort(0x12, airPressure.charAt(3));
-        String airPressureDMD = "Air pressure";
+        IO.writeShort(0x12, 0x100 | secondDigit("" + airPressure.charAt(3)));
+        IO.writeShort(0x10, airPressure.charAt(5));
+        String airPressureDMD = "Showing current air \n pressure in hPa.";
         for (int i = 0; i < airPressureDMD.length(); i++) {
             IO.writeShort(0x40, airPressureDMD.charAt(i));
         }
@@ -413,12 +420,12 @@ public class Main {
         IO.writeShort(0x24, rainRate.charAt(0));
         IO.writeShort(0x22, rainRate.charAt(1));
         IO.writeShort(0x20, rainRate.charAt(2));
-        String rainRateDMD = "Rain rate";
+        String rainRateDMD = "Showing current rain \n rate in mm";
         for (int i = 0; i < rainRateDMD.length(); i++) {
             IO.writeShort(0x40, rainRateDMD.charAt(i));
 
         }
-        returnToSecondPage();
+        returnToFirstPage();
     }
 
     public static void selectUV() {
@@ -446,16 +453,6 @@ public class Main {
             if (IO.readShort(0x90) == 1) {
                 firstPage();
                 firstPageSelector();
-                i = -1;
-            }
-        }
-    }
-
-    public static void returnToSecondPage() {
-        for (int i = 1; i > 0; i++) {
-            if (IO.readShort(0x90) == 1) {
-                secondPage();
-                secondPageSelector();
                 i = -1;
             }
         }
