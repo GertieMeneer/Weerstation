@@ -424,9 +424,8 @@ public class Main {
         ArrayList<Measurement> measurements = now.getMeasurements();
         String outsideHum = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideHum());
         IO.writeShort(0x24, outsideHum.charAt(0));
-        IO.writeShort(0x22, 0x100 | secondDigit("" + outsideHum.charAt(1)));
-        IO.writeShort(0x20, outsideHum.charAt(3));
-        String outsideHumDMD = "Outside humidity";
+        IO.writeShort(0x22, outsideHum.charAt(1));
+        String outsideHumDMD = "Showing relative \n outside humidity \n in percentage";
         for (int i = 0; i < outsideHumDMD.length(); i++) {
             IO.writeShort(0x40, outsideHumDMD.charAt(i));
         }
@@ -484,10 +483,38 @@ public class Main {
         GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
         ArrayList<Measurement> measurements = now.getMeasurements();
-        String windSpeed = "Wind speed = " + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getWindSpeed()) + "Km/h";
-        String windDirection = "Wind direction = " + now.getMeasurements().get(measurements.size() - 1).getWindDirection();
-        for (int i = 0; i < windSpeed.length(); i++) {
-            IO.writeShort(0x40, windSpeed.charAt(i));
+        String windSpeed = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getWindSpeed());
+        String windDirection = "Wind direction: " + now.getMeasurements().get(measurements.size() - 1).getWindDirection();
+        String avgwindspeed = "" + Utilities.rounder(now.getMeasurements().get(measurements.size()-1).getAvgWindSpeed());
+
+        if(Double.parseDouble(avgwindspeed) < 10 && Double.parseDouble(avgwindspeed) >= 0) {
+            IO.writeShort(0x34, 0);
+            IO.writeShort(0x32, 0x100 | secondDigit("" + avgwindspeed.charAt(0)));
+            IO.writeShort(0x30, avgwindspeed.charAt(2));
+        } else {
+            IO.writeShort(0x34, avgwindspeed.charAt(0));
+            IO.writeShort(0x32, 0x100 | secondDigit("" + avgwindspeed.charAt(1)));
+            IO.writeShort(0x30, avgwindspeed.charAt(3));
+        }
+
+        if(Double.parseDouble(windSpeed) < 10 && Double.parseDouble(windSpeed) >= 0) {
+            IO.writeShort(0x24, 0);
+            IO.writeShort(0x22, 0x100 | secondDigit("" + windSpeed.charAt(0)));
+            IO.writeShort(0x20, windSpeed.charAt(2));
+        } else {
+            IO.writeShort(0x24, windSpeed.charAt(0));
+            IO.writeShort(0x22, 0x100 | secondDigit("" + windSpeed.charAt(1)));
+            IO.writeShort(0x20, windSpeed.charAt(3));
+        }
+
+        String windspeedDMD = "Left: wind in km/h";
+        String avgwindspeedDMD = "Right: avg wind";
+        for (int i = 0; i < windspeedDMD.length(); i++) {
+            IO.writeShort(0x40, windspeedDMD.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        for (int i = 0; i < avgwindspeedDMD.length(); i++) {
+            IO.writeShort(0x40, avgwindspeedDMD.charAt(i));
         }
         IO.writeShort(0x40, '\n');
         for (int i = 0; i < windDirection.length(); i++) {
