@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f6c4b544-5e0f-4fe7-b49f-c315ab6b7609" name="Default Changelist" comment="yes">
+    <list default="true" id="f6c4b544-5e0f-4fe7-b49f-c315ab6b7609" name="Default Changelist" comment="tiny tweaks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/Main.java" afterDir="false" />
     </list>
@@ -129,7 +129,7 @@
       <workItem from="1666365587138" duration="695000" />
       <workItem from="1666425379987" duration="4924000" />
       <workItem from="1666439449642" duration="2077000" />
-      <workItem from="1666441560756" duration="6994000" />
+      <workItem from="1666441560756" duration="10278000" />
     </task>
     <task id="LOCAL-00001" summary="yes">
       <created>1666005657038</created>
@@ -201,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666447580716</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="tiny tweaks">
+      <created>1666454219052</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1666454219052</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -286,37 +293,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="deleted testvalueconverter in test klasse want overbodig ja doei" />
     <MESSAGE value="yes" />
-    <option name="LAST_COMMIT_MESSAGE" value="yes" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>265</line>
-          <properties class="Main" method="noSelection">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>702</line>
-          <properties class="Main" method="secondDigit">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Weekly Assignment/src/Main.java</url>
-          <line>20</line>
-          <properties class="Main" method="firstPage">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="tiny tweaks" />
+    <option name="LAST_COMMIT_MESSAGE" value="tiny tweaks" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Weekly Assignment/src/RawMeasurement.java">
