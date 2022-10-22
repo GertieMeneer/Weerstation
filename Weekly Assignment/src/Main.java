@@ -100,6 +100,7 @@ public class Main {
 
     public static void secondPageSelector() {
         firstPos();
+        IO.delay(1000);
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
                 selectAirpressure();
@@ -404,7 +405,20 @@ public class Main {
     }
 
     public static void selectRainraite() {
+        GuiBoardDemos.clrDMDisplay();
+        GuiBoardDemos.clrSevenSegment();
+        Period now = new Period();
+        now.getMeasurements();
+        String rainRate = "" + Utilities.rounder(now.getMeasurements().get(0).getRainRate());
+        IO.writeShort(0x24, rainRate.charAt(0));
+        IO.writeShort(0x22, rainRate.charAt(1));
+        IO.writeShort(0x20, rainRate.charAt(2));
+        String rainRateDMD = "Rain rate";
+        for (int i = 0; i < rainRateDMD.length(); i++) {
+            IO.writeShort(0x40, rainRateDMD.charAt(i));
 
+        }
+        returnToSecondPage();
     }
 
     public static void selectUV() {
@@ -432,6 +446,16 @@ public class Main {
             if (IO.readShort(0x90) == 1) {
                 firstPage();
                 firstPageSelector();
+                i = -1;
+            }
+        }
+    }
+
+    public static void returnToSecondPage() {
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x90) == 1) {
+                secondPage();
+                secondPageSelector();
                 i = -1;
             }
         }
