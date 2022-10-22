@@ -8,8 +8,8 @@ public class Utilities {
     }
 
     public String toString() {
-        String outsidetemp = ("Outsidetemperature: " + rounder(measurement.getOutsideTemperature()) + " graden Celcius");
-        String insidetemp = ("Insidetemperature: " + rounder(measurement.getInsideTemperature()) + " graden Celcius");
+        String outsidetemp = ("Outside temperature: " + rounder(measurement.getOutsideTemperature()) + " graden Celcius");
+        String insidetemp = ("Inside temperature: " + rounder(measurement.getInsideTemperature()) + " graden Celcius");
         String airpressure = ("Airpressure: " + rounder(measurement.getAirPressure()) + " hPa");
         String insidehum = ("Humidity Inside: " + rounder(measurement.getInsideHum()) + " %");
         String outsidehum = ("Humidity Outside: " + rounder(measurement.getOutsideHum()) + " %");

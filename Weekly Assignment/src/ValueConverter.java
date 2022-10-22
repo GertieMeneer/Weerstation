@@ -6,9 +6,10 @@ public class ValueConverter {
     }
 
     public static double Temperature(short rawValue) {
-        double outsidetemperature = (((rawValue / 10.0)) - 32.0) * 5.0 / 9.0;
-        return outsidetemperature;
+        double temperature = (((rawValue / 10.0)) - 32.0) * 5.0 / 9.0;
+        return temperature;
     }
+
 
     public static double windSpeed(short rawValue) {
         double windspeed = rawValue * 1.609;

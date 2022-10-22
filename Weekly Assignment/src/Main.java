@@ -1,9 +1,11 @@
-import java.io.IOException;
-import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
+        Utilities utilities = new Utilities();
+        System.out.println("Newest values:");
+        System.out.println(utilities);
         IO.init();
         firstPage();
         firstPageSelector();
@@ -11,12 +13,14 @@ public class Main {
     }
 
     public static void homePage() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
 
     }
 
     public static void firstPage() {
-        GuiBoardDemos.clrDMDisplay();
-        GuiBoardDemos.clrSevenSegment();
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
         String temp = "Temperature     1/4";
         String hum = "Humidity";
         String wind = "Wind";
@@ -46,8 +50,7 @@ public class Main {
             if (IO.readShort(0x80) == 1) {
                 selectTemp();
                 i = -1;
-            }
-            else if (IO.readShort(0x100) == 1) {
+            } else if (IO.readShort(0x100) == 1) {
                 noSelection();
                 secondPos();
                 i = -1;
@@ -77,8 +80,8 @@ public class Main {
     }
 
     public static void secondPage() {
-        GuiBoardDemos.clrDMDisplay();
-        GuiBoardDemos.clrSevenSegment();
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
         String airp = "Air pressure    2/4";
         String rainrate = "Rain rate";
         String uv = "UV-index";
@@ -108,8 +111,7 @@ public class Main {
             if (IO.readShort(0x80) == 1) {
                 selectAirpressure();
                 i = -1;
-            }
-            else if (IO.readShort(0x100) == 0) {
+            } else if (IO.readShort(0x100) == 0) {
                 noSelection();
                 secondPos();
                 i = -1;
@@ -139,8 +141,8 @@ public class Main {
     }
 
     public static void thirdPage() {
-        GuiBoardDemos.clrDMDisplay();
-        GuiBoardDemos.clrSevenSegment();
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
         String solar = "Solar radiation 3/4";
         String sun = "Sun";
         String batt = "Batteries";
@@ -170,8 +172,7 @@ public class Main {
             if (IO.readShort(0x80) == 1) {
                 selectSolarrad();
                 i = -1;
-            }
-            else if (IO.readShort(0x100) == 1) {
+            } else if (IO.readShort(0x100) == 1) {
                 noSelection();
                 secondPos();
                 i = -1;
@@ -201,8 +202,8 @@ public class Main {
     }
 
     public static void fourthPage() {
-        GuiBoardDemos.clrDMDisplay();
-        GuiBoardDemos.clrSevenSegment();
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
         String dewpoint = "Dewpoint        4/4";
         String windchill = "Windchill";
         String heatindex = "Heatindex";
@@ -232,8 +233,7 @@ public class Main {
             if (IO.readShort(0x80) == 1) {
                 selectDewpoint();
                 i = -1;
-            }
-            else if (IO.readShort(0x100) == 0) {
+            } else if (IO.readShort(0x100) == 0) {
                 noSelection();
                 secondPos();
                 i = -1;
@@ -261,7 +261,6 @@ public class Main {
             }
         }
     }
-
 
 
     public static void noSelection() {
@@ -320,25 +319,25 @@ public class Main {
             if (IO.readShort(0x80) == 0) {
                 selectBothTemps();
                 return;
-            }   else if (IO.readShort(0x100) == 1) {
+            } else if (IO.readShort(0x100) == 1) {
                 noSelection();
                 IO.delay(1000);
                 firstPos();
                 j = -1;
             }
-            }
         }
+    }
 
 
     public static void selectOutsideTemp() {
-        GuiBoardDemos.clrDMDisplay();
+        GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
-        now.getMeasurements();
-        String outsideTemp = "" + Utilities.rounder(now.getMeasurements().get(0).getOutsideTemperature());
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String outsideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideTemperature());
         IO.writeShort(0x24, outsideTemp.charAt(0));
         IO.writeShort(0x22, 0x100 | secondDigit("" + outsideTemp.charAt(1)));
         IO.writeShort(0x20, outsideTemp.charAt(3));
-        String outsideTempDMD = "Outside temperature";
+        String outsideTempDMD = "Showing outside \n temperature in \n degrees Celcius";
         for (int i = 0; i < outsideTempDMD.length(); i++) {
             IO.writeShort(0x40, outsideTempDMD.charAt(i));
         }
@@ -346,14 +345,14 @@ public class Main {
     }
 
     public static void selectInsideTemp() {
-        GuiBoardDemos.clrDMDisplay();
+        GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
-        now.getMeasurements();
-        String insideTemp = "" + Utilities.rounder(now.getMeasurements().get(0).getInsideTemperature());
-        IO.writeShort(0x24, insideTemp.charAt(0));
-        IO.writeShort(0x22, 0x100 | secondDigit("" + insideTemp.charAt(1)));
-        IO.writeShort(0x20, insideTemp.charAt(3));
-        String insideTempDMD = "Inside temperature";
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String insidetemp = "" + now.getMeasurements().get(measurements.size() - 1).getInsideTemperature();
+        IO.writeShort(0x24, insidetemp.charAt(0));
+        IO.writeShort(0x22, 0x100 | secondDigit("" + insidetemp.charAt(1)));
+        IO.writeShort(0x20, insidetemp.charAt(3));
+        String insideTempDMD = "Showing inside \n temperature in \n degrees Celcius";
         for (int i = 0; i < insideTempDMD.length(); i++) {
             IO.writeShort(0x40, insideTempDMD.charAt(i));
         }
@@ -361,20 +360,20 @@ public class Main {
     }
 
     public static void selectBothTemps() {
-        GuiBoardDemos.clrDMDisplay();
+        GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
-        now.getMeasurements();
-        String outsideTemp = "" + Utilities.rounder(now.getMeasurements().get(0).getOutsideTemperature());
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String outsideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideTemperature());
         IO.writeShort(0x34, outsideTemp.charAt(0));
         IO.writeShort(0x32, 0x100 | secondDigit("" + outsideTemp.charAt(1)));
         IO.writeShort(0x30, outsideTemp.charAt(3));
-        String insideTemp = "" + Utilities.rounder(now.getMeasurements().get(0).getInsideTemperature());
+        String insideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getInsideTemperature());
         IO.writeShort(0x24, insideTemp.charAt(0));
         IO.writeShort(0x22, 0x100 | secondDigit("" + insideTemp.charAt(1)));
         IO.writeShort(0x20, insideTemp.charAt(3));
-        String insideTempDMD = "Inside = left";
-        String outsideTempDMD = "Outside = right";
-        String differenceTemptDMD = "Difference = " + Utilities.rounder((Utilities.rounder(now.getMeasurements().get(0).getInsideTemperature()) - Utilities.rounder(now.getMeasurements().get(0).getOutsideTemperature())));
+        String insideTempDMD = "Left = inside";
+        String outsideTempDMD = "Right = outside";
+        String differenceTemptDMD = "Difference = " + Utilities.rounder((Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getInsideTemperature()) - Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideTemperature())));
         for (int i = 0; i < insideTempDMD.length(); i++) {
             IO.writeShort(0x40, insideTempDMD.charAt(i));
         }
@@ -420,10 +419,10 @@ public class Main {
     }
 
     public static void selectOutsideHum() {
-        GuiBoardDemos.clrDMDisplay();
+        GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
-        now.getMeasurements();
-        String outsideHum = "" + Utilities.rounder(now.getMeasurements().get(0).getOutsideHum());
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String outsideHum = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideHum());
         IO.writeShort(0x24, outsideHum.charAt(0));
         IO.writeShort(0x22, 0x100 | secondDigit("" + outsideHum.charAt(1)));
         IO.writeShort(0x20, outsideHum.charAt(3));
@@ -435,10 +434,10 @@ public class Main {
     }
 
     public static void selectInsideHum() {
-        GuiBoardDemos.clrDMDisplay();
+        GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
-        now.getMeasurements();
-        String insideHum = "" + Utilities.rounder(now.getMeasurements().get(0).getInsideHum());
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String insideHum = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getInsideHum());
         IO.writeShort(0x24, insideHum.charAt(0));
         IO.writeShort(0x22, 0x100 | secondDigit("" + insideHum.charAt(1)));
         IO.writeShort(0x20, insideHum.charAt(3));
@@ -450,20 +449,20 @@ public class Main {
     }
 
     public static void selectBothHum() {
-        GuiBoardDemos.clrDMDisplay();
+        GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
-        now.getMeasurements();
-        String insideHum = "" + Utilities.rounder(now.getMeasurements().get(0).getInsideHum());
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String insideHum = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getInsideHum());
         IO.writeShort(0x24, insideHum.charAt(0));
         IO.writeShort(0x22, 0x100 | secondDigit("" + insideHum.charAt(1)));
         IO.writeShort(0x20, insideHum.charAt(3));
-        String outsideHum = "" + Utilities.rounder(now.getMeasurements().get(0).getOutsideHum());
+        String outsideHum = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideHum());
         IO.writeShort(0x34, outsideHum.charAt(0));
         IO.writeShort(0x32, 0x100 | secondDigit("" + outsideHum.charAt(1)));
         IO.writeShort(0x30, outsideHum.charAt(3));
         String insideTempDMD = "Inside = left";
         String outsideTempDMD = "Outside = right";
-        String differenceTempDMD = "Difference = " + (now.getMeasurements().get(0).getInsideHum() - now.getMeasurements().get(0).getOutsideHum());
+        String differenceTempDMD = "Difference = " + (now.getMeasurements().get(measurements.size() - 1).getInsideHum() - now.getMeasurements().get(0).getOutsideHum());
         if (differenceTempDMD.contains("-")) {
             differenceTempDMD = differenceTempDMD.substring(0, 12) + " " + differenceTempDMD.substring(14);
         }
@@ -482,11 +481,11 @@ public class Main {
     }
 
     public static void selectWind() {
-        GuiBoardDemos.clrDMDisplay();
+        GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
-        now.getMeasurements();
-        String windSpeed = "Wind speed = " + Utilities.rounder(now.getMeasurements().get(0).getWindSpeed()) + "Km/h";
-        String windDirection = "Wind direction = " + now.getMeasurements().get(0).getWindDirection();
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String windSpeed = "Wind speed = " + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getWindSpeed()) + "Km/h";
+        String windDirection = "Wind direction = " + now.getMeasurements().get(measurements.size() - 1).getWindDirection();
         for (int i = 0; i < windSpeed.length(); i++) {
             IO.writeShort(0x40, windSpeed.charAt(i));
         }
@@ -498,7 +497,8 @@ public class Main {
     }
 
     private static void printInsideOutsideBoth() {
-        GuiBoardDemos.clrDMDisplay();
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
 
         String outsideTemperature = "Outside";
         String insideTemperature = "Inside";
@@ -525,11 +525,11 @@ public class Main {
     }
 
     public static void selectAirpressure() {
-        GuiBoardDemos.clrDMDisplay();
-        GuiBoardDemos.clrSevenSegment();
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
         Period now = new Period();
-        now.getMeasurements();
-        String airPressure = "" + Utilities.rounder(now.getMeasurements().get(0).getAirPressure());
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String airPressure = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getAirPressure());
         IO.writeShort(0x18, airPressure.charAt(0));
         IO.writeShort(0x16, airPressure.charAt(1));
         IO.writeShort(0x14, airPressure.charAt(2));
@@ -543,11 +543,11 @@ public class Main {
     }
 
     public static void selectRainraite() {
-        GuiBoardDemos.clrDMDisplay();
-        GuiBoardDemos.clrSevenSegment();
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
         Period now = new Period();
-        now.getMeasurements();
-        String rainRate = "" + Utilities.rounder(now.getMeasurements().get(0).getRainRate());
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String rainRate = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getRainRate());
         IO.writeShort(0x24, rainRate.charAt(0));
         IO.writeShort(0x22, rainRate.charAt(1));
         IO.writeShort(0x20, rainRate.charAt(2));
@@ -560,27 +560,113 @@ public class Main {
     }
 
     public static void selectUV() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        Period now = new Period();
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String UVIndex = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getUVLevel());
+        IO.writeShort(0x24, 0x100 | secondDigit("" + UVIndex.charAt(0)));
+        IO.writeShort(0x22, UVIndex.charAt(2));
+        String UVindexDMD = "Showing current UV \n index";
+        for (int i = 0; i < UVindexDMD.length(); i++) {
+            IO.writeShort(0x40, UVindexDMD.charAt(i));
 
+        }
+        returnToFirstPage();
     }
 
     public static void selectSolarrad() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        Period now = new Period();
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String Solarrad = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getSolarRad());
+        IO.writeShort(0x18, Solarrad.charAt(0));
+        IO.writeShort(0x16, Solarrad.charAt(1));
+        IO.writeShort(0x14, Solarrad.charAt(2));
+        String SolarradDMD = "Showing current solar \n radiation in W/M2";
+        for (int i = 0; i < SolarradDMD.length(); i++) {
+            IO.writeShort(0x40, SolarradDMD.charAt(i));
 
+        }
+        returnToFirstPage();
     }
 
     public static void selectSun() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        Period now = new Period();
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String sunrise = "Sunrise: " + now.getMeasurements().get(measurements.size() - 1).getSunrise();
+        String sunset = "Sunset: " + now.getMeasurements().get(measurements.size() - 1).getSunset();
+        String suninfo = "Sun information";
+        for (int i = 0; i < suninfo.length(); i++) {
+            IO.writeShort(0x40, suninfo.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
 
+        for (int i = 0; i < sunrise.length(); i++) {
+            IO.writeShort(0x40, sunrise.charAt(i));
+
+        }
+        IO.writeShort(0x40, '\n');
+        for (int i = 0; i < sunset.length(); i++) {
+            IO.writeShort(0x40, sunset.charAt(i));
+        }
+        returnToFirstPage();
     }
 
-    public static void selectBatteries() {
 
+    public static void selectBatteries() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        Period now = new Period();
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String xmitbatt = "" + now.getMeasurements().get(measurements.size() - 1).getXmitBatt();
+        String otherbatt = "" + now.getMeasurements().get(measurements.size() - 1).getBattLevel();
+        IO.writeShort(0x24, xmitbatt.charAt(0));
+        IO.writeShort(0x22, xmitbatt.charAt(1));
+        IO.writeShort(0x22, xmitbatt.charAt(2));
+        IO.writeShort(0x34, otherbatt.charAt(0));
+        IO.writeShort(0x32, otherbatt.charAt(1));
+        IO.writeShort(0x30, otherbatt.charAt(2));
+        String battsDMD = "Current battery status \n Left: xmit \n Right: otherbat";
+        for (int i = 0; i < battsDMD.length(); i++) {
+            IO.writeShort(0x40, battsDMD.charAt(i));
+        }
+        returnToFirstPage();
     }
 
     public static void selectDewpoint() {
-
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        Period now = new Period();
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String dewpoint = "" + now.getMeasurements().get(measurements.size() - 1).getDewPoint();
+        IO.writeShort(0x24, dewpoint.charAt(0));
+        IO.writeShort(0x22, 0x100 | secondDigit("" + dewpoint.charAt(1)));
+        IO.writeShort(0x20, dewpoint.charAt(3));
+        String dewpointDMD = "Showing current \n dewpoint in \n degrees Celcius";
+        for (int i = 0; i < dewpointDMD.length(); i++) {
+            IO.writeShort(0x40, dewpointDMD.charAt(i));
+        }
+        returnToFirstPage();
     }
 
     public static void selectWindchill() {
-
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        Period now = new Period();
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String windchill = "" + now.getMeasurements().get(measurements.size() - 1).getWindChill();
+        IO.writeShort(0x24, windchill.charAt(0));
+        IO.writeShort(0x22, 0x100 | secondDigit("" + windchill.charAt(1)));
+        IO.writeShort(0x20, windchill.charAt(3));
+        String windchillDMD = "Showing current \n windchill in \n degrees Celcius";
+        for (int i = 0; i < windchillDMD.length(); i++) {
+            IO.writeShort(0x40, windchillDMD.charAt(i));
+        }
+        returnToFirstPage();
     }
 
     public static void selectHeatindex() {
