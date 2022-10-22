@@ -10,10 +10,14 @@ public class Main {
 
     }
 
+    public static void homePage() {
+
+    }
+
     public static void firstPage() {
         GuiBoardDemos.clrDMDisplay();
         GuiBoardDemos.clrSevenSegment();
-        String temp = "Temperature      1";
+        String temp = "Temperature     1/4";
         String hum = "Humidity";
         String wind = "Wind";
         IO.writeShort(0x40, ' ');
@@ -75,7 +79,7 @@ public class Main {
     public static void secondPage() {
         GuiBoardDemos.clrDMDisplay();
         GuiBoardDemos.clrSevenSegment();
-        String airp = "Air pressure     2";
+        String airp = "Air pressure    2/4";
         String rainrate = "Rain rate";
         String uv = "UV-index";
         IO.writeShort(0x40, ' ');
@@ -127,11 +131,138 @@ public class Main {
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
-                firstPos();
+                thirdPage();
+                thirdPageSelector();
                 i = -1;
             }
         }
     }
+
+    public static void thirdPage() {
+        GuiBoardDemos.clrDMDisplay();
+        GuiBoardDemos.clrSevenSegment();
+        String solar = "Solar radiation 3/4";
+        String sun = "Sun";
+        String batt = "Batteries";
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < solar.length(); i++) {
+            IO.writeShort(0x40, solar.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < sun.length(); i++) {
+            IO.writeShort(0x40, sun.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < batt.length(); i++) {
+            IO.writeShort(0x40, batt.charAt(i));
+        }
+        IO.writeShort(0x42, 1);
+    }
+
+    public static void thirdPageSelector() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                selectSolarrad();
+                i = -1;
+            }
+            else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                selectSun();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                thirdPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                selectBatteries();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                fourthPage();
+                fourthPageSelector();
+                i = -1;
+            }
+        }
+    }
+
+    public static void fourthPage() {
+        GuiBoardDemos.clrDMDisplay();
+        GuiBoardDemos.clrSevenSegment();
+        String dewpoint = "Dewpoint        4/4";
+        String windchill = "Windchill";
+        String heatindex = "Heatindex";
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < dewpoint.length(); i++) {
+            IO.writeShort(0x40, dewpoint.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < windchill.length(); i++) {
+            IO.writeShort(0x40, windchill.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < heatindex.length(); i++) {
+            IO.writeShort(0x40, heatindex.charAt(i));
+        }
+        IO.writeShort(0x42, 1);
+    }
+
+    public static void fourthPageSelector() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                selectDewpoint();
+                i = -1;
+            }
+            else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                selectWindchill();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                thirdPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                selectHeatindex();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                firstPage();
+                firstPageSelector();
+                i = -1;
+            }
+        }
+    }
+
+
 
     public static void noSelection() {
         for (int i = 2; i < 7; i++) {
@@ -429,6 +560,30 @@ public class Main {
     }
 
     public static void selectUV() {
+
+    }
+
+    public static void selectSolarrad() {
+
+    }
+
+    public static void selectSun() {
+
+    }
+
+    public static void selectBatteries() {
+
+    }
+
+    public static void selectDewpoint() {
+
+    }
+
+    public static void selectWindchill() {
+
+    }
+
+    public static void selectHeatindex() {
 
     }
 
