@@ -6,9 +6,9 @@ public class Main {
         Utilities utilities = new Utilities();
         System.out.println("Newest values:");
         System.out.println(utilities);
-//        IO.init();
-//        firstPage();
-//        firstPageSelector();
+        IO.init();
+        firstPage();
+        firstPageSelector();
     }
 
     public static void homePage() {
@@ -362,7 +362,7 @@ public class Main {
         if (Double.parseDouble(avgwindspeed) < 10 && Double.parseDouble(avgwindspeed) >= 0) {
             IO.writeShort(0x34, 0x100 | secondDigit("" + avgwindspeed.charAt(0)));
             IO.writeShort(0x32, avgwindspeed.charAt(2));
-        } else if(Double.parseDouble(avgwindspeed) >= 10 && Double.parseDouble(avgwindspeed) < 100) {
+        } else if (Double.parseDouble(avgwindspeed) >= 10 && Double.parseDouble(avgwindspeed) < 100) {
             IO.writeShort(0x34, avgwindspeed.charAt(0));
             IO.writeShort(0x32, 0x100 | secondDigit("" + avgwindspeed.charAt(1)));
             IO.writeShort(0x30, avgwindspeed.charAt(3));
@@ -375,7 +375,7 @@ public class Main {
         if (Double.parseDouble(windSpeed) < 10 && Double.parseDouble(windSpeed) >= 0) {
             IO.writeShort(0x24, 0x100 | secondDigit("" + windSpeed.charAt(0)));
             IO.writeShort(0x22, windSpeed.charAt(2));
-        } else if(Double.parseDouble(windSpeed) >= 10 && Double.parseDouble(windSpeed) < 100) {
+        } else if (Double.parseDouble(windSpeed) >= 10 && Double.parseDouble(windSpeed) < 100) {
             IO.writeShort(0x24, windSpeed.charAt(0));
             IO.writeShort(0x22, 0x100 | secondDigit("" + windSpeed.charAt(1)));
             IO.writeShort(0x20, windSpeed.charAt(3));
@@ -407,11 +407,19 @@ public class Main {
         Period now = new Period();
         ArrayList<Measurement> measurements = now.getMeasurements();
         String airPressure = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getAirPressure());
-        IO.writeShort(0x18, airPressure.charAt(0));
-        IO.writeShort(0x16, airPressure.charAt(1));
-        IO.writeShort(0x14, airPressure.charAt(2));
-        IO.writeShort(0x12, 0x100 | secondDigit("" + airPressure.charAt(3)));
-        IO.writeShort(0x10, airPressure.charAt(5));
+        if(Double.parseDouble(airPressure) >= 1000) {
+            IO.writeShort(0x18, airPressure.charAt(0));
+            IO.writeShort(0x16, airPressure.charAt(1));
+            IO.writeShort(0x14, airPressure.charAt(2));
+            IO.writeShort(0x12, 0x100 | secondDigit("" + airPressure.charAt(3)));
+            IO.writeShort(0x10, airPressure.charAt(5));
+        } else if (Double.parseDouble(airPressure) < 1000) {
+            IO.writeShort(0x18, airPressure.charAt(0));
+            IO.writeShort(0x16, airPressure.charAt(1));
+            IO.writeShort(0x14, 0x100 | secondDigit("" + airPressure.charAt(2)));
+            IO.writeShort(0x12, airPressure.charAt(4));
+        }
+
         String airPressureDMD = "Showing current air \n pressure in hPa.";
         for (int i = 0; i < airPressureDMD.length(); i++) {
             IO.writeShort(0x40, airPressureDMD.charAt(i));
@@ -428,7 +436,7 @@ public class Main {
         if (Double.parseDouble(rainrate) < 10 && Double.parseDouble(rainrate) >= 0) {
             IO.writeShort(0x18, 0x100 | secondDigit("" + rainrate.charAt(0)));
             IO.writeShort(0x16, rainrate.charAt(2));
-        } else if (Double.parseDouble(rainrate) >= 10 && Double.parseDouble(rainrate) < 100){
+        } else if (Double.parseDouble(rainrate) >= 10 && Double.parseDouble(rainrate) < 100) {
             IO.writeShort(0x18, rainrate.charAt(0));
             IO.writeShort(0x16, rainrate.charAt(1));
             IO.writeShort(0x14, 0x100 | secondDigit("" + rainrate.charAt(2)));
@@ -437,7 +445,7 @@ public class Main {
             IO.writeShort(0x18, rainrate.charAt(0));
             IO.writeShort(0x16, rainrate.charAt(1));
             IO.writeShort(0x14, rainrate.charAt(2));
-            IO.writeShort(0x12, 0x100 | secondDigit("" +rainrate.charAt(3)));
+            IO.writeShort(0x12, 0x100 | secondDigit("" + rainrate.charAt(3)));
             IO.writeShort(0x10, rainrate.charAt(5));
         }
         String rainRateDMD = "Showing current rain \n rate in mm";
@@ -479,7 +487,7 @@ public class Main {
         if (Double.parseDouble(solarrad) < 10 && Double.parseDouble(solarrad) >= 0) {
             IO.writeShort(0x18, 0x100 | secondDigit("" + solarrad.charAt(0)));
             IO.writeShort(0x16, solarrad.charAt(2));
-        } else if (Double.parseDouble(solarrad) >= 10 && Double.parseDouble(solarrad) < 100){
+        } else if (Double.parseDouble(solarrad) >= 10 && Double.parseDouble(solarrad) < 100) {
             IO.writeShort(0x18, solarrad.charAt(0));
             IO.writeShort(0x16, 0x100 | secondDigit("" + solarrad.charAt(1)));
             IO.writeShort(0x14, solarrad.charAt(3));
@@ -492,7 +500,7 @@ public class Main {
             IO.writeShort(0x18, solarrad.charAt(0));
             IO.writeShort(0x16, solarrad.charAt(1));
             IO.writeShort(0x14, solarrad.charAt(2));
-            IO.writeShort(0x12, 0x100 | secondDigit("" +solarrad.charAt(3)));
+            IO.writeShort(0x12, 0x100 | secondDigit("" + solarrad.charAt(3)));
             IO.writeShort(0x10, solarrad.charAt(5));
         }
         String SolarradDMD = "Showing current solar \n radiation in W/M2";
@@ -569,9 +577,14 @@ public class Main {
         Period now = new Period();
         ArrayList<Measurement> measurements = now.getMeasurements();
         String dewpoint = "" + now.getMeasurements().get(measurements.size() - 1).getDewPoint();
-        IO.writeShort(0x24, dewpoint.charAt(0));
-        IO.writeShort(0x22, 0x100 | secondDigit("" + dewpoint.charAt(1)));
-        IO.writeShort(0x20, dewpoint.charAt(3));
+        if (Double.parseDouble(dewpoint) < 10) {
+            IO.writeShort(0x24, 0x100 | secondDigit("" + dewpoint.charAt(0)));
+            IO.writeShort(0x22, dewpoint.charAt(2));
+        } else {
+            IO.writeShort(0x24, dewpoint.charAt(0));
+            IO.writeShort(0x22, 0x100 | secondDigit("" + dewpoint.charAt(1)));
+            IO.writeShort(0x20, dewpoint.charAt(3));
+        }
         String dewpointDMD = "Showing current \n dewpoint in \n degrees Celcius";
         for (int i = 0; i < dewpointDMD.length(); i++) {
             IO.writeShort(0x40, dewpointDMD.charAt(i));
@@ -585,9 +598,14 @@ public class Main {
         Period now = new Period();
         ArrayList<Measurement> measurements = now.getMeasurements();
         String windchill = "" + now.getMeasurements().get(measurements.size() - 1).getWindChill();
-        IO.writeShort(0x24, windchill.charAt(0));
-        IO.writeShort(0x22, 0x100 | secondDigit("" + windchill.charAt(1)));
-        IO.writeShort(0x20, windchill.charAt(3));
+        if (Double.parseDouble(windchill) < 10) {
+            IO.writeShort(0x24, 0x100 | secondDigit("" + windchill.charAt(0)));
+            IO.writeShort(0x22, windchill.charAt(2));
+        } else {
+            IO.writeShort(0x24, windchill.charAt(0));
+            IO.writeShort(0x22, 0x100 | secondDigit("" + windchill.charAt(1)));
+            IO.writeShort(0x20, windchill.charAt(3));
+        }
         String windchillDMD = "Showing current \n windchill in \n degrees Celcius";
         for (int i = 0; i < windchillDMD.length(); i++) {
             IO.writeShort(0x40, windchillDMD.charAt(i));
@@ -596,7 +614,24 @@ public class Main {
     }
 
     public static void selectHeatindex() {
-
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        Period now = new Period();
+        ArrayList<Measurement> measurements = now.getMeasurements();
+        String heatindex = "" + now.getMeasurements().get(measurements.size() - 1).getHeatIndex();
+        if (Double.parseDouble(heatindex) < 10) {
+            IO.writeShort(0x24, 0x100 | secondDigit("" + heatindex.charAt(0)));
+            IO.writeShort(0x22, heatindex.charAt(2));
+        } else {
+            IO.writeShort(0x24, heatindex.charAt(0));
+            IO.writeShort(0x22, 0x100 | secondDigit("" + heatindex.charAt(1)));
+            IO.writeShort(0x20, heatindex.charAt(3));
+        }
+        String heatindexDMD = "Showing current \n heat index in \n degrees Celcius";
+        for (int i = 0; i < heatindexDMD.length(); i++) {
+            IO.writeShort(0x40, heatindexDMD.charAt(i));
+        }
+        returnToFirstPage();
     }
 
     public static int secondDigit(String secondDigit) {

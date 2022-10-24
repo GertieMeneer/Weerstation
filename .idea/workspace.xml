@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f6c4b544-5e0f-4fe7-b49f-c315ab6b7609" name="Default Changelist" comment="newer version">
+    <list default="true" id="f6c4b544-5e0f-4fe7-b49f-c315ab6b7609" name="Default Changelist" comment="HEAT INDEX FIXED!!!!!!!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/ValueConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/ValueConverter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +130,7 @@
       <workItem from="1666425379987" duration="4924000" />
       <workItem from="1666439449642" duration="2077000" />
       <workItem from="1666441560756" duration="10918000" />
-      <workItem from="1666591881117" duration="2844000" />
+      <workItem from="1666591881117" duration="3482000" />
     </task>
     <task id="LOCAL-00001" summary="yes">
       <created>1666005657038</created>
@@ -224,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666460014501</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="HEAT INDEX FIXED!!!!!!!">
+      <created>1666597514090</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1666597514090</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -311,7 +317,8 @@
     <MESSAGE value="yes" />
     <MESSAGE value="tiny tweaks" />
     <MESSAGE value="newer version" />
-    <option name="LAST_COMMIT_MESSAGE" value="newer version" />
+    <MESSAGE value="HEAT INDEX FIXED!!!!!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="HEAT INDEX FIXED!!!!!!!" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Weekly Assignment/src/RawMeasurement.java">
