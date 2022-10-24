@@ -1,20 +1,54 @@
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Main {
 
     public static void main(String[] args) {
-        Utilities utilities = new Utilities();
-        System.out.println("Newest values:");
-        System.out.println(utilities);
+//        Utilities utilities = new Utilities();
+//        System.out.println("Newest values:");
+//        System.out.println(utilities);
         IO.init();
-        firstPage();
-        firstPageSelector();
+        homePage();
     }
 
     public static void homePage() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
+        for (int i = 1; i > 0; i++) {
+            clock();
+            Period now = new Period();
+            ArrayList<Measurement> measurements = now.getMeasurements();
+            displayTemps(now, measurements);
+            String windSpeed = "";
+            String windDirection = "";
+            windSpeed += "Wind speed: " + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getWindSpeed()) + " Km/h";
+            windDirection += "Wind direction: " + now.getMeasurements().get(measurements.size() - 1).getWindDirection();
+            GuiBoardUtilities.clrDMDisplay();
+            for (int j = 0; j < windSpeed.length(); j++) {
+                IO.writeShort(0x40, windSpeed.charAt(j));
+            }
+            IO.writeShort(0x40, '\n');
+            for (int y = 0; y < windDirection.length(); y++) {
+                IO.writeShort(0x40, windDirection.charAt(y));
+            }
+            if (IO.readShort(0x0090) == 1) {
+                i = -1;
+                firstPage();
+                firstPageSelector();
+            }
+        }
 
+
+    }
+
+    public static void clock() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+            LocalDateTime now = LocalDateTime.now();
+            IO.writeShort(0x18, dtf.format(now).charAt(0));
+            IO.writeShort(0x16, dtf.format(now).charAt(1));
+            IO.writeShort(0x12, dtf.format(now).charAt(3));
+            IO.writeShort(0x10, dtf.format(now).charAt(4));
     }
 
     public static void firstPage() {
@@ -296,15 +330,8 @@ public class Main {
         GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
         ArrayList<Measurement> measurements = now.getMeasurements();
-        String outsideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideTemperature());
-        IO.writeShort(0x24, outsideTemp.charAt(0));
-        IO.writeShort(0x22, 0x100 | secondDigit("" + outsideTemp.charAt(1)));
-        IO.writeShort(0x20, outsideTemp.charAt(3));
-        String insideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getInsideTemperature());
-        IO.writeShort(0x34, insideTemp.charAt(0));
-        IO.writeShort(0x32, 0x100 | secondDigit("" + insideTemp.charAt(1)));
-        IO.writeShort(0x30, insideTemp.charAt(3));
-        String insideTempDMD = "Left: inside temp (C)";
+        displayTemps(now, measurements);
+        String insideTempDMD = "Left: outside temp";
         String outsideTempDMD = "Right: inside temp";
         String differenceTemptDMD = "Difference = " + Utilities.rounder((Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getInsideTemperature()) - Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideTemperature())));
         for (int i = 0; i < insideTempDMD.length(); i++) {
@@ -319,6 +346,17 @@ public class Main {
             IO.writeShort(0x40, differenceTemptDMD.charAt(i));
         }
         returnToFirstPage();
+    }
+
+    private static void displayTemps(Period now, ArrayList<Measurement> measurements) {
+        String outsideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideTemperature());
+        IO.writeShort(0x24, outsideTemp.charAt(0));
+        IO.writeShort(0x22, 0x100 | secondDigit("" + outsideTemp.charAt(1)));
+        IO.writeShort(0x20, outsideTemp.charAt(3));
+        String insideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getInsideTemperature());
+        IO.writeShort(0x34, insideTemp.charAt(0));
+        IO.writeShort(0x32, 0x100 | secondDigit("" + insideTemp.charAt(1)));
+        IO.writeShort(0x30, insideTemp.charAt(3));
     }
 
     public static void selectHum() {
