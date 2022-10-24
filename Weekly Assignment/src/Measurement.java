@@ -70,7 +70,7 @@ public class Measurement {
 
     public double getAvgWindSpeed() {
 
-        return windSpeed;
+        return avgWindSpeed;
     }
 
     public String getWindDirection() {
