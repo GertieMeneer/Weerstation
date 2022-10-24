@@ -362,4 +362,15 @@ public class SelectOptions {
             default -> throw new IllegalStateException("Unexpected value");
         };
     }
+
+    public static void selectReturnHome() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        PrintPage.homePage();
+    }
+
+    public static void selectGoToTop() {
+        PageSelectors.noSelection();
+        PrintPage.firstPage();
+    }
 }

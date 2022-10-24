@@ -135,6 +135,29 @@ public class PageSelectors {
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
+                PrintPage.fifthPage();
+                fifthPageSelector();
+                i = -1;
+            }
+        }
+
+    }
+
+    public static void fifthPageSelector() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                SelectOptions.selectReturnHome();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x100) == 0) {
+                noSelection();
                 PrintPage.firstPage();
                 firstPageSelector();
                 i = -1;

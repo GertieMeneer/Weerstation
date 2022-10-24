@@ -43,7 +43,7 @@ public class PrintPage {
     public static void firstPage() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
-        String temp = "Temperature     1/4";
+        String temp = "Temperature     1/5";
         String hum = "Humidity";
         String wind = "Wind";
         IO.writeShort(0x40, ' ');
@@ -69,7 +69,7 @@ public class PrintPage {
     public static void secondPage() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
-        String airp = "Air pressure    2/4";
+        String airp = "Air pressure    2/5";
         String rainrate = "Rain rate";
         String uv = "UV-index";
         IO.writeShort(0x40, ' ');
@@ -95,7 +95,7 @@ public class PrintPage {
     public static void thirdPage() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
-        String solar = "Solar radiation 3/4";
+        String solar = "Solar radiation 3/5";
         String sun = "Sun";
         String batt = "Batteries";
         IO.writeShort(0x40, ' ');
@@ -121,7 +121,7 @@ public class PrintPage {
     public static void fourthPage() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
-        String dewpoint = "Dewpoint        4/4";
+        String dewpoint = "Dewpoint        4/5";
         String windchill = "Windchill";
         String heatindex = "Heatindex";
         IO.writeShort(0x40, ' ');
@@ -140,6 +140,25 @@ public class PrintPage {
         IO.writeShort(0x40, ' ');
         for (int i = 0; i < heatindex.length(); i++) {
             IO.writeShort(0x40, heatindex.charAt(i));
+        }
+        IO.writeShort(0x42, 1);
+    }
+
+    public static void fifthPage() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String returnhome = "Return home    5/5";
+        String gototop = "END OF LIST";
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < returnhome.length() ; i++) {
+            IO.writeShort(0x40, returnhome.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < gototop.length(); i++) {
+            IO.writeShort(0x40, gototop.charAt(i));
         }
         IO.writeShort(0x42, 1);
     }

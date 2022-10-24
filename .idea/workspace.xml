@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8166e110-434b-4922-aca4-26cd764ea230" name="Changes" comment="made different classes">
-      <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/Measurement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/Measurement.java" afterDir="false" />
+    <list default="true" id="8166e110-434b-4922-aca4-26cd764ea230" name="Changes" comment="bug fixes: avgwindspeed was the same as windspeed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/PageSelectors.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/PageSelectors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/PrintPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/PrintPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/SelectOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/SelectOptions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666618881378</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="bug fixes: avgwindspeed was the same as windspeed">
+      <created>1666619204675</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1666619204675</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -333,7 +343,8 @@
     <MESSAGE value="newer version" />
     <MESSAGE value="HEAT INDEX FIXED!!!!!!!" />
     <MESSAGE value="made different classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="made different classes" />
+    <MESSAGE value="bug fixes: avgwindspeed was the same as windspeed" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixes: avgwindspeed was the same as windspeed" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Weekly Assignment/src/RawMeasurement.java">
