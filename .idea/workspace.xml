@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8166e110-434b-4922-aca4-26cd764ea230" name="Changes" comment="Eerste page GUI" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2G4s8FyOgVbrqqWAMPZqwdIclXg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Documents/GitHub/Weerstation/Weekly Assignment/lib&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Documents\GitHub\Weerstation\Weekly Assignment\lib" />
+      <recent name="D:\Documents\GitHub\Weerstation\Weekly Assignment" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Weerstation" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8166e110-434b-4922-aca4-26cd764ea230" name="Changes" comment="" />
+      <created>1665659045406</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1665659045406</updated>
+      <workItem from="1665659052124" duration="16051000" />
+      <workItem from="1665827176878" duration="12197000" />
+      <workItem from="1666004968242" duration="2032000" />
+      <workItem from="1666007040770" duration="14305000" />
+      <workItem from="1666204393784" duration="42000" />
+      <workItem from="1666268866320" duration="1443000" />
+    </task>
+    <task id="LOCAL-00001" summary="yes">
+      <created>1665748554944</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1665748554944</updated>
+    </task>
+    <task id="LOCAL-00002" summary="yes">
+      <created>1665749123413</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1665749123413</updated>
+    </task>
+    <task id="LOCAL-00003" summary="yes">
+      <created>1665776693713</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1665776693713</updated>
+    </task>
+    <task id="LOCAL-00004" summary="working average methods">
+      <created>1665778247411</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1665778247411</updated>
+    </task>
+    <task id="LOCAL-00005" summary="working average methods">
+      <created>1665780982115</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1665780982115</updated>
+    </task>
+    <task id="LOCAL-00006" summary="mode">
+      <created>1665827314515</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1665827314515</updated>
+    </task>
+    <task id="LOCAL-00007" summary="mode">
+      <created>1665827901272</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1665827901272</updated>
+    </task>
+    <task id="LOCAL-00008" summary="individuele opdrachten">
+      <created>1665840828265</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1665840828265</updated>
+    </task>
+    <task id="LOCAL-00009" summary="begin GUI, buiten temp is selecteerbaar">
+      <created>1666012567249</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1666012567249</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Eerste page GUI">
+      <created>1666030164308</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1666030164308</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="yes" />
+    <MESSAGE value="working average methods" />
+    <MESSAGE value="mode" />
+    <MESSAGE value="individuele opdrachten" />
+    <MESSAGE value="begin GUI, buiten temp is selecteerbaar" />
+    <MESSAGE value="Eerste page GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Eerste page GUI" />
+  </component>
+</project>
