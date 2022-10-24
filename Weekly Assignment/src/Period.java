@@ -25,6 +25,7 @@ public class Period {
         beginPeriod = LocalDate.now();
         endPeriod = LocalDate.now();
     }
+
     public Period(String year) {
         this.year = Integer.parseInt(year);
     }
@@ -592,6 +593,7 @@ public class Period {
 
         return values.get(index2);
     }
+
     public double aantalGraaddagen() {
         ArrayList<Measurement> measurements = getMeasurements();
         RawMeasurement rawMeasurement = DatabaseConnection.getMostRecentMeasurement();
@@ -607,6 +609,7 @@ public class Period {
 
         return amount;
     }
+
     public String biggestDifference(LocalDate beginPeriod, LocalDate endPeriod) {
         this.beginPeriod = beginPeriod;
         this.endPeriod = endPeriod;
