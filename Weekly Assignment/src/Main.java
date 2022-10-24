@@ -3,15 +3,12 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-
-        IO.init();
         Utilities utilities = new Utilities();
         System.out.println("Newest values:");
         System.out.println(utilities);
-        firstPage();
-        firstPageSelector();
-
-
+//        IO.init();
+//        firstPage();
+//        firstPageSelector();
     }
 
     public static void homePage() {
@@ -121,7 +118,7 @@ public class Main {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                selectRainraite();
+                selectRainrate();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -365,19 +362,27 @@ public class Main {
         if (Double.parseDouble(avgwindspeed) < 10 && Double.parseDouble(avgwindspeed) >= 0) {
             IO.writeShort(0x34, 0x100 | secondDigit("" + avgwindspeed.charAt(0)));
             IO.writeShort(0x32, avgwindspeed.charAt(2));
-        } else {
+        } else if(Double.parseDouble(avgwindspeed) >= 10 && Double.parseDouble(avgwindspeed) < 100) {
             IO.writeShort(0x34, avgwindspeed.charAt(0));
             IO.writeShort(0x32, 0x100 | secondDigit("" + avgwindspeed.charAt(1)));
             IO.writeShort(0x30, avgwindspeed.charAt(3));
+        } else {
+            IO.writeShort(0x34, avgwindspeed.charAt(0));
+            IO.writeShort(0x32, avgwindspeed.charAt(1));
+            IO.writeShort(0x30, avgwindspeed.charAt(2));
         }
 
         if (Double.parseDouble(windSpeed) < 10 && Double.parseDouble(windSpeed) >= 0) {
             IO.writeShort(0x24, 0x100 | secondDigit("" + windSpeed.charAt(0)));
             IO.writeShort(0x22, windSpeed.charAt(2));
-        } else {
+        } else if(Double.parseDouble(windSpeed) >= 10 && Double.parseDouble(windSpeed) < 100) {
             IO.writeShort(0x24, windSpeed.charAt(0));
             IO.writeShort(0x22, 0x100 | secondDigit("" + windSpeed.charAt(1)));
             IO.writeShort(0x20, windSpeed.charAt(3));
+        } else {
+            IO.writeShort(0x24, windSpeed.charAt(0));
+            IO.writeShort(0x22, windSpeed.charAt(1));
+            IO.writeShort(0x20, windSpeed.charAt(2));
         }
 
         String windspeedDMD = "Left: wind in km/h";
@@ -414,19 +419,26 @@ public class Main {
         returnToFirstPage();
     }
 
-    public static void selectRainraite() {
+    public static void selectRainrate() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
         Period now = new Period();
         ArrayList<Measurement> measurements = now.getMeasurements();
         String rainrate = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getRainRate());
         if (Double.parseDouble(rainrate) < 10 && Double.parseDouble(rainrate) >= 0) {
-            IO.writeShort(0x24, 0x100 | secondDigit("" + rainrate.charAt(0)));
-            IO.writeShort(0x22, rainrate.charAt(2));
+            IO.writeShort(0x18, 0x100 | secondDigit("" + rainrate.charAt(0)));
+            IO.writeShort(0x16, rainrate.charAt(2));
+        } else if (Double.parseDouble(rainrate) >= 10 && Double.parseDouble(rainrate) < 100){
+            IO.writeShort(0x18, rainrate.charAt(0));
+            IO.writeShort(0x16, rainrate.charAt(1));
+            IO.writeShort(0x14, 0x100 | secondDigit("" + rainrate.charAt(2)));
+            IO.writeShort(0x12, rainrate.charAt(4));
         } else {
-            IO.writeShort(0x24, rainrate.charAt(0));
-            IO.writeShort(0x22, 0x100 | secondDigit("" + rainrate.charAt(1)));
-            IO.writeShort(0x20, rainrate.charAt(3));
+            IO.writeShort(0x18, rainrate.charAt(0));
+            IO.writeShort(0x16, rainrate.charAt(1));
+            IO.writeShort(0x14, rainrate.charAt(2));
+            IO.writeShort(0x12, 0x100 | secondDigit("" +rainrate.charAt(3)));
+            IO.writeShort(0x10, rainrate.charAt(5));
         }
         String rainRateDMD = "Showing current rain \n rate in mm";
         for (int i = 0; i < rainRateDMD.length(); i++) {
@@ -523,13 +535,28 @@ public class Main {
         ArrayList<Measurement> measurements = now.getMeasurements();
         String xmitbatt = "" + now.getMeasurements().get(measurements.size() - 1).getXmitBatt();
         String otherbatt = "" + now.getMeasurements().get(measurements.size() - 1).getBattLevel();
-        IO.writeShort(0x24, xmitbatt.charAt(0));
-        IO.writeShort(0x22, xmitbatt.charAt(1));
-        IO.writeShort(0x22, xmitbatt.charAt(2));
-        IO.writeShort(0x34, otherbatt.charAt(0));
-        IO.writeShort(0x32, otherbatt.charAt(1));
-        IO.writeShort(0x30, otherbatt.charAt(2));
-        String battsDMD = "Current battery status \n Left: xmit \n Right: otherbat";
+        if (Double.parseDouble(xmitbatt) >= 00 && Double.parseDouble(xmitbatt) < 10) {
+            IO.writeShort(0x24, xmitbatt.charAt(0));
+        } else if (Double.parseDouble(xmitbatt) >= 10 && Double.parseDouble(xmitbatt) < 100) {
+            IO.writeShort(0x24, xmitbatt.charAt(0));
+            IO.writeShort(0x22, xmitbatt.charAt(1));
+        } else {
+            IO.writeShort(0x24, xmitbatt.charAt(0));
+            IO.writeShort(0x22, xmitbatt.charAt(1));
+            IO.writeShort(0x20, xmitbatt.charAt(2));
+        }
+
+        if (Double.parseDouble(otherbatt) >= 00 && Double.parseDouble(otherbatt) < 10) {
+            IO.writeShort(0x34, otherbatt.charAt(0));
+        } else if (Double.parseDouble(otherbatt) >= 10 && Double.parseDouble(otherbatt) < 100) {
+            IO.writeShort(0x34, otherbatt.charAt(0));
+            IO.writeShort(0x32, otherbatt.charAt(1));
+        } else {
+            IO.writeShort(0x34, otherbatt.charAt(0));
+            IO.writeShort(0x32, otherbatt.charAt(1));
+            IO.writeShort(0x30, otherbatt.charAt(2));
+        }
+        String battsDMD = "Current battery stats \n Left: xmit (%) \n Right: otherbat";
         for (int i = 0; i < battsDMD.length(); i++) {
             IO.writeShort(0x40, battsDMD.charAt(i));
         }
