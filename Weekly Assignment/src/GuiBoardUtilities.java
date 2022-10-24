@@ -1,0 +1,117 @@
+public class GuiBoardUtilities {
+    public static void clrDMDisplay() {
+        IO.writeShort(0x40, 0xFE);
+        IO.writeShort(0x40, 0x01);
+    }
+
+    public static void clrSevenSegment() {
+        //top display
+        IO.writeShort(0x18, 0x100);
+        IO.writeShort(0x16, 0x100);
+        IO.writeShort(0x14, 0x100);
+        IO.writeShort(0x12, 0x100);
+        IO.writeShort(0x10, 0x100);
+        //bottom left
+        IO.writeShort(0x24, 0x100);
+        IO.writeShort(0x22, 0x100);
+        IO.writeShort(0x20, 0x100);
+        //bottom right
+        IO.writeShort(0x34, 0x100);
+        IO.writeShort(0x32, 0x100);
+        IO.writeShort(0x30, 0x100);
+    }
+
+    public static void sus() {
+        IO.writeShort(0x42, 0b0001001001100101);
+        IO.writeShort(0x42, 0b0001001010000101);
+        IO.writeShort(0x42, 0b0001001010100101);
+        IO.writeShort(0x42, 0b0001001011000101);
+        IO.writeShort(0x42, 0b0001001011100101);
+        IO.writeShort(0x42, 0b0001001100000101);
+        IO.writeShort(0x42, 0b0001001100100110);
+        IO.writeShort(0x42, 0b0001001101000111);
+        IO.writeShort(0x42, 0b0001001100101000);
+        IO.writeShort(0x42, 0b0001001100001000);
+        IO.writeShort(0x42, 0b0001001100001000);
+        IO.writeShort(0x42, 0b0001001011101000);
+        IO.writeShort(0x42, 0b0001001011001000);
+        IO.writeShort(0x42, 0b0001001010101000);
+        IO.writeShort(0x42, 0b0001001010001001);
+        IO.writeShort(0x42, 0b0001001001101010);
+        IO.writeShort(0x42, 0b0001001001101011);
+        IO.writeShort(0x42, 0b0001001001101100);
+        IO.writeShort(0x42, 0b0001001010001101);
+        IO.writeShort(0x42, 0b0001001010101110);
+        IO.writeShort(0x42, 0b0001001011001110);
+        IO.writeShort(0x42, 0b0001001011101110);
+        IO.writeShort(0x42, 0b0001001100001110);
+        IO.writeShort(0x42, 0b0001001100101110);
+        IO.writeShort(0x42, 0b0001001101001110);
+        IO.writeShort(0x42, 0b0001001101001000);
+        IO.writeShort(0x42, 0b0001001101101001);
+        IO.writeShort(0x42, 0b0001001110001010);
+        IO.writeShort(0x42, 0b0001001110001011);
+        IO.writeShort(0x42, 0b0001001110001100);
+        IO.writeShort(0x42, 0b0001001101101101);
+        IO.writeShort(0x42, 0b0001001101101110);
+        IO.writeShort(0x42, 0b0001001101101111);
+        IO.writeShort(0x42, 0b0001001101110000);
+        IO.writeShort(0x42, 0b0001001101110001);
+        IO.writeShort(0x42, 0b0001001101110010);
+        IO.writeShort(0x42, 0b0001001101110011);
+        IO.writeShort(0x42, 0b0001001101110100);
+        IO.writeShort(0x42, 0b0001001101110101);
+        IO.writeShort(0x42, 0b0001001101110110);
+        IO.writeShort(0x42, 0b0001001101110111);
+        IO.writeShort(0x42, 0b0001001101111000);
+        IO.writeShort(0x42, 0b0001001101111000);
+        IO.writeShort(0x42, 0b0001001101011001);
+        IO.writeShort(0x42, 0b0001001100111001);
+        IO.writeShort(0x42, 0b0001001100011001);
+        IO.writeShort(0x42, 0b0001001011111000);
+        IO.writeShort(0x42, 0b0001001011110111);
+        IO.writeShort(0x42, 0b0001001011110110);
+        IO.writeShort(0x42, 0b0001001011010110);
+        IO.writeShort(0x42, 0b0001001010110110);
+        IO.writeShort(0x42, 0b0001001010010110);
+        IO.writeShort(0x42, 0b0001001010010111);
+        IO.writeShort(0x42, 0b0001001010011000);
+        IO.writeShort(0x42, 0b0001001001111001);
+        IO.writeShort(0x42, 0b0001001001011001);
+        IO.writeShort(0x42, 0b0001001001011001);
+        IO.writeShort(0x42, 0b0001001000111001);
+        IO.writeShort(0x42, 0b0001001000111001);
+        IO.writeShort(0x42, 0b0001001000011000);
+        IO.writeShort(0x42, 0b0001001000010111);
+        IO.writeShort(0x42, 0b0001001000010110);
+        IO.writeShort(0x42, 0b0001001000010101);
+        IO.writeShort(0x42, 0b0001000111110101);
+        IO.writeShort(0x42, 0b0001000111010101);
+        IO.writeShort(0x42, 0b0001000110110100);
+        IO.writeShort(0x42, 0b0001000110110011);
+        IO.writeShort(0x42, 0b0001000110110010);
+        IO.writeShort(0x42, 0b0001000110110001);
+        IO.writeShort(0x42, 0b0001000110110000);
+        IO.writeShort(0x42, 0b0001000110101111);
+        IO.writeShort(0x42, 0b0001000110101110);
+        IO.writeShort(0x42, 0b0001000110101101);
+        IO.writeShort(0x42, 0b0001000110101100);
+        IO.writeShort(0x42, 0b0001000111001011);
+        IO.writeShort(0x42, 0b0001000111101011);
+        IO.writeShort(0x42, 0b0001001000010100);
+        IO.writeShort(0x42, 0b0001001000010011);
+        IO.writeShort(0x42, 0b0001001000010010);
+        IO.writeShort(0x42, 0b0001001000010001);
+        IO.writeShort(0x42, 0b0001001000010000);
+        IO.writeShort(0x42, 0b0001001000001111);
+        IO.writeShort(0x42, 0b0001001000001110);
+        IO.writeShort(0x42, 0b0001001000001101);
+        IO.writeShort(0x42, 0b0001001000001100);
+        IO.writeShort(0x42, 0b0001001000001011);
+        IO.writeShort(0x42, 0b0001001000001010);
+        IO.writeShort(0x42, 0b0001001000001001);
+        IO.writeShort(0x42, 0b0001001000001000);
+        IO.writeShort(0x42, 0b0001001001000110);
+        IO.writeShort(0x42, 0b0001001000100111);
+    }
+}

@@ -6,9 +6,10 @@ public class ValueConverter {
     }
 
     public static double Temperature(short rawValue) {
-        double outsidetemperature = (((rawValue / 10.0)) - 32.0) * 5.0 / 9.0;
-        return outsidetemperature;
+        double temperature = (((rawValue / 10.0)) - 32.0) * 5.0 / 9.0;
+        return temperature;
     }
+
 
     public static double windSpeed(short rawValue) {
         double windspeed = rawValue * 1.609;
@@ -99,17 +100,23 @@ public class ValueConverter {
         return dewpoint;
     }
 
-    public static double heatIndex(double outsidetemperature, double outsidehumvalue) {
-        double c1 = -42.379;
-        double c2 = -2.04901523;
-        double c3 = -10.14333127;
-        double c4 = -0.22475541;
-        double c5 = 6.83783 * Math.pow(10, -3);
-        double c6 = -5.481717 * Math.pow(10, -2);
-        double c7 = -1.22874 * Math.pow(10, -3);
-        double c8 = 8.5282 * Math.pow(10, -4);
-        double c9 = -1.99 * Math.pow(10, -6);
-        double heatindex = c1 + c2 * outsidetemperature + c3 * outsidehumvalue + c4 * outsidetemperature * outsidehumvalue + c5 * Math.pow(outsidetemperature, 2) + c6 * Math.pow(outsidehumvalue, 2) + c7 * Math.pow(outsidetemperature, 2) * outsidehumvalue + c8 * outsidetemperature * Math.pow(outsidehumvalue, 2) + c9 * Math.pow(outsidetemperature, 2) * Math.pow(outsidehumvalue, 2);
+    public static double heatIndex(short rawoutsidetemp, short rawoutsidehum) {
+        double outsidetemp = ValueConverter.Temperature(rawoutsidetemp);
+        double c1 = -8.78469475556;
+        double c2 = 1.61139411;
+        double c3 = 2.33854883889;
+        double c4 = -0.14611605;
+        double c5 = -0.012308094;
+        double c6 = -0.0164248277778;
+        double c7 = 2.211732 * Math.pow(10, -3);
+        double c8 = 7.2546 * Math.pow(10, -4);
+        double c9 = -3.582 * Math.pow(10, -6);
+        double heatindex = c1 + c2 * outsidetemp +
+                c3 * rawoutsidehum + c4 * outsidetemp * rawoutsidehum +
+                c5 * Math.pow(outsidetemp, 2) + c6 * Math.pow(rawoutsidehum, 2) +
+                c7 * Math.pow(outsidetemp, 2) * rawoutsidehum +
+                c8 * outsidetemp * Math.pow(rawoutsidehum, 2) +
+                c9 * Math.pow(outsidetemp, 2) * Math.pow(rawoutsidehum, 2);
         return heatindex;
     }
 
