@@ -162,4 +162,90 @@ public class PrintPage {
         }
         IO.writeShort(0x42, 1);
     }
+
+    public static void selectTempPage() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String currenttemp = "Current temp";
+        String customtemp = "Custom info";
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < currenttemp.length(); i++) {
+            IO.writeShort(0x40, currenttemp.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < customtemp.length(); i++) {
+            IO.writeShort(0x40, customtemp.charAt(i));
+        }
+    }
+
+    public static void selectCustomInfoPage1() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String average = "Average";
+        String lowest = "Lowest";
+        String highest = "Highest";
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < average.length(); i++) {
+            IO.writeShort(0x40, average.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < lowest.length(); i++) {
+            IO.writeShort(0x40, lowest.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < highest.length(); i++) {
+            IO.writeShort(0x40, highest.charAt(i));
+        }
+    }
+
+    public static void selectCustomInfoPage2() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String median = "Median";
+        String mode = "Mode";
+    }
+
+    public static void selectTempPeriod() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String pastday = "Past 24 hours";
+        String pastyear = "Past year";
+        String custom = "Custom period";
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < pastday.length(); i++) {
+            IO.writeShort(0x40, pastday.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < pastyear.length(); i++) {
+            IO.writeShort(0x40, pastyear.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < custom.length(); i++) {
+            IO.writeShort(0x40, custom.charAt(i));
+        }
+    }
+
+    public static void selectCustomTempAveragePeriod() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String selectcustom = "Follow instructions \n in console";
+        for (int i = 0; i < selectcustom.length(); i++) {
+            IO.writeShort(0x40, selectcustom.charAt(i));
+        }
+        System.out.println("Please type the start date and end date (yyyy-mm-dd of in een andere vorm weet ik niet meer later checken): ");
+    }
+
 }

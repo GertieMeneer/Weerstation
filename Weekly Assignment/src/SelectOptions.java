@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class SelectOptions {
-    public static void selectTemp() {
+    public static void selectCurrentTemp() {
         GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
         ArrayList<Measurement> measurements = now.getMeasurements();
@@ -22,6 +22,8 @@ public class SelectOptions {
         }
         PageSelectors.returnToFirstPage();
     }
+
+
 
     public static void displayTemps(Period now, ArrayList<Measurement> measurements) {
         String outsideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideTemperature());

@@ -3,7 +3,8 @@ public class PageSelectors {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectTemp();
+                PrintPage.selectTempPage();
+                PageSelectors.selectTempPage();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -160,6 +161,162 @@ public class PageSelectors {
                 noSelection();
                 PrintPage.firstPage();
                 firstPageSelector();
+                i = -1;
+            }
+        }
+    }
+
+    public static void selectTempPage() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                SelectOptions.selectCurrentTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                PrintPage.selectCustomInfoPage1();
+                PageSelectors.selectCustomTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                firstPos();
+                selectTempPage();
+                i = -1;
+            }
+        }
+    }
+
+    public static void selectCustomTemp() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectCustomInfoPage1();
+                selectCustomInfoTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectCustomInfoPage2();
+                selectCustomInfoTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                thirdPos();
+                i = -1;
+            }
+        }
+    }
+
+    public static void selectCustomInfoTemp() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectTempPeriod();
+                selectCustomAverageTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                secondPos();
+            }
+        }
+    }
+
+    public static void selectCustomAverageTemp() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectCustomInfoPage1();
+                selectCustomInfoTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+    }
+
+    public static void selectCustomLowestTemp() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectCustomInfoPage1();
+                selectCustomInfoTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+    }
+
+    public static void selectCustomHighestTemp() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectCustomInfoPage1();
+                selectCustomInfoTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+    }
+
+    public static void selectCustomMedianTemp() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectCustomInfoPage1();
+                selectCustomInfoTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+    }
+
+    public static void selectCustomModeTemp() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectCustomInfoPage1();
+                selectCustomInfoTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+    }
+
+    public static void selectPeriodTemp() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectCustomInfoPage1();
+                selectCustomInfoTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
                 i = -1;
             }
         }
