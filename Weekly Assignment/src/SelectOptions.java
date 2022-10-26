@@ -384,8 +384,23 @@ public class SelectOptions {
         Period test = new Period(startdatelocaldate, enddatelocaldate);
         if(value.equals("temp")) {
             if(type.equals("avg")) {
-                System.out.println("Average outside temp: " + test.getAverageOutsideTemperature(startdatelocaldate, enddatelocaldate));
-                System.out.println("Average inside temp: " + test.getAverageInsideTemperature(startdatelocaldate, enddatelocaldate));
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String avgoutside = "" + Utilities.rounder(test.getAverageOutsideTemperature(startdatelocaldate, enddatelocaldate));
+                String avginside = "" + Utilities.rounder(test.getAverageInsideTemperature(startdatelocaldate, enddatelocaldate));
+                String avgoutsideDMD = "Left: outside";
+                String avginsideDMD = "Right: inside";
+                IO.writeShort(0x24, avgoutside.charAt(0));
+                IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
+                IO.writeShort(0x20, avgoutside.charAt(3));
+                for (int i = 0; i < avginsideDMD.length(); i++) {
+                    IO.writeShort(0x40, avginsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < avgoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, avgoutsideDMD.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
 
             } else if (type.equals("low")) {
                 System.out.println("Lowest outside temp: " + test.getLowestOutsideTemp(startdatelocaldate, enddatelocaldate));

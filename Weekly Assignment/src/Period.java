@@ -623,8 +623,8 @@ public class Period {
         double difference;
         double biggestDifference = 0;
         for (int i = 0; i < (int) numberOfDays(); i++) {
-            highest = highestOutsideTemp(currentDay, currentDay);
-            lowest = lowestOutsideTemp(currentDay, currentDay);
+            highest = getHighestOutsideTemp(currentDay, currentDay);
+            lowest = getLowestOutsideTemp(currentDay, currentDay);
             difference = highest - lowest;
             currentDay = beginPeriod.plusDays(1);
             if (difference > biggestDifference) {
