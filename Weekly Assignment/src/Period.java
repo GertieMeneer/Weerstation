@@ -207,7 +207,7 @@ public class Period {
         return new Period();
     }
 
-    public double lowestOutsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
+    public double getLowestOutsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
         this.beginPeriod = beginPeriod;
         this.endPeriod = endPeriod;
         getMeasurements();
@@ -222,7 +222,7 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double highestOutsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
+    public double getHighestOutsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
         this.beginPeriod = beginPeriod;
         this.endPeriod = endPeriod;
         getMeasurements();
@@ -235,7 +235,7 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double lowestInsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
+    public double getLowestInsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
         this.beginPeriod = beginPeriod;
         this.endPeriod = endPeriod;
         getMeasurements();
@@ -248,7 +248,7 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double highestInsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
+    public double getHighestInsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
         this.beginPeriod = beginPeriod;
         this.endPeriod = endPeriod;
         getMeasurements();

@@ -374,25 +374,28 @@ public class SelectOptions {
     }
 
     public static void selectCustomPeriod(String value, String type) {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Input start date (yyyy-mm-dd): ");
+        String startdate = reader.nextLine();
+        System.out.println("Input end date (yyyy-mm-dd): ");
+        String enddate = reader.nextLine();
+        LocalDate startdatelocaldate = LocalDate.parse(startdate);
+        LocalDate enddatelocaldate = LocalDate.parse(enddate);
+        Period test = new Period(startdatelocaldate, enddatelocaldate);
         if(value.equals("temp")) {
             if(type.equals("avg")) {
-                Scanner reader = new Scanner(System.in);
-                System.out.println("Input start date (yyyy-mm-dd): ");
-                String startdate = reader.nextLine();
-                System.out.println("Input end date (yyyy-mm-dd): ");
-                String enddate = reader.nextLine();
-                LocalDate startdatelocaldate = LocalDate.parse(startdate);
-                LocalDate enddatelocaldate = LocalDate.parse(enddate);
-                Period test = new Period(startdatelocaldate, enddatelocaldate);
                 System.out.println("Average outside temp: " + test.getAverageOutsideTemperature(startdatelocaldate, enddatelocaldate));
                 System.out.println("Average inside temp: " + test.getAverageInsideTemperature(startdatelocaldate, enddatelocaldate));
 
             } else if (type.equals("low")) {
-
+                System.out.println("Lowest outside temp: " + test.getLowestOutsideTemp(startdatelocaldate, enddatelocaldate));
+                System.out.println("Lowest inside temp: " + test.getLowestInsideTemp(startdatelocaldate, enddatelocaldate));
             } else if (type.equals("high")) {
-
+                System.out.println("Highest outside temp: " + test.getHighestInsideTemp(startdatelocaldate, enddatelocaldate));
+                System.out.println("Highest inside temp: " + test.getHighestInsideTemp(startdatelocaldate, enddatelocaldate));
             } else if (type.equals("median")) {
-
+                System.out.println("Median outside temp: " + test.getLowestOutsideTemp(startdatelocaldate, enddatelocaldate));
+                System.out.println("Median inside temp: " + test.getLowestInsideTemp(startdatelocaldate, enddatelocaldate));
             } else if (type.equals("mode")) {
 
             }
