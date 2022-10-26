@@ -582,7 +582,7 @@ public class SelectOptions {
                 }
                 PageSelectors.returnToFirstPage();
             } else if (type.equals("deviation")) {
-
+                System.out.println(test.standardDeviation("insideTemperature"));
             }
         } else if (value.equals("hum")) {
             if (type.equals("avg")) {
