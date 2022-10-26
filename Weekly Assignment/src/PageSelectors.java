@@ -181,7 +181,7 @@ public class PageSelectors {
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 0) {
                 PrintPage.selectCustomInfoPage1();
-                PageSelectors.selectCustomTemp();
+                PageSelectors.selectCustomInfoTempPage1();
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
@@ -192,33 +192,33 @@ public class PageSelectors {
         }
     }
 
-    public static void selectCustomTemp() {
-        firstPos();
-        for (int i = 1; i > 0; i++) {
-            if (IO.readShort(0x80) == 1) {
-                PrintPage.selectCustomInfoPage1();
-                selectCustomInfoTemp();
-                i = -1;
-            } else if (IO.readShort(0x100) == 1) {
-                noSelection();
-                secondPos();
-                i = -1;
-            }
-        }
-        for (int i = 1; i > 0; i++) {
-            if (IO.readShort(0x80) == 1) {
-                PrintPage.selectCustomInfoPage2();
-                selectCustomInfoTemp();
-                i = -1;
-            } else if (IO.readShort(0x100) == 1) {
-                noSelection();
-                thirdPos();
-                i = -1;
-            }
-        }
-    }
+//    public static void selectCustomTemp() {
+//        firstPos();
+//        for (int i = 1; i > 0; i++) {
+//            if (IO.readShort(0x80) == 1) {
+//                PrintPage.selectCustomInfoPage1();
+//                selectCustomInfoTempPage1();
+//                i = -1;
+//            } else if (IO.readShort(0x100) == 0) {
+//                noSelection();
+//                secondPos();
+//                i = -1;
+//            }
+//        }
+//        for (int i = 1; i > 0; i++) {
+//            if (IO.readShort(0x80) == 1) {
+//                PrintPage.selectCustomInfoPage2();
+//                selectCustomInfoTempPage2();
+//                i = -1;
+//            } else if (IO.readShort(0x100) == 1) {
+//                noSelection();
+//                thirdPos();
+//                i = -1;
+//            }
+//        }
+//    }
 
-    public static void selectCustomInfoTemp() {
+    public static void selectCustomInfoTempPage1() {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
@@ -228,16 +228,69 @@ public class PageSelectors {
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
                 secondPos();
+                i--;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectTempPeriod();
+                selectCustomLowestTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                thirdPos();
+                i--;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectTempPeriod();
+                selectCustomHighestTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                PrintPage.selectCustomInfoPage2();
+                selectCustomInfoTempPage2();
+                i--;
             }
         }
     }
+    public static void selectCustomInfoTempPage2() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectTempPeriod();
+                selectCustomModeTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i--;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectTempPeriod();
+                selectCustomMedianTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                PrintPage.selectCustomInfoPage1();
+                selectCustomInfoTempPage1();
+                firstPos();
+                i--;
+            }
+        }
+    }
+
+
 
     public static void selectCustomAverageTemp() {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
                 PrintPage.selectCustomInfoPage1();
-                selectCustomInfoTemp();
+                selectCustomInfoTempPage1();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -252,7 +305,7 @@ public class PageSelectors {
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
                 PrintPage.selectCustomInfoPage1();
-                selectCustomInfoTemp();
+                selectCustomInfoTempPage1();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -267,7 +320,7 @@ public class PageSelectors {
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
                 PrintPage.selectCustomInfoPage1();
-                selectCustomInfoTemp();
+                selectCustomInfoTempPage1();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -282,7 +335,7 @@ public class PageSelectors {
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
                 PrintPage.selectCustomInfoPage1();
-                selectCustomInfoTemp();
+                selectCustomInfoTempPage1();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -297,7 +350,7 @@ public class PageSelectors {
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
                 PrintPage.selectCustomInfoPage1();
-                selectCustomInfoTemp();
+                selectCustomInfoTempPage1();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -312,7 +365,7 @@ public class PageSelectors {
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
                 PrintPage.selectCustomInfoPage1();
-                selectCustomInfoTemp();
+                selectCustomInfoTempPage1();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();

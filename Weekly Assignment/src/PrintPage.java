@@ -211,6 +211,17 @@ public class PrintPage {
         GuiBoardUtilities.clrSevenSegment();
         String median = "Median";
         String mode = "Mode";
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < median.length(); i++) {
+            IO.writeShort(0x40, median.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < mode.length(); i++) {
+            IO.writeShort(0x40, mode.charAt(i));
+        }
     }
 
     public static void selectTempPeriod() {
