@@ -211,7 +211,7 @@ public class PrintPage {
         GuiBoardUtilities.clrSevenSegment();
         String median = "Median";
         String mode = "Mode";
-        String endpage = "END OF LIST";
+        String deviation = "Deviation";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
         for (int i = 0; i < median.length(); i++) {
@@ -226,8 +226,8 @@ public class PrintPage {
         IO.writeShort(0x40, '\n');
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
-        for (int i = 0; i < endpage.length(); i++) {
-            IO.writeShort(0x40, endpage.charAt(i));
+        for (int i = 0; i < deviation.length(); i++) {
+            IO.writeShort(0x40, deviation.charAt(i));
         }
     }
 

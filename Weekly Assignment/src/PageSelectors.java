@@ -303,9 +303,11 @@ public class PageSelectors {
             if (IO.readShort(0x80) == 1) {
                 PrintPage.selectCustomPeriod(value, "deviation");
                 i = -1;
-            } else if (IO.readShort(0x100) == 0) {
+            } else if (IO.readShort(0x100) == 1) {
                 noSelection();
-                thirdPos();
+                firstPos();
+                PrintPage.selectCustomInfoPage1();
+                selectCustomInfoTempPage1(value);
                 i = -1;
             }
         }
