@@ -623,27 +623,27 @@ public class Period {
         return amount;
     }
 
-//    public String biggestDifference(LocalDate beginPeriod, LocalDate endPeriod) {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
-//        LocalDate currentDay = beginPeriod;
-//        LocalDate bigDifferenceDate = beginPeriod;
-//        double highest;
-//        double lowest;
-//        double difference;
-//        double biggestDifference = 0;
-//        for (int i = 0; i < (int) numberOfDays(); i++) {
-//            highest = getHighestOutsideTemp(currentDay, currentDay);
-//            lowest = getLowestOutsideTemp(currentDay, currentDay);
-//            difference = highest - lowest;
-//            currentDay = beginPeriod.plusDays(1);
-//            if (difference > biggestDifference) {
-//                biggestDifference = difference;
-//                bigDifferenceDate = currentDay;
-//            }
-//        }
-//        return ("On " + bigDifferenceDate + " there was a difference of " + biggestDifference + "°C");
-//    }
+    public String biggestDifference(LocalDate beginPeriod, LocalDate endPeriod) {
+        this.beginPeriod = beginPeriod;
+        this.endPeriod = endPeriod;
+        LocalDate currentDay = beginPeriod;
+        LocalDate bigDifferenceDate = beginPeriod;
+        double highest;
+        double lowest;
+        double difference;
+        double biggestDifference = 0;
+        for (int i = 0; i < (int) numberOfDays(); i++) {
+            highest = getHighestOutsideTemp();
+            lowest = getLowestOutsideTemp();
+            difference = highest - lowest;
+            currentDay = beginPeriod.plusDays(1);
+            if (difference > biggestDifference) {
+                biggestDifference = difference;
+                bigDifferenceDate = currentDay;
+            }
+        }
+        return ("On " + bigDifferenceDate + " there was a difference of " + biggestDifference + "°C");
+    }
 
     public String mostRainInGivenYear() {
         //Opdracht G
