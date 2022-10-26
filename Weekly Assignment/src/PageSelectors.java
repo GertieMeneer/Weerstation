@@ -218,7 +218,7 @@ public class PageSelectors {
                 } else if (selectoption == 7) {
                     SelectOptions.selectDewpoint();
                 } else if (selectoption == 8) {
-                    SelectOptions.selectWind();
+                    SelectOptions.selectWindchill();
                 } else if (selectoption == 9) {
                     SelectOptions.selectHeatindex();
                 }

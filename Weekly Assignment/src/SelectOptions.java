@@ -1267,17 +1267,17 @@ public class SelectOptions {
                 String avgoutside = "" + Utilities.rounder(test.getAverageSolarrad());
                 String avgoutsideDMD = "Left: avg outside";
                 String val = "Solar radiation (W/M2)";
-                if (Double.parseDouble(avgoutside) >= 0 && Double.parseDouble(avgoutside) < 10) {
-                    IO.writeShort(0x24, 0x100 | secondDigit("" + avgoutside.charAt(0)));
-                    IO.writeShort(0x22, avgoutside.charAt(2));
-                } else if (Double.parseDouble(avgoutside) >= 10 && Double.parseDouble(avgoutside) < 100) {
-                    IO.writeShort(0x24, avgoutside.charAt(0));
-                    IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
-                    IO.writeShort(0x20, avgoutside.charAt(3));
-                } else if (Double.parseDouble(avgoutside) >= 100) {
-                    IO.writeShort(0x24, avgoutside.charAt(0));
-                    IO.writeShort(0x22, avgoutside.charAt(1));
-                    IO.writeShort(0x20, avgoutside.charAt(2));
+                if (Double.parseDouble(avgoutside) >= 1000) {
+                    IO.writeShort(0x18, avgoutside.charAt(0));
+                    IO.writeShort(0x16, avgoutside.charAt(1));
+                    IO.writeShort(0x14, avgoutside.charAt(2));
+                    IO.writeShort(0x12, 0x100 | secondDigit("" + avgoutside.charAt(3)));
+                    IO.writeShort(0x10, avgoutside.charAt(5));
+                } else if (Double.parseDouble(avgoutside) < 1000) {
+                    IO.writeShort(0x18, avgoutside.charAt(0));
+                    IO.writeShort(0x16, avgoutside.charAt(1));
+                    IO.writeShort(0x14, 0x100 | secondDigit("" + avgoutside.charAt(2)));
+                    IO.writeShort(0x12, avgoutside.charAt(4));
                 }
                 IO.writeShort(0x40, '\n');
                 for (int i = 0; i < avgoutsideDMD.length(); i++) {
@@ -1294,17 +1294,17 @@ public class SelectOptions {
                 String avgoutside = "" + Utilities.rounder(test.getLowestSolarrad());
                 String avgoutsideDMD = "Left: low outside";
                 String val = "Solar radiation (W/M2)";
-                if (Double.parseDouble(avgoutside) >= 0 && Double.parseDouble(avgoutside) < 10) {
-                    IO.writeShort(0x24, 0x100 | secondDigit("" + avgoutside.charAt(0)));
-                    IO.writeShort(0x22, avgoutside.charAt(2));
-                } else if (Double.parseDouble(avgoutside) >= 10 && Double.parseDouble(avgoutside) < 100) {
-                    IO.writeShort(0x24, avgoutside.charAt(0));
-                    IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
-                    IO.writeShort(0x20, avgoutside.charAt(3));
-                } else if (Double.parseDouble(avgoutside) >= 100) {
-                    IO.writeShort(0x24, avgoutside.charAt(0));
-                    IO.writeShort(0x22, avgoutside.charAt(1));
-                    IO.writeShort(0x20, avgoutside.charAt(2));
+                if (Double.parseDouble(avgoutside) >= 1000) {
+                    IO.writeShort(0x18, avgoutside.charAt(0));
+                    IO.writeShort(0x16, avgoutside.charAt(1));
+                    IO.writeShort(0x14, avgoutside.charAt(2));
+                    IO.writeShort(0x12, 0x100 | secondDigit("" + avgoutside.charAt(3)));
+                    IO.writeShort(0x10, avgoutside.charAt(5));
+                } else if (Double.parseDouble(avgoutside) < 1000) {
+                    IO.writeShort(0x18, avgoutside.charAt(0));
+                    IO.writeShort(0x16, avgoutside.charAt(1));
+                    IO.writeShort(0x14, 0x100 | secondDigit("" + avgoutside.charAt(2)));
+                    IO.writeShort(0x12, avgoutside.charAt(4));
                 }
                 IO.writeShort(0x40, '\n');
                 for (int i = 0; i < avgoutsideDMD.length(); i++) {
@@ -1321,17 +1321,17 @@ public class SelectOptions {
                 String avgoutside = "" + Utilities.rounder(test.getHighestSolarrad());
                 String avgoutsideDMD = "Left: high outside";
                 String val = "Solar radiation (W/M2)";
-                if (Double.parseDouble(avgoutside) >= 0 && Double.parseDouble(avgoutside) < 10) {
-                    IO.writeShort(0x24, 0x100 | secondDigit("" + avgoutside.charAt(0)));
-                    IO.writeShort(0x22, avgoutside.charAt(2));
-                } else if (Double.parseDouble(avgoutside) >= 10 && Double.parseDouble(avgoutside) < 100) {
-                    IO.writeShort(0x24, avgoutside.charAt(0));
-                    IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
-                    IO.writeShort(0x20, avgoutside.charAt(3));
-                } else if (Double.parseDouble(avgoutside) >= 100) {
-                    IO.writeShort(0x24, avgoutside.charAt(0));
-                    IO.writeShort(0x22, avgoutside.charAt(1));
-                    IO.writeShort(0x20, avgoutside.charAt(2));
+                if (Double.parseDouble(avgoutside) >= 1000) {
+                    IO.writeShort(0x18, avgoutside.charAt(0));
+                    IO.writeShort(0x16, avgoutside.charAt(1));
+                    IO.writeShort(0x14, avgoutside.charAt(2));
+                    IO.writeShort(0x12, 0x100 | secondDigit("" + avgoutside.charAt(3)));
+                    IO.writeShort(0x10, avgoutside.charAt(5));
+                } else if (Double.parseDouble(avgoutside) < 1000) {
+                    IO.writeShort(0x18, avgoutside.charAt(0));
+                    IO.writeShort(0x16, avgoutside.charAt(1));
+                    IO.writeShort(0x14, 0x100 | secondDigit("" + avgoutside.charAt(2)));
+                    IO.writeShort(0x12, avgoutside.charAt(4));
                 }
                 IO.writeShort(0x40, '\n');
                 for (int i = 0; i < avgoutsideDMD.length(); i++) {
@@ -1348,17 +1348,17 @@ public class SelectOptions {
                 String avgoutside = "" + Utilities.rounder(test.getMedianSolarrad());
                 String avgoutsideDMD = "Left: med outside";
                 String val = "Solar radiation (W/M2)";
-                if (Double.parseDouble(avgoutside) >= 0 && Double.parseDouble(avgoutside) < 10) {
-                    IO.writeShort(0x24, 0x100 | secondDigit("" + avgoutside.charAt(0)));
-                    IO.writeShort(0x22, avgoutside.charAt(2));
-                } else if (Double.parseDouble(avgoutside) >= 10 && Double.parseDouble(avgoutside) < 100) {
-                    IO.writeShort(0x24, avgoutside.charAt(0));
-                    IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
-                    IO.writeShort(0x20, avgoutside.charAt(3));
-                } else if (Double.parseDouble(avgoutside) >= 100) {
-                    IO.writeShort(0x24, avgoutside.charAt(0));
-                    IO.writeShort(0x22, avgoutside.charAt(1));
-                    IO.writeShort(0x20, avgoutside.charAt(2));
+                if (Double.parseDouble(avgoutside) >= 1000) {
+                    IO.writeShort(0x18, avgoutside.charAt(0));
+                    IO.writeShort(0x16, avgoutside.charAt(1));
+                    IO.writeShort(0x14, avgoutside.charAt(2));
+                    IO.writeShort(0x12, 0x100 | secondDigit("" + avgoutside.charAt(3)));
+                    IO.writeShort(0x10, avgoutside.charAt(5));
+                } else if (Double.parseDouble(avgoutside) < 1000) {
+                    IO.writeShort(0x18, avgoutside.charAt(0));
+                    IO.writeShort(0x16, avgoutside.charAt(1));
+                    IO.writeShort(0x14, 0x100 | secondDigit("" + avgoutside.charAt(2)));
+                    IO.writeShort(0x12, avgoutside.charAt(4));
                 }
                 IO.writeShort(0x40, '\n');
                 for (int i = 0; i < avgoutsideDMD.length(); i++) {
@@ -1375,17 +1375,17 @@ public class SelectOptions {
                 String avgoutside = "" + Utilities.rounder(test.getModeSolarrad());
                 String avgoutsideDMD = "Left: mode outside";
                 String val = "Solar radiation (W/M2)";
-                if (Double.parseDouble(avgoutside) >= 0 && Double.parseDouble(avgoutside) < 10) {
-                    IO.writeShort(0x24, 0x100 | secondDigit("" + avgoutside.charAt(0)));
-                    IO.writeShort(0x22, avgoutside.charAt(2));
-                } else if (Double.parseDouble(avgoutside) >= 10 && Double.parseDouble(avgoutside) < 100) {
-                    IO.writeShort(0x24, avgoutside.charAt(0));
-                    IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
-                    IO.writeShort(0x20, avgoutside.charAt(3));
-                } else if (Double.parseDouble(avgoutside) >= 100) {
-                    IO.writeShort(0x24, avgoutside.charAt(0));
-                    IO.writeShort(0x22, avgoutside.charAt(1));
-                    IO.writeShort(0x20, avgoutside.charAt(2));
+                if (Double.parseDouble(avgoutside) >= 1000) {
+                    IO.writeShort(0x18, avgoutside.charAt(0));
+                    IO.writeShort(0x16, avgoutside.charAt(1));
+                    IO.writeShort(0x14, avgoutside.charAt(2));
+                    IO.writeShort(0x12, 0x100 | secondDigit("" + avgoutside.charAt(3)));
+                    IO.writeShort(0x10, avgoutside.charAt(5));
+                } else if (Double.parseDouble(avgoutside) < 1000) {
+                    IO.writeShort(0x18, avgoutside.charAt(0));
+                    IO.writeShort(0x16, avgoutside.charAt(1));
+                    IO.writeShort(0x14, 0x100 | secondDigit("" + avgoutside.charAt(2)));
+                    IO.writeShort(0x12, avgoutside.charAt(4));
                 }
                 IO.writeShort(0x40, '\n');
                 for (int i = 0; i < avgoutsideDMD.length(); i++) {
