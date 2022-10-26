@@ -156,9 +156,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double getAverageInsideHumidity(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getAverageInsideHumidity() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         for (Measurement measurement : measurements) {
@@ -168,9 +168,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double getAverageOutsideHumidity(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getAverageOutsideHumidity() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         for (Measurement measurement : measurements) {
@@ -180,9 +180,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double getAverageAirPressure(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getAverageAirPressure() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         for (Measurement measurement : measurements) {
@@ -206,9 +206,9 @@ public class Period {
         return new Period();
     }
 
-    public double getLowestOutsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getLowestOutsideTemp() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getOutsideTemperature();
         for (Measurement measures : measurements) {
@@ -221,9 +221,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double getHighestOutsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getHighestOutsideTemp() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getOutsideTemperature();
         for (Measurement measures : measurements) {
@@ -234,9 +234,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double getLowestInsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getLowestInsideTemp() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getInsideTemperature();
         for (Measurement measures : measurements) {
@@ -247,9 +247,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double getHighestInsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getHighestInsideTemp() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getInsideTemperature();
         for (Measurement measures : measurements) {
@@ -260,9 +260,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double lowestInsideHum(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double lowestInsideHum() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getInsideHum();
         for (Measurement measures : measurements) {
@@ -273,9 +273,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double lowestOutsideHum(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double lowestOutsideHum() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getOutsideHum();
         for (Measurement measures : measurements) {
@@ -286,9 +286,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double highestOutsideHum(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double highestOutsideHum() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getOutsideHum();
         for (Measurement measures : measurements) {
@@ -299,9 +299,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double highestInsideHum(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double highestInsideHum() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getInsideHum();
         for (Measurement measures : measurements) {
@@ -312,9 +312,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double lowestAirpressure(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double lowestAirpressure() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getAirPressure();
         for (Measurement measures : measurements) {
@@ -325,9 +325,9 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double highestAirpressure(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double highestAirpressure() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getAirPressure();
         for (Measurement measures : measurements) {
@@ -629,27 +629,27 @@ public class Period {
         return amount;
     }
 
-    public String biggestDifference(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
-        LocalDate currentDay = beginPeriod;
-        LocalDate bigDifferenceDate = beginPeriod;
-        double highest;
-        double lowest;
-        double difference;
-        double biggestDifference = 0;
-        for (int i = 0; i < (int) numberOfDays(); i++) {
-            highest = getHighestOutsideTemp(currentDay, currentDay);
-            lowest = getLowestOutsideTemp(currentDay, currentDay);
-            difference = highest - lowest;
-            currentDay = beginPeriod.plusDays(1);
-            if (difference > biggestDifference) {
-                biggestDifference = difference;
-                bigDifferenceDate = currentDay;
-            }
-        }
-        return ("On " + bigDifferenceDate + " there was a difference of " + biggestDifference + "°C");
-    }
+//    public String biggestDifference(LocalDate beginPeriod, LocalDate endPeriod) {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
+//        LocalDate currentDay = beginPeriod;
+//        LocalDate bigDifferenceDate = beginPeriod;
+//        double highest;
+//        double lowest;
+//        double difference;
+//        double biggestDifference = 0;
+//        for (int i = 0; i < (int) numberOfDays(); i++) {
+//            highest = getHighestOutsideTemp(currentDay, currentDay);
+//            lowest = getLowestOutsideTemp(currentDay, currentDay);
+//            difference = highest - lowest;
+//            currentDay = beginPeriod.plusDays(1);
+//            if (difference > biggestDifference) {
+//                biggestDifference = difference;
+//                bigDifferenceDate = currentDay;
+//            }
+//        }
+//        return ("On " + bigDifferenceDate + " there was a difference of " + biggestDifference + "°C");
+//    }
 
     public String mostRainInGivenYear() {
         //Opdracht G. Geschreven door Marcel

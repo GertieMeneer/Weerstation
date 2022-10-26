@@ -386,8 +386,8 @@ public class SelectOptions {
             if(type.equals("avg")) {
                 GuiBoardUtilities.clrDMDisplay();
                 GuiBoardUtilities.clrSevenSegment();
-                String avgoutside = "" + Utilities.rounder(test.getAverageOutsideTemperature(startdatelocaldate, enddatelocaldate));
-                String avginside = "" + Utilities.rounder(test.getAverageInsideTemperature(startdatelocaldate, enddatelocaldate));
+                String avgoutside = "" + Utilities.rounder(test.getAverageOutsideTemperature());
+                String avginside = "" + Utilities.rounder(test.getAverageInsideTemperature());
                 String avgoutsideDMD = "Left: avg outside";
                 String avginsideDMD = "Right: avg inside (C)";
                 if(Double.parseDouble(avgoutside) >= 0 && Double.parseDouble(avgoutside) < 10) {
@@ -397,6 +397,8 @@ public class SelectOptions {
                     IO.writeShort(0x24, avgoutside.charAt(0));
                     IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
                     IO.writeShort(0x20, avgoutside.charAt(3));
+                } else if (Double.parseDouble(avgoutside) < 0) {
+
                 }
                 IO.writeShort(0x34, avginside.charAt(0));
                 IO.writeShort(0x32, 0x100 | secondDigit("" + avginside.charAt(1)));
@@ -411,14 +413,37 @@ public class SelectOptions {
                 PageSelectors.returnToFirstPage();
 
             } else if (type.equals("low")) {
-                System.out.println("Lowest outside temp: " + test.getLowestOutsideTemp(startdatelocaldate, enddatelocaldate));
-                System.out.println("Lowest inside temp: " + test.getLowestInsideTemp(startdatelocaldate, enddatelocaldate));
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String lowoutside = "" + Utilities.rounder(test.getLowestOutsideTemp());
+                String lowinside = "" + Utilities.rounder(test.getLowestInsideTemp());
+                String lowoutsideDMD = "Left: low outside";
+                String lowinsideDMD = "Right: low inside (C)";
+                if(Double.parseDouble(lowoutside) >= 0 && Double.parseDouble(lowoutside) < 10) {
+                    IO.writeShort(0x24, 0x100 | secondDigit("" + lowoutside.charAt(0)));
+                    IO.writeShort(0x22, lowoutside.charAt(2));
+                } else if (Double.parseDouble(lowoutside) >= 10 && Double.parseDouble(lowoutside) < 100) {
+                    IO.writeShort(0x24, lowoutside.charAt(0));
+                    IO.writeShort(0x22, 0x100 | secondDigit("" + lowoutside.charAt(1)));
+                    IO.writeShort(0x20, lowoutside.charAt(3));
+                }
+                IO.writeShort(0x34, lowinside.charAt(0));
+                IO.writeShort(0x32, 0x100 | secondDigit("" + lowinside.charAt(1)));
+                IO.writeShort(0x30, lowinside.charAt(3));
+                for (int i = 0; i < lowinsideDMD.length(); i++) {
+                    IO.writeShort(0x40, lowinsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < lowoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, lowoutsideDMD.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
             } else if (type.equals("high")) {
-                System.out.println("Highest outside temp: " + test.getHighestInsideTemp(startdatelocaldate, enddatelocaldate));
-                System.out.println("Highest inside temp: " + test.getHighestInsideTemp(startdatelocaldate, enddatelocaldate));
+                System.out.println("Highest outside temp: " + test.getHighestInsideTemp());
+                System.out.println("Highest inside temp: " + test.getHighestInsideTemp());
             } else if (type.equals("median")) {
-                System.out.println("Median outside temp: " + test.getLowestOutsideTemp(startdatelocaldate, enddatelocaldate));
-                System.out.println("Median inside temp: " + test.getLowestInsideTemp(startdatelocaldate, enddatelocaldate));
+                System.out.println("Median outside temp: " + test.getLowestOutsideTemp());
+                System.out.println("Median inside temp: " + test.getLowestInsideTemp());
             } else if (type.equals("mode")) {
 
             } else if (type.equals("deviation")) {
