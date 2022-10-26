@@ -617,7 +617,7 @@ public class Period {
 //    }
 
     public String mostRainInGivenYear() {
-        //Opdracht G. Geschreven door Marcel
+        //Opdracht G
         //initializing variables for each month
         double januaryRain = 0.0;
         double februaryRain = 0.0;

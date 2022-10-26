@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class SelectOptions {
 
-    private static int negativeSign = 0b10100000;
+    private static int negativeSign = 0x40;
     public static void selectCurrentTemp() {
         GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
@@ -400,9 +400,9 @@ public class SelectOptions {
                     IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
                     IO.writeShort(0x20, avgoutside.charAt(3));
                 } else if (Double.parseDouble(avgoutside) < 0) {
-                    IO.writeShort(0x20, 0x100 | negativeSign);
+                    IO.writeShort(0x24, 0x100 | negativeSign);
                     IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
-                    IO.writeShort(0x24, avgoutside.charAt(2));
+                    IO.writeShort(0x20, avgoutside.charAt(3));
                 }
                 IO.writeShort(0x34, avginside.charAt(0));
                 IO.writeShort(0x32, 0x100 | secondDigit("" + avginside.charAt(1)));
@@ -436,9 +436,10 @@ public class SelectOptions {
                     IO.writeShort(0x22, 0x100 | secondDigit("" + lowoutside.charAt(1)));
                     IO.writeShort(0x20, lowoutside.charAt(3));
                 } else if (Double.parseDouble(lowoutside) < 0) {
-                    IO.writeShort(0x20, 0x100 | negativeSign);
+                    System.out.println(Double.parseDouble(lowoutside));
+                    IO.writeShort(0x24, 0x100 | negativeSign);
                     IO.writeShort(0x22, 0x100 | secondDigit("" + lowoutside.charAt(1)));
-                    IO.writeShort(0x24, lowoutside.charAt(2));
+                    IO.writeShort(0x20, lowoutside.charAt(3));
                 }
                 IO.writeShort(0x34, lowinside.charAt(0));
                 IO.writeShort(0x32, 0x100 | secondDigit("" + lowinside.charAt(1)));
@@ -472,9 +473,9 @@ public class SelectOptions {
                     IO.writeShort(0x22, 0x100 | secondDigit("" + highoutside.charAt(1)));
                     IO.writeShort(0x20, highoutside.charAt(3));
                 } else if (Double.parseDouble(highoutside) < 0) {
-                    IO.writeShort(0x20, 0x100 | negativeSign);
+                    IO.writeShort(0x24, 0x100 | negativeSign);
                     IO.writeShort(0x22, 0x100 | secondDigit("" + highoutside.charAt(1)));
-                    IO.writeShort(0x24, highoutside.charAt(2));
+                    IO.writeShort(0x20, highoutside.charAt(3));
                 }
                 IO.writeShort(0x34, highinside.charAt(0));
                 IO.writeShort(0x32, 0x100 | secondDigit("" + highinside.charAt(1)));
@@ -507,9 +508,9 @@ public class SelectOptions {
                     IO.writeShort(0x22, 0x100 | secondDigit("" + medoutside.charAt(1)));
                     IO.writeShort(0x20, medoutside.charAt(3));
                 } else if (Double.parseDouble(medoutside) < 0) {
-                    IO.writeShort(0x20, 0x100 | negativeSign);
+                    IO.writeShort(0x24, 0x100 | negativeSign);
                     IO.writeShort(0x22, 0x100 | secondDigit("" + medoutside.charAt(1)));
-                    IO.writeShort(0x24, medoutside.charAt(2));
+                    IO.writeShort(0x20, medoutside.charAt(3));
                 }
                 IO.writeShort(0x34, medinside.charAt(0));
                 IO.writeShort(0x32, 0x100 | secondDigit("" + medinside.charAt(1)));
@@ -542,9 +543,9 @@ public class SelectOptions {
                     IO.writeShort(0x22, 0x100 | secondDigit("" + modeoutside.charAt(1)));
                     IO.writeShort(0x20, modeoutside.charAt(3));
                 } else if (Double.parseDouble(modeoutside) < 0) {
-                    IO.writeShort(0x20, 0x100 | negativeSign);
+                    IO.writeShort(0x24, 0x100 | negativeSign);
                     IO.writeShort(0x22, 0x100 | secondDigit("" + modeoutside.charAt(1)));
-                    IO.writeShort(0x24, modeoutside.charAt(2));
+                    IO.writeShort(0x20, modeoutside.charAt(3));
                 }
                 IO.writeShort(0x34, modeinside.charAt(0));
                 IO.writeShort(0x32, 0x100 | secondDigit("" + modeinside.charAt(1)));
