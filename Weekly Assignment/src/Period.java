@@ -121,8 +121,6 @@ public class Period {
 
 
     public double getAverageOutsideTemperature() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         int measurementCount = measurements.size();
@@ -139,8 +137,6 @@ public class Period {
     }
 
     public double getAverageInsideTemperature() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         int measurementCount = measurements.size();
@@ -221,8 +217,6 @@ public class Period {
     }
 
     public double getHighestOutsideTemp() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getOutsideTemperature();
         for (Measurement measures : measurements) {
@@ -562,139 +556,55 @@ public class Period {
         return values.get(index2);
     }
 
-    public double standardDeviation(String type) {
+    public double getAverageWindSpeed() {
+
         getMeasurements();
+        double value = 0;
+        for (Measurement measurement : measurements) {
+                value += measurement.getWindSpeed();
+            }
+        value /= measurements.size();
+        return Utilities.rounder(value);
+    }
+
+    public double getHighestWindSpeed() {
+        getMeasurements();
+        double value = measurements.get(0).getWindSpeed();
+        for (Measurement measures : measurements) {
+            if (measures.getWindSpeed() > value) {
+                value = measures.getWindSpeed();
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getLowestWindSpeed() {
+        getMeasurements();
+        double value = measurements.get(0).getWindSpeed();
+        for (Measurement measures : measurements) {
+            if (measures.getWindSpeed() < value) {
+                value = measures.getWindSpeed();
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+
+
+    public double standardDeviation(ArrayList<Double> list) {
         double sum = 0.0;
         double standardDeviation = 0.0;
-        int length = measurements.size();
-        switch (type) {
-            case "outsideTemperature":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getOutsideTemperature();
-                }
-                break;
-            case "insideTemperature":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getInsideTemperature();
-                }
-                break;
-            case "outsideHumidity":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getOutsideHum();
-                }
-                break;
-            case "insideHumidity":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getInsideHum();
-                }
-                break;
-            case "windSpeed":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getWindSpeed();
-                }
-                break;
-            case "airPressure":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getAirPressure();
-                }
-                break;
-            case "rain":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getRainRate();
-                }
-                break;
-            case "UV":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getUVLevel();
-                }
-                break;
-            case "solarRad":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getSolarRad();
-                }
-                break;
-            case "dewPoint":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getDewPoint();
-                }
-                break;
-            case "windChill":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getWindChill();
-                }
-                break;
-            case "heatIndex":
-                for (Measurement measurement : measurements) {
-                    sum += measurement.getHeatIndex();
-                }
-                break;
+        int length = list.size();
+
+        for (double value : list) {
+            sum += value;
         }
 
         double mean = sum / length;
 
-        switch (type) {
-            case "outsideTemperature":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getOutsideTemperature() - mean), 2);
-                }
-                break;
-            case "insideTemperature":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getInsideTemperature() - mean), 2);
-                }
-                break;
-            case "outsideHumidity":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getOutsideHum() - mean), 2);
-                }
-                break;
-            case "insideHumidity":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getInsideHum() - mean), 2);
-                }
-                break;
-            case "windSpeed":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getWindSpeed() - mean), 2);
-                }
-                break;
-            case "airPressure":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getAirPressure() - mean), 2);
-                }
-                break;
-            case "rain":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getRainRate() - mean), 2);
-                }
-                break;
-            case "UV":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getUVLevel() - mean), 2);
-                }
-                break;
-            case "solarRad":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getSolarRad() - mean), 2);
-                }
-                break;
-            case "dewPoint":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getDewPoint() - mean), 2);
-                }
-                break;
-            case "windChill":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getWindChill() - mean), 2);
-                }
-                break;
-            case "heatIndex":
-                for (Measurement measurement : measurements) {
-                    standardDeviation += Math.pow((measurement.getHeatIndex() - mean), 2);
-                }
-                break;
+        for (double value : list) {
+            standardDeviation += Math.pow((value - mean), 2);
         }
-
         return Utilities.rounder(Math.sqrt(standardDeviation / length));
     }
 
