@@ -121,8 +121,6 @@ public class Period {
 
 
     public double getAverageOutsideTemperature() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         int measurementCount = measurements.size();
@@ -139,8 +137,6 @@ public class Period {
     }
 
     public double getAverageInsideTemperature() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         int measurementCount = measurements.size();
@@ -221,8 +217,6 @@ public class Period {
     }
 
     public double getHighestOutsideTemp() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getOutsideTemperature();
         for (Measurement measures : measurements) {
@@ -561,6 +555,41 @@ public class Period {
 
         return values.get(index2);
     }
+
+    public double getAverageWindSpeed() {
+
+        getMeasurements();
+        double value = 0;
+        for (Measurement measurement : measurements) {
+                value += measurement.getWindSpeed();
+            }
+        value /= measurements.size();
+        return Utilities.rounder(value);
+    }
+
+    public double getHighestWindSpeed() {
+        getMeasurements();
+        double value = measurements.get(0).getWindSpeed();
+        for (Measurement measures : measurements) {
+            if (measures.getWindSpeed() > value) {
+                value = measures.getWindSpeed();
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getLowestWindSpeed() {
+        getMeasurements();
+        double value = measurements.get(0).getWindSpeed();
+        for (Measurement measures : measurements) {
+            if (measures.getWindSpeed() < value) {
+                value = measures.getWindSpeed();
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+
 
     public double standardDeviation(ArrayList<Double> list) {
         double sum = 0.0;
