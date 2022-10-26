@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8166e110-434b-4922-aca4-26cd764ea230" name="Changes" comment="newest">
+    <list default="true" id="8166e110-434b-4922-aca4-26cd764ea230" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/Period.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/Period.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/SelectOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/SelectOptions.java" afterDir="false" />
     </list>
@@ -142,9 +143,7 @@
       <workItem from="1666621736893" duration="1038000" />
       <workItem from="1666626982622" duration="1001000" />
       <workItem from="1666694551258" duration="19000" />
-      <workItem from="1666707063267" duration="4850000" />
-      <workItem from="1666766892421" duration="921000" />
-      <workItem from="1666768596531" duration="5092000" />
+      <workItem from="1666707063267" duration="3216000" />
     </task>
     <task id="LOCAL-00001" summary="yes">
       <created>1666005657038</created>
@@ -265,42 +264,7 @@
       <option name="project" value="LOCAL" />
       <updated>1666620385126</updated>
     </task>
-    <task id="LOCAL-00018" summary="newest">
-      <created>1666710443932</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1666710443934</updated>
-    </task>
-    <task id="LOCAL-00019" summary="newest">
-      <created>1666767792267</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1666767792267</updated>
-    </task>
-    <task id="LOCAL-00020" summary="newest">
-      <created>1666771214264</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1666771214264</updated>
-    </task>
-    <task id="LOCAL-00021" summary="newest">
-      <created>1666774100538</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1666774100538</updated>
-    </task>
-    <task id="LOCAL-00022" summary="newest">
-      <created>1666777936679</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1666777936679</updated>
-    </task>
-    <option name="localTasksCounter" value="23" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
