@@ -436,7 +436,6 @@ public class SelectOptions {
                     IO.writeShort(0x22, 0x100 | secondDigit("" + lowoutside.charAt(1)));
                     IO.writeShort(0x20, lowoutside.charAt(3));
                 } else if (Double.parseDouble(lowoutside) < 0) {
-                    System.out.println(Double.parseDouble(lowoutside));
                     IO.writeShort(0x24, 0x100 | negativeSign);
                     IO.writeShort(0x22, 0x100 | secondDigit("" + lowoutside.charAt(1)));
                     IO.writeShort(0x20, lowoutside.charAt(3));
