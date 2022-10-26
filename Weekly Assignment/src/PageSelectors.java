@@ -252,7 +252,7 @@ public class PageSelectors {
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
                 secondPos();
-                i--;
+                i = -1;
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -262,7 +262,7 @@ public class PageSelectors {
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
                 thirdPos();
-                i--;
+                i = -1;
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -273,7 +273,7 @@ public class PageSelectors {
                 noSelection();
                 PrintPage.selectCustomInfoPage2();
                 selectCustomInfoTempPage2(value);
-                i--;
+                i = -1;
             }
         }
     }
@@ -286,7 +286,7 @@ public class PageSelectors {
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
                 secondPos();
-                i--;
+                i = -1;
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -298,7 +298,7 @@ public class PageSelectors {
                 PrintPage.selectCustomInfoPage1();
                 selectCustomInfoTempPage1(value);
                 firstPos();
-                i--;
+                i = -1;
             }
         }
     }
