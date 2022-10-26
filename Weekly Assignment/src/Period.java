@@ -121,8 +121,6 @@ public class Period {
 
 
     public double getAverageOutsideTemperature() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         int measurementCount = measurements.size();
@@ -139,8 +137,6 @@ public class Period {
     }
 
     public double getAverageInsideTemperature() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         int measurementCount = measurements.size();
@@ -156,8 +152,6 @@ public class Period {
     }
 
     public double getAverageInsideHumidity() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         for (Measurement measurement : measurements) {
@@ -168,8 +162,6 @@ public class Period {
     }
 
     public double getAverageOutsideHumidity() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         for (Measurement measurement : measurements) {
@@ -180,8 +172,6 @@ public class Period {
     }
 
     public double getAverageAirPressure() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         for (Measurement measurement : measurements) {
@@ -206,8 +196,6 @@ public class Period {
     }
 
     public double getLowestOutsideTemp() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getOutsideTemperature();
         for (Measurement measures : measurements) {
@@ -221,8 +209,6 @@ public class Period {
     }
 
     public double getHighestOutsideTemp() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getOutsideTemperature();
         for (Measurement measures : measurements) {
@@ -301,7 +287,7 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double lowestAirpressure() {
+    public double getLowestAirpressure() {
         getMeasurements();
         double value = measurements.get(0).getAirPressure();
         for (Measurement measures : measurements) {
@@ -312,7 +298,7 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double highestAirpressure() {
+    public double getHighestAirpressure() {
         getMeasurements();
         double value = measurements.get(0).getAirPressure();
         for (Measurement measures : measurements) {
@@ -326,7 +312,7 @@ public class Period {
     /**
      * Todo more methods
      */
-    public double tempDifference() {
+    public double getTempDifference() {
         boolean higher = false; // false inside true outside
         boolean raise1 = false;
         boolean raise2 = false;
@@ -543,6 +529,497 @@ public class Period {
         int bigger = 0;
         for (Measurement measures : measurements) {
             double rawValue = Utilities.rounder(measures.getAirPressure());
+            if (values.contains(rawValue)) {
+                int index = values.indexOf(rawValue);
+                counter.set(index, (counter.get(index) + 1));
+
+            } else {
+                values.add(rawValue);
+                counter.add(1);
+            }
+        }
+        for (int i : counter) {
+            if (i > bigger) {
+                bigger = i;
+            }
+        }
+        int index2 = counter.indexOf(bigger);
+
+        return values.get(index2);
+    }
+
+    public double getAverageWindSpeed() {
+
+        getMeasurements();
+        double value = 0;
+        for (Measurement measurement : measurements) {
+            value += measurement.getWindSpeed();
+        }
+        value /= measurements.size();
+        return Utilities.rounder(value);
+    }
+
+    public double getHighestWindSpeed() {
+        getMeasurements();
+        double value = measurements.get(0).getWindSpeed();
+        for (Measurement measures : measurements) {
+            if (measures.getWindSpeed() > value) {
+                value = measures.getWindSpeed();
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getLowestWindSpeed() {
+        getMeasurements();
+        double value = measurements.get(0).getWindSpeed();
+        for (Measurement measures : measurements) {
+            if (measures.getWindSpeed() < value) {
+                value = measures.getWindSpeed();
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getModeWindspeed() {
+        ArrayList<Integer> counter = new ArrayList<>();
+        ArrayList<Double> values = new ArrayList<>();
+        getMeasurements();
+        int bigger = 0;
+        for (Measurement measures : measurements) {
+            double rawValue = Utilities.rounder(measures.getWindSpeed());
+            if (values.contains(rawValue)) {
+                int index = values.indexOf(rawValue);
+                counter.set(index, (counter.get(index) + 1));
+
+            } else {
+                values.add(rawValue);
+                counter.add(1);
+            }
+        }
+        for (int i : counter) {
+            if (i > bigger) {
+                bigger = i;
+            }
+        }
+        int index2 = counter.indexOf(bigger);
+
+        return values.get(index2);
+    }
+
+    public double getAverageRain() {
+        getMeasurements();
+        double value = 0;
+        for (Measurement measurement : measurements) {
+            value += measurement.getRainRate();
+        }
+        value /= measurements.size();
+        return Utilities.rounder(value);
+    }
+
+    public double getLeastRain() {
+        getMeasurements();
+        double value = measurements.get(0).getRainRate();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() < value) {
+                value = measures.getRainRate();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getMostRain() {
+        getMeasurements();
+        double value = measurements.get(0).getRainRate();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() > value) {
+                value = measures.getRainRate();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getMedianRain() {
+        getMeasurements();
+
+        if (measurements.size() % 2 == 0) {
+            return Utilities.rounder(((measurements.get(measurements.size() / 2).getRainRate()) + (measurements.get(measurements.size() / 2 + 1).getRainRate())) / 2);
+        } else {
+            return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getRainRate());
+        }
+    }
+
+    public double getModeRain() {
+        ArrayList<Integer> counter = new ArrayList<>();
+        ArrayList<Double> values = new ArrayList<>();
+        getMeasurements();
+        int bigger = 0;
+        for (Measurement measures : measurements) {
+            double rawValue = Utilities.rounder(measures.getRainRate());
+            if (values.contains(rawValue)) {
+                int index = values.indexOf(rawValue);
+                counter.set(index, (counter.get(index) + 1));
+
+            } else {
+                values.add(rawValue);
+                counter.add(1);
+            }
+        }
+        for (int i : counter) {
+            if (i > bigger) {
+                bigger = i;
+            }
+        }
+        int index2 = counter.indexOf(bigger);
+
+        return values.get(index2);
+    }
+
+    public double getAverageUV() {
+        getMeasurements();
+        double value = 0;
+        for (Measurement measurement : measurements) {
+            value += measurement.getUVLevel();
+        }
+        value /= measurements.size();
+        return Utilities.rounder(value);
+    }
+
+    public double getLowestUV() {
+        getMeasurements();
+        double value = measurements.get(0).getUVLevel();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() < value) {
+                value = measures.getUVLevel();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getHighestUV() {
+        getMeasurements();
+        double value = measurements.get(0).getUVLevel();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() > value) {
+                value = measures.getUVLevel();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getMedianUV() {
+        getMeasurements();
+
+        if (measurements.size() % 2 == 0) {
+            return Utilities.rounder(((measurements.get(measurements.size() / 2).getUVLevel()) + (measurements.get(measurements.size() / 2 + 1).getUVLevel())) / 2);
+        } else {
+            return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getUVLevel());
+        }
+    }
+
+    public double getModeUV() {
+        ArrayList<Integer> counter = new ArrayList<>();
+        ArrayList<Double> values = new ArrayList<>();
+        getMeasurements();
+        int bigger = 0;
+        for (Measurement measures : measurements) {
+            double rawValue = Utilities.rounder(measures.getUVLevel());
+            if (values.contains(rawValue)) {
+                int index = values.indexOf(rawValue);
+                counter.set(index, (counter.get(index) + 1));
+
+            } else {
+                values.add(rawValue);
+                counter.add(1);
+            }
+        }
+        for (int i : counter) {
+            if (i > bigger) {
+                bigger = i;
+            }
+        }
+        int index2 = counter.indexOf(bigger);
+
+        return values.get(index2);
+    }
+
+    public double getAverageSolarrad() {
+        getMeasurements();
+        double value = 0;
+        for (Measurement measurement : measurements) {
+            value += measurement.getSolarRad();
+        }
+        value /= measurements.size();
+        return Utilities.rounder(value);
+    }
+
+    public double getLowestSolarrad() {
+        getMeasurements();
+        double value = measurements.get(0).getSolarRad();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() < value) {
+                value = measures.getSolarRad();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getHighestSolarrad() {
+        getMeasurements();
+        double value = measurements.get(0).getSolarRad();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() > value) {
+                value = measures.getSolarRad();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getMedianSolarrad() {
+        getMeasurements();
+
+        if (measurements.size() % 2 == 0) {
+            return Utilities.rounder(((measurements.get(measurements.size() / 2).getSolarRad()) + (measurements.get(measurements.size() / 2 + 1).getSolarRad())) / 2);
+        } else {
+            return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getSolarRad());
+        }
+    }
+
+    public double getModeSolarrad() {
+        ArrayList<Integer> counter = new ArrayList<>();
+        ArrayList<Double> values = new ArrayList<>();
+        getMeasurements();
+        int bigger = 0;
+        for (Measurement measures : measurements) {
+            double rawValue = Utilities.rounder(measures.getSolarRad());
+            if (values.contains(rawValue)) {
+                int index = values.indexOf(rawValue);
+                counter.set(index, (counter.get(index) + 1));
+
+            } else {
+                values.add(rawValue);
+                counter.add(1);
+            }
+        }
+        for (int i : counter) {
+            if (i > bigger) {
+                bigger = i;
+            }
+        }
+        int index2 = counter.indexOf(bigger);
+
+        return values.get(index2);
+    }
+
+    public double getAverageDewpoint() {
+        getMeasurements();
+        double value = 0;
+        for (Measurement measurement : measurements) {
+            value += measurement.getDewPoint();
+        }
+        value /= measurements.size();
+        return Utilities.rounder(value);
+    }
+
+    public double getLowestDewpoint() {
+        getMeasurements();
+        double value = measurements.get(0).getDewPoint();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() < value) {
+                value = measures.getDewPoint();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getHighestDewpoint() {
+        getMeasurements();
+        double value = measurements.get(0).getDewPoint();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() > value) {
+                value = measures.getDewPoint();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getMedianDewpoint() {
+        getMeasurements();
+
+        if (measurements.size() % 2 == 0) {
+            return Utilities.rounder(((measurements.get(measurements.size() / 2).getDewPoint()) + (measurements.get(measurements.size() / 2 + 1).getDewPoint())) / 2);
+        } else {
+            return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getDewPoint());
+        }
+    }
+
+    public double getModeDewpoint() {
+        ArrayList<Integer> counter = new ArrayList<>();
+        ArrayList<Double> values = new ArrayList<>();
+        getMeasurements();
+        int bigger = 0;
+        for (Measurement measures : measurements) {
+            double rawValue = Utilities.rounder(measures.getDewPoint());
+            if (values.contains(rawValue)) {
+                int index = values.indexOf(rawValue);
+                counter.set(index, (counter.get(index) + 1));
+
+            } else {
+                values.add(rawValue);
+                counter.add(1);
+            }
+        }
+        for (int i : counter) {
+            if (i > bigger) {
+                bigger = i;
+            }
+        }
+        int index2 = counter.indexOf(bigger);
+
+        return values.get(index2);
+    }
+
+    public double getAverageWindchill() {
+        getMeasurements();
+        double value = 0;
+        for (Measurement measurement : measurements) {
+            value += measurement.getWindChill();
+        }
+        value /= measurements.size();
+        return Utilities.rounder(value);
+    }
+
+    public double getLowestWindchill() {
+        getMeasurements();
+        double value = measurements.get(0).getWindChill();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() < value) {
+                value = measures.getWindChill();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getHighestWindchill() {
+        getMeasurements();
+        double value = measurements.get(0).getWindChill();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() > value) {
+                value = measures.getWindChill();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getMedianWindchill() {
+        getMeasurements();
+
+        if (measurements.size() % 2 == 0) {
+            return Utilities.rounder(((measurements.get(measurements.size() / 2).getWindChill()) + (measurements.get(measurements.size() / 2 + 1).getWindChill())) / 2);
+        } else {
+            return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getWindChill());
+        }
+    }
+
+    public double getModeWindchill() {
+        ArrayList<Integer> counter = new ArrayList<>();
+        ArrayList<Double> values = new ArrayList<>();
+        getMeasurements();
+        int bigger = 0;
+        for (Measurement measures : measurements) {
+            double rawValue = Utilities.rounder(measures.getWindChill());
+            if (values.contains(rawValue)) {
+                int index = values.indexOf(rawValue);
+                counter.set(index, (counter.get(index) + 1));
+
+            } else {
+                values.add(rawValue);
+                counter.add(1);
+            }
+        }
+        for (int i : counter) {
+            if (i > bigger) {
+                bigger = i;
+            }
+        }
+        int index2 = counter.indexOf(bigger);
+
+        return values.get(index2);
+    }
+
+    public double getAverageHeatindex() {
+        getMeasurements();
+        double value = 0;
+        for (Measurement measurement : measurements) {
+            value += measurement.getHeatIndex();
+        }
+        value /= measurements.size();
+        return Utilities.rounder(value);
+    }
+
+    public double getLowestHeatindex() {
+        getMeasurements();
+        double value = measurements.get(0).getHeatIndex();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() < value) {
+                value = measures.getHeatIndex();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getHighestHeatindex() {
+        getMeasurements();
+        double value = measurements.get(0).getHeatIndex();
+        for (Measurement measures : measurements) {
+            if (measures.getRainRate() > value) {
+                value = measures.getHeatIndex();
+            } else {
+                value = value;
+            }
+        }
+        return Utilities.rounder(value);
+    }
+
+    public double getMedianHeatindex() {
+        getMeasurements();
+
+        if (measurements.size() % 2 == 0) {
+            return Utilities.rounder(((measurements.get(measurements.size() / 2).getHeatIndex()) + (measurements.get(measurements.size() / 2 + 1).getHeatIndex())) / 2);
+        } else {
+            return Utilities.rounder(measurements.get(((measurements.size() - 1) / 2) + 1).getHeatIndex());
+        }
+    }
+
+    public double getModeHeatindex() {
+        ArrayList<Integer> counter = new ArrayList<>();
+        ArrayList<Double> values = new ArrayList<>();
+        getMeasurements();
+        int bigger = 0;
+        for (Measurement measures : measurements) {
+            double rawValue = Utilities.rounder(measures.getHeatIndex());
             if (values.contains(rawValue)) {
                 int index = values.indexOf(rawValue);
                 counter.set(index, (counter.get(index) + 1));
