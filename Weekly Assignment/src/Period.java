@@ -121,9 +121,9 @@ public class Period {
 
 
 
-    public double getAverageOutsideTemperature(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getAverageOutsideTemperature() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         int measurementCount = measurements.size();
@@ -139,14 +139,13 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double getAverageInsideTemperature(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getAverageInsideTemperature() {
+//        this.beginPeriod = beginPeriod;
+//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = 0;
         int measurementCount = measurements.size();
         for (Measurement measurement : measurements) {
-            System.out.println(measurement.getOutsideTemperature());
             if (measurement.getInsideTemperature() < 50) {
                 value += measurement.getInsideTemperature();
             } else {
@@ -619,7 +618,7 @@ public class Period {
         RawMeasurement rawMeasurement = DatabaseConnection.getMostRecentMeasurement();
         Measurement measures = new Measurement(rawMeasurement);
         double insideTemp = measures.getInsideTemperature();
-        double averageOutsideTemp = getAverageOutsideTemperature(beginPeriod, endPeriod);
+        double averageOutsideTemp = getAverageOutsideTemperature();
         double amount = 0;
         if (averageOutsideTemp > 18.0) {
             amount = 0;
