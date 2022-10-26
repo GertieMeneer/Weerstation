@@ -120,7 +120,6 @@ public class Period {
      */
 
 
-
     public double getAverageOutsideTemperature() {
 //        this.beginPeriod = beginPeriod;
 //        this.endPeriod = endPeriod;
@@ -248,8 +247,6 @@ public class Period {
     }
 
     public double getHighestInsideTemp() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getInsideTemperature();
         for (Measurement measures : measurements) {
@@ -261,8 +258,6 @@ public class Period {
     }
 
     public double lowestInsideHum() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getInsideHum();
         for (Measurement measures : measurements) {
@@ -273,9 +268,7 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double lowestOutsideHum() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
+    public double getLowestOutsideHum() {
         getMeasurements();
         double value = measurements.get(0).getOutsideHum();
         for (Measurement measures : measurements) {
@@ -286,9 +279,7 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double highestOutsideHum() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
+    public double getHighestOutsideHum() {
         getMeasurements();
         double value = measurements.get(0).getOutsideHum();
         for (Measurement measures : measurements) {
@@ -299,9 +290,7 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    public double highestInsideHum() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
+    public double getHighestInsideHum() {
         getMeasurements();
         double value = measurements.get(0).getInsideHum();
         for (Measurement measures : measurements) {
@@ -313,8 +302,6 @@ public class Period {
     }
 
     public double lowestAirpressure() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getAirPressure();
         for (Measurement measures : measurements) {
@@ -326,8 +313,6 @@ public class Period {
     }
 
     public double highestAirpressure() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getAirPressure();
         for (Measurement measures : measurements) {
@@ -397,9 +382,7 @@ public class Period {
         return "Grootste verschil tussen outsideTemperature en windChill = " + Utilities.rounder(highestDifference) + "\nDate = " + date;
     }
 
-    public double getMedianOutsideTemperature(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getMedianOutsideTemperature() {
         getMeasurements();
 
         if (measurements.size() % 2 == 0) {
@@ -409,9 +392,7 @@ public class Period {
         }
     }
 
-    public double getMedianInsideTemperature(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getMedianInsideTemperature() {
         getMeasurements();
 
         if (measurements.size() % 2 == 0) {
@@ -421,9 +402,7 @@ public class Period {
         }
     }
 
-    public double getMedianOutsideHumidity(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getMedianOutsideHumidity() {
         getMeasurements();
 
         if (measurements.size() % 2 == 0) {
@@ -433,9 +412,7 @@ public class Period {
         }
     }
 
-    public double getMedianInsideHumidity(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getMedianInsideHumidity() {
         getMeasurements();
 
         if (measurements.size() % 2 == 0) {
@@ -445,9 +422,7 @@ public class Period {
         }
     }
 
-    public double getMedianAirPressure(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public double getMedianAirPressure() {
         getMeasurements();
 
         if (measurements.size() % 2 == 0) {
@@ -457,11 +432,9 @@ public class Period {
         }
     }
 
-    public double modeOutsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
+    public double getModeOutsideTemp() {
         ArrayList<Integer> counter = new ArrayList<>();
         ArrayList<Double> values = new ArrayList<>();
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
         getMeasurements();
         int bigger = 0;
         for (Measurement measures : measurements) {
@@ -485,11 +458,9 @@ public class Period {
         return values.get(index2);
     }
 
-    public double modeInsideTemp(LocalDate beginPeriod, LocalDate endPeriod) {
+    public double getModeInsideTemp() {
         ArrayList<Integer> counter = new ArrayList<>();
         ArrayList<Double> values = new ArrayList<>();
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
         getMeasurements();
         int bigger = 0;
         for (Measurement measures : measurements) {
@@ -513,11 +484,9 @@ public class Period {
         return values.get(index2);
     }
 
-    public double modeOutsideHum(LocalDate beginPeriod, LocalDate endPeriod) {
+    public double getModeOutsideHum() {
         ArrayList<Integer> counter = new ArrayList<>();
         ArrayList<Double> values = new ArrayList<>();
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
         getMeasurements();
         int bigger = 0;
         for (Measurement measures : measurements) {
@@ -541,11 +510,9 @@ public class Period {
         return values.get(index2);
     }
 
-    public double modeInsideHum(LocalDate beginPeriod, LocalDate endPeriod) {
+    public double getModeInsideHum() {
         ArrayList<Integer> counter = new ArrayList<>();
         ArrayList<Double> values = new ArrayList<>();
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
         getMeasurements();
         int bigger = 0;
         for (Measurement measures : measurements) {
@@ -569,11 +536,9 @@ public class Period {
         return values.get(index2);
     }
 
-    public double modeAirpressure(LocalDate beginPeriod, LocalDate endPeriod) {
+    public double getModeAirpressure() {
         ArrayList<Integer> counter = new ArrayList<>();
         ArrayList<Double> values = new ArrayList<>();
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
         getMeasurements();
         int bigger = 0;
         for (Measurement measures : measurements) {
@@ -603,13 +568,13 @@ public class Period {
         int length = list.size();
 
         for (double value : list) {
-            sum+= value;
+            sum += value;
         }
 
-        double mean = sum /length;
+        double mean = sum / length;
 
         for (double value : list) {
-            standardDeviation+= Math.pow((value - mean), 2);
+            standardDeviation += Math.pow((value - mean), 2);
         }
         return Utilities.rounder(Math.sqrt(standardDeviation / length));
     }

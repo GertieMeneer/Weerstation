@@ -26,7 +26,6 @@ public class SelectOptions {
     }
 
 
-
     public static void displayTemps(Period now, ArrayList<Measurement> measurements) {
         String outsideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideTemperature());
         IO.writeShort(0x24, outsideTemp.charAt(0));
@@ -382,15 +381,16 @@ public class SelectOptions {
         LocalDate startdatelocaldate = LocalDate.parse(startdate);
         LocalDate enddatelocaldate = LocalDate.parse(enddate);
         Period test = new Period(startdatelocaldate, enddatelocaldate);
-        if(value.equals("temp")) {
-            if(type.equals("avg")) {
+        if (value.equals("temp")) {
+            if (type.equals("avg")) {
                 GuiBoardUtilities.clrDMDisplay();
                 GuiBoardUtilities.clrSevenSegment();
                 String avgoutside = "" + Utilities.rounder(test.getAverageOutsideTemperature());
                 String avginside = "" + Utilities.rounder(test.getAverageInsideTemperature());
                 String avgoutsideDMD = "Left: avg outside";
-                String avginsideDMD = "Right: avg inside (C)";
-                if(Double.parseDouble(avgoutside) >= 0 && Double.parseDouble(avgoutside) < 10) {
+                String avginsideDMD = "Right: avg inside";
+                String val = "Temperature (C)";
+                if (Double.parseDouble(avgoutside) >= 0 && Double.parseDouble(avgoutside) < 10) {
                     IO.writeShort(0x24, 0x100 | secondDigit("" + avgoutside.charAt(0)));
                     IO.writeShort(0x22, avgoutside.charAt(2));
                 } else if (Double.parseDouble(avgoutside) >= 10 && Double.parseDouble(avgoutside) < 100) {
@@ -410,6 +410,10 @@ public class SelectOptions {
                 for (int i = 0; i < avgoutsideDMD.length(); i++) {
                     IO.writeShort(0x40, avgoutsideDMD.charAt(i));
                 }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
                 PageSelectors.returnToFirstPage();
 
             } else if (type.equals("low")) {
@@ -418,8 +422,9 @@ public class SelectOptions {
                 String lowoutside = "" + Utilities.rounder(test.getLowestOutsideTemp());
                 String lowinside = "" + Utilities.rounder(test.getLowestInsideTemp());
                 String lowoutsideDMD = "Left: low outside";
-                String lowinsideDMD = "Right: low inside (C)";
-                if(Double.parseDouble(lowoutside) >= 0 && Double.parseDouble(lowoutside) < 10) {
+                String lowinsideDMD = "Right: low inside";
+                String val = "Temperature (C)";
+                if (Double.parseDouble(lowoutside) >= 0 && Double.parseDouble(lowoutside) < 10) {
                     IO.writeShort(0x24, 0x100 | secondDigit("" + lowoutside.charAt(0)));
                     IO.writeShort(0x22, lowoutside.charAt(2));
                 } else if (Double.parseDouble(lowoutside) >= 10 && Double.parseDouble(lowoutside) < 100) {
@@ -437,35 +442,259 @@ public class SelectOptions {
                 for (int i = 0; i < lowoutsideDMD.length(); i++) {
                     IO.writeShort(0x40, lowoutsideDMD.charAt(i));
                 }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
                 PageSelectors.returnToFirstPage();
-            } else if (type.equals("high")) {
-                System.out.println("Highest outside temp: " + test.getHighestInsideTemp());
-                System.out.println("Highest inside temp: " + test.getHighestInsideTemp());
-            } else if (type.equals("median")) {
-                System.out.println("Median outside temp: " + test.getLowestOutsideTemp());
-                System.out.println("Median inside temp: " + test.getLowestInsideTemp());
-            } else if (type.equals("mode")) {
 
+            } else if (type.equals("high")) {
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String highoutside = "" + Utilities.rounder(test.getHighestOutsideTemp());
+                String highinside = "" + Utilities.rounder(test.getHighestInsideTemp());
+                String highoutsideDMD = "Left: high outside";
+                String highinsideDMD = "Right: high inside";
+                String val = "Temperature (C)";
+                if (Double.parseDouble(highoutside) >= 0 && Double.parseDouble(highoutside) < 10) {
+                    IO.writeShort(0x24, 0x100 | secondDigit("" + highoutside.charAt(0)));
+                    IO.writeShort(0x22, highoutside.charAt(2));
+                } else if (Double.parseDouble(highoutside) >= 10 && Double.parseDouble(highoutside) < 100) {
+                    IO.writeShort(0x24, highoutside.charAt(0));
+                    IO.writeShort(0x22, 0x100 | secondDigit("" + highoutside.charAt(1)));
+                    IO.writeShort(0x20, highoutside.charAt(3));
+                }
+                IO.writeShort(0x34, highinside.charAt(0));
+                IO.writeShort(0x32, 0x100 | secondDigit("" + highinside.charAt(1)));
+                IO.writeShort(0x30, highinside.charAt(3));
+                for (int i = 0; i < highinsideDMD.length(); i++) {
+                    IO.writeShort(0x40, highinsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < highoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, highoutsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
+            } else if (type.equals("median")) {
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String medoutside = "" + Utilities.rounder(test.getMedianOutsideTemperature());
+                String medinside = "" + Utilities.rounder(test.getMedianInsideTemperature());
+                String medoutsideDMD = "Left: med outside";
+                String medinsideDMD = "Right: med inside";
+                String val = "Temperature (C)";
+                if (Double.parseDouble(medoutside) >= 0 && Double.parseDouble(medoutside) < 10) {
+                    IO.writeShort(0x24, 0x100 | secondDigit("" + medoutside.charAt(0)));
+                    IO.writeShort(0x22, medoutside.charAt(2));
+                } else if (Double.parseDouble(medoutside) >= 10 && Double.parseDouble(medoutside) < 100) {
+                    IO.writeShort(0x24, medoutside.charAt(0));
+                    IO.writeShort(0x22, 0x100 | secondDigit("" + medoutside.charAt(1)));
+                    IO.writeShort(0x20, medoutside.charAt(3));
+                }
+                IO.writeShort(0x34, medinside.charAt(0));
+                IO.writeShort(0x32, 0x100 | secondDigit("" + medinside.charAt(1)));
+                IO.writeShort(0x30, medinside.charAt(3));
+                for (int i = 0; i < medinsideDMD.length(); i++) {
+                    IO.writeShort(0x40, medinsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < medoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, medoutsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
+            } else if (type.equals("mode")) {
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String modeoutside = "" + Utilities.rounder(test.getModeOutsideTemp());
+                String modeinside = "" + Utilities.rounder(test.getModeInsideTemp());
+                String modeoutsideDMD = "Left: mode outside";
+                String modeinsideDMD = "Right: mode inside";
+                String val = "Temperature (C)";
+                if (Double.parseDouble(modeoutside) >= 0 && Double.parseDouble(modeoutside) < 10) {
+                    IO.writeShort(0x24, 0x100 | secondDigit("" + modeoutside.charAt(0)));
+                    IO.writeShort(0x22, modeoutside.charAt(2));
+                } else if (Double.parseDouble(modeoutside) >= 10 && Double.parseDouble(modeoutside) < 100) {
+                    IO.writeShort(0x24, modeoutside.charAt(0));
+                    IO.writeShort(0x22, 0x100 | secondDigit("" + modeoutside.charAt(1)));
+                    IO.writeShort(0x20, modeoutside.charAt(3));
+                }
+                IO.writeShort(0x34, modeinside.charAt(0));
+                IO.writeShort(0x32, 0x100 | secondDigit("" + modeinside.charAt(1)));
+                IO.writeShort(0x30, modeinside.charAt(3));
+                for (int i = 0; i < modeinsideDMD.length(); i++) {
+                    IO.writeShort(0x40, modeinsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < modeoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, modeoutsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
             } else if (type.equals("deviation")) {
 
             }
         } else if (value.equals("hum")) {
-            if(type.equals("avg")) {
-
+            if (type.equals("avg")) {
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String avgoutside = "" + Utilities.rounder(test.getAverageOutsideHumidity());
+                String avginside = "" + Utilities.rounder(test.getAverageInsideHumidity());
+                String avgoutsideDMD = "Left: avg outside";
+                String avginsideDMD = "Right: avg inside";
+                String val = "Humidity (%)";
+                IO.writeShort(0x24, avgoutside.charAt(0));
+                IO.writeShort(0x22, avgoutside.charAt(1));
+                IO.writeShort(0x34, avginside.charAt(0));
+                IO.writeShort(0x32, avginside.charAt(1));
+                for (int i = 0; i < avginsideDMD.length(); i++) {
+                    IO.writeShort(0x40, avginsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < avgoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, avgoutsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
             } else if (type.equals("low")) {
-
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String lowoutside = "" + Utilities.rounder(test.getLowestOutsideHum());
+                String lowinside = "" + Utilities.rounder(test.getLowestOutsideHum());
+                String lowoutsideDMD = "Left: low outside";
+                String lowinsideDMD = "Right: low inside";
+                String val = "Humidity (%)";
+                IO.writeShort(0x24, lowoutside.charAt(0));
+                IO.writeShort(0x22, lowoutside.charAt(1));
+                IO.writeShort(0x34, lowinside.charAt(0));
+                IO.writeShort(0x32, lowinside.charAt(1));
+                for (int i = 0; i < lowinsideDMD.length(); i++) {
+                    IO.writeShort(0x40, lowinsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < lowoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, lowoutsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
             } else if (type.equals("high")) {
-
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String highoutside = "" + Utilities.rounder(test.getHighestOutsideHum());
+                String highinside = "" + Utilities.rounder(test.getHighestInsideHum());
+                String highoutsideDMD = "Left: high outside";
+                String highinsideDMD = "Right: high inside";
+                String val = "Humidity (%)";
+                IO.writeShort(0x24, highoutside.charAt(0));
+                IO.writeShort(0x22, highoutside.charAt(1));
+                IO.writeShort(0x34, highinside.charAt(0));
+                IO.writeShort(0x32, highinside.charAt(1));
+                for (int i = 0; i < highinsideDMD.length(); i++) {
+                    IO.writeShort(0x40, highinsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < highoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, highoutsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
             } else if (type.equals("median")) {
-
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String highoutside = "" + Utilities.rounder(test.getMedianOutsideHumidity());
+                String highinside = "" + Utilities.rounder(test.getMedianInsideHumidity());
+                String highoutsideDMD = "Left: med outside";
+                String highinsideDMD = "Right: med inside";
+                String val = "Humidity (%)";
+                IO.writeShort(0x24, highoutside.charAt(0));
+                IO.writeShort(0x22, highoutside.charAt(1));
+                IO.writeShort(0x34, highinside.charAt(0));
+                IO.writeShort(0x32, highinside.charAt(1));
+                for (int i = 0; i < highinsideDMD.length(); i++) {
+                    IO.writeShort(0x40, highinsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < highoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, highoutsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
             } else if (type.equals("mode")) {
-
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String highoutside = "" + Utilities.rounder(test.getModeOutsideHum());
+                String highinside = "" + Utilities.rounder(test.getModeInsideHum());
+                String highoutsideDMD = "Left: mode outside";
+                String highinsideDMD = "Right: mode inside";
+                String val = "Humidity (%)";
+                IO.writeShort(0x24, highoutside.charAt(0));
+                IO.writeShort(0x22, highoutside.charAt(1));
+                IO.writeShort(0x34, highinside.charAt(0));
+                IO.writeShort(0x32, highinside.charAt(1));
+                for (int i = 0; i < highinsideDMD.length(); i++) {
+                    IO.writeShort(0x40, highinsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < highoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, highoutsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
             } else if (type.equals("deviation")) {
 
             }
         } else if (value.equals("wind")) {
-            if(type.equals("avg")) {
-
+            if (type.equals("avg")) {
+                GuiBoardUtilities.clrDMDisplay();
+                GuiBoardUtilities.clrSevenSegment();
+                String avgoutside = "" + Utilities.rounder(test.getAverageOutsideTemperature());
+                String avgoutsideDMD = "Left: avg outside";
+                String val = "Wind (KM/H)";
+                if (Double.parseDouble(avgoutside) >= 0 && Double.parseDouble(avgoutside) < 10) {
+                    IO.writeShort(0x24, 0x100 | secondDigit("" + avgoutside.charAt(0)));
+                    IO.writeShort(0x22, avgoutside.charAt(2));
+                } else if (Double.parseDouble(avgoutside) >= 10 && Double.parseDouble(avgoutside) < 100) {
+                    IO.writeShort(0x24, avgoutside.charAt(0));
+                    IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
+                    IO.writeShort(0x20, avgoutside.charAt(3));
+                } else if (Double.parseDouble(avgoutside) == 0) {
+                    IO.writeShort(0x24, 0x100 | secondDigit("" + avgoutside.charAt(0)));
+                    IO.writeShort(0x22, avgoutside.charAt(2));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < avgoutsideDMD.length(); i++) {
+                    IO.writeShort(0x40, avgoutsideDMD.charAt(i));
+                }
+                IO.writeShort(0x40, '\n');
+                for (int i = 0; i < val.length(); i++) {
+                    IO.writeShort(0x40, val.charAt(i));
+                }
+                PageSelectors.returnToFirstPage();
             } else if (type.equals("low")) {
 
             } else if (type.equals("high")) {
@@ -478,7 +707,7 @@ public class SelectOptions {
 
             }
         } else if (value.equals("airpressure")) {
-            if(type.equals("avg")) {
+            if (type.equals("avg")) {
 
             } else if (type.equals("low")) {
 
@@ -492,7 +721,7 @@ public class SelectOptions {
 
             }
         } else if (value.equals("rain")) {
-            if(type.equals("avg")) {
+            if (type.equals("avg")) {
 
             } else if (type.equals("low")) {
 
@@ -506,7 +735,7 @@ public class SelectOptions {
 
             }
         } else if (value.equals("uv")) {
-            if(type.equals("avg")) {
+            if (type.equals("avg")) {
 
             } else if (type.equals("low")) {
 
@@ -520,7 +749,7 @@ public class SelectOptions {
 
             }
         } else if (value.equals("solarrad")) {
-            if(type.equals("avg")) {
+            if (type.equals("avg")) {
 
             } else if (type.equals("low")) {
 
@@ -534,7 +763,7 @@ public class SelectOptions {
 
             }
         } else if (value.equals("dewpoint")) {
-            if(type.equals("avg")) {
+            if (type.equals("avg")) {
 
             } else if (type.equals("low")) {
 
@@ -548,7 +777,7 @@ public class SelectOptions {
 
             }
         } else if (value.equals("windchill")) {
-            if(type.equals("avg")) {
+            if (type.equals("avg")) {
 
             } else if (type.equals("low")) {
 
@@ -562,7 +791,7 @@ public class SelectOptions {
 
             }
         } else if (value.equals("heatindex")) {
-            if(type.equals("avg")) {
+            if (type.equals("avg")) {
 
             } else if (type.equals("low")) {
 
