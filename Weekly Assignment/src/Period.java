@@ -595,7 +595,6 @@ public class Period {
     }
 
     public double aantalGraaddagen() {
-        ArrayList<Measurement> measurements = getMeasurements();
         RawMeasurement rawMeasurement = DatabaseConnection.getMostRecentMeasurement();
         Measurement measures = new Measurement(rawMeasurement);
         double insideTemp = measures.getInsideTemperature();

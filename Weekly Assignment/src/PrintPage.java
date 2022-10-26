@@ -211,6 +211,7 @@ public class PrintPage {
         GuiBoardUtilities.clrSevenSegment();
         String median = "Median";
         String mode = "Mode";
+        String endpage = "END OF LIST";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
         for (int i = 0; i < median.length(); i++) {
@@ -222,41 +223,32 @@ public class PrintPage {
         for (int i = 0; i < mode.length(); i++) {
             IO.writeShort(0x40, mode.charAt(i));
         }
-    }
-
-    public static void selectTempPeriod() {
-        GuiBoardUtilities.clrDMDisplay();
-        GuiBoardUtilities.clrSevenSegment();
-        String pastday = "Past 24 hours";
-        String pastyear = "Past year";
-        String custom = "Custom period";
-        IO.writeShort(0x40, ' ');
-        IO.writeShort(0x40, ' ');
-        for (int i = 0; i < pastday.length(); i++) {
-            IO.writeShort(0x40, pastday.charAt(i));
-        }
         IO.writeShort(0x40, '\n');
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
-        for (int i = 0; i < pastyear.length(); i++) {
-            IO.writeShort(0x40, pastyear.charAt(i));
-        }
-        IO.writeShort(0x40, '\n');
-        IO.writeShort(0x40, ' ');
-        IO.writeShort(0x40, ' ');
-        for (int i = 0; i < custom.length(); i++) {
-            IO.writeShort(0x40, custom.charAt(i));
+        for (int i = 0; i < endpage.length(); i++) {
+            IO.writeShort(0x40, endpage.charAt(i));
         }
     }
 
-    public static void selectCustomTempAveragePeriod() {
+    public static void selectCustomTempPeriod(String type) {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
         String selectcustom = "Follow instructions \n in console";
         for (int i = 0; i < selectcustom.length(); i++) {
             IO.writeShort(0x40, selectcustom.charAt(i));
         }
-        System.out.println("Please type the start date and end date (yyyy-mm-dd of in een andere vorm weet ik niet meer later checken): ");
+        if(type.equals("avg")) {
+            SelectOptions.selectCustomTempAveragePeriod();
+        } else if(type.equals("low")) {
+            SelectOptions.selectCustomTempLowestPeriod();
+        } else if(type.equals("high")) {
+            SelectOptions.selectCustomTempHighestPeriod();
+        } else if(type.equals("median")) {
+            SelectOptions.selectCustomTempMedianPeriod();
+        } else if(type.equals("mode")) {
+            SelectOptions.selectCustomTempModePeriod();
+        }
     }
 
 }

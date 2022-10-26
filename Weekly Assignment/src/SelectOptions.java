@@ -371,8 +371,32 @@ public class SelectOptions {
         PrintPage.homePage();
     }
 
-    public static void selectGoToTop() {
-        PageSelectors.noSelection();
-        PrintPage.firstPage();
+    public static void selectCustomTempAveragePeriod() {
+        System.out.println("Inupt date hereererrere (yyyy-mm-dd ofzo): ");
+        //dan de berekening doen
     }
+
+    public static void selectCustomTempLowestPeriod() {
+        System.out.println("Inupt date hereererrere (yyyy-mm-dd ofzo): ");
+        //dan de berekening doen
+    }
+
+    public static void selectCustomTempHighestPeriod() {
+        System.out.println("Inupt date hereererrere (yyyy-mm-dd ofzo): ");
+        //dan de berekening doen
+    }
+
+    public static void selectCustomTempMedianPeriod() {
+        System.out.println("Inupt date hereererrere (yyyy-mm-dd ofzo): ");
+        //dan de berekening doen
+    }
+
+    public static void selectCustomTempModePeriod() {
+        System.out.println("Inupt date hereererrere (yyyy-mm-dd ofzo): ");
+        //dan de berekening doen
+    }
+
+
+
+
 }
