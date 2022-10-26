@@ -295,9 +295,17 @@ public class PageSelectors {
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
-                PrintPage.selectCustomInfoPage1();
-                selectCustomInfoTempPage1(value);
-                firstPos();
+                thirdPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 1) {
+                PrintPage.selectCustomPeriod(value, "deviation");
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                thirdPos();
                 i = -1;
             }
         }

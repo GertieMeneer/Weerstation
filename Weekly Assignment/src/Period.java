@@ -598,6 +598,23 @@ public class Period {
         return values.get(index2);
     }
 
+    public double standardDeviation(ArrayList<Double> list) {
+        double sum = 0.0;
+        double standardDeviation = 0.0;
+        int length = list.size();
+
+        for (double value : list) {
+            sum+= value;
+        }
+
+        double mean = sum /length;
+
+        for (double value : list) {
+            standardDeviation+= Math.pow((value - mean), 2);
+        }
+        return Utilities.rounder(Math.sqrt(standardDeviation / length));
+    }
+
     public double aantalGraaddagen() {
         RawMeasurement rawMeasurement = DatabaseConnection.getMostRecentMeasurement();
         Measurement measures = new Measurement(rawMeasurement);

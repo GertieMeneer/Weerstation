@@ -388,11 +388,19 @@ public class SelectOptions {
                 GuiBoardUtilities.clrSevenSegment();
                 String avgoutside = "" + Utilities.rounder(test.getAverageOutsideTemperature(startdatelocaldate, enddatelocaldate));
                 String avginside = "" + Utilities.rounder(test.getAverageInsideTemperature(startdatelocaldate, enddatelocaldate));
-                String avgoutsideDMD = "Left: outside";
-                String avginsideDMD = "Right: inside";
-                IO.writeShort(0x24, avgoutside.charAt(0));
-                IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
-                IO.writeShort(0x20, avgoutside.charAt(3));
+                String avgoutsideDMD = "Left: avg outside";
+                String avginsideDMD = "Right: avg inside (C)";
+                if(Double.parseDouble(avgoutside) >= 0 && Double.parseDouble(avgoutside) < 10) {
+                    IO.writeShort(0x24, 0x100 | secondDigit("" + avgoutside.charAt(0)));
+                    IO.writeShort(0x22, avgoutside.charAt(2));
+                } else if (Double.parseDouble(avgoutside) >= 10 && Double.parseDouble(avgoutside) < 100) {
+                    IO.writeShort(0x24, avgoutside.charAt(0));
+                    IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
+                    IO.writeShort(0x20, avgoutside.charAt(3));
+                }
+                IO.writeShort(0x34, avginside.charAt(0));
+                IO.writeShort(0x32, 0x100 | secondDigit("" + avginside.charAt(1)));
+                IO.writeShort(0x30, avginside.charAt(3));
                 for (int i = 0; i < avginsideDMD.length(); i++) {
                     IO.writeShort(0x40, avginsideDMD.charAt(i));
                 }
@@ -413,6 +421,8 @@ public class SelectOptions {
                 System.out.println("Median inside temp: " + test.getLowestInsideTemp(startdatelocaldate, enddatelocaldate));
             } else if (type.equals("mode")) {
 
+            } else if (type.equals("deviation")) {
+
             }
         } else if (value.equals("hum")) {
             if(type.equals("avg")) {
@@ -424,6 +434,8 @@ public class SelectOptions {
             } else if (type.equals("median")) {
 
             } else if (type.equals("mode")) {
+
+            } else if (type.equals("deviation")) {
 
             }
         } else if (value.equals("wind")) {
@@ -437,6 +449,8 @@ public class SelectOptions {
 
             } else if (type.equals("mode")) {
 
+            } else if (type.equals("deviation")) {
+
             }
         } else if (value.equals("airpressure")) {
             if(type.equals("avg")) {
@@ -448,6 +462,8 @@ public class SelectOptions {
             } else if (type.equals("median")) {
 
             } else if (type.equals("mode")) {
+
+            } else if (type.equals("deviation")) {
 
             }
         } else if (value.equals("rain")) {
@@ -461,6 +477,8 @@ public class SelectOptions {
 
             } else if (type.equals("mode")) {
 
+            } else if (type.equals("deviation")) {
+
             }
         } else if (value.equals("uv")) {
             if(type.equals("avg")) {
@@ -472,6 +490,8 @@ public class SelectOptions {
             } else if (type.equals("median")) {
 
             } else if (type.equals("mode")) {
+
+            } else if (type.equals("deviation")) {
 
             }
         } else if (value.equals("solarrad")) {
@@ -485,6 +505,8 @@ public class SelectOptions {
 
             } else if (type.equals("mode")) {
 
+            } else if (type.equals("deviation")) {
+
             }
         } else if (value.equals("dewpoint")) {
             if(type.equals("avg")) {
@@ -496,6 +518,8 @@ public class SelectOptions {
             } else if (type.equals("median")) {
 
             } else if (type.equals("mode")) {
+
+            } else if (type.equals("deviation")) {
 
             }
         } else if (value.equals("windchill")) {
@@ -509,6 +533,8 @@ public class SelectOptions {
 
             } else if (type.equals("mode")) {
 
+            } else if (type.equals("deviation")) {
+
             }
         } else if (value.equals("heatindex")) {
             if(type.equals("avg")) {
@@ -520,6 +546,8 @@ public class SelectOptions {
             } else if (type.equals("median")) {
 
             } else if (type.equals("mode")) {
+
+            } else if (type.equals("deviation")) {
 
             }
         }
