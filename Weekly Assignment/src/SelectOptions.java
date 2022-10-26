@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class SelectOptions {
     public static void selectCurrentTemp() {
@@ -372,9 +374,19 @@ public class SelectOptions {
     }
 
     public static void selectCustomPeriod(String value, String type) {
-//        System.out.println(value + " " + type);
         if(value.equals("temp")) {
             if(type.equals("avg")) {
+                Scanner reader = new Scanner(System.in);
+                System.out.println("Input start date (yyyy-mm-dd): ");
+                String startdate = reader.nextLine();
+                System.out.println("Input end date (yyyy-mm-dd): ");
+                String enddate = reader.nextLine();
+                LocalDate startdatelocaldate = LocalDate.parse(startdate);
+                LocalDate enddatelocaldate = LocalDate.parse(enddate);
+                Period test = new Period(startdatelocaldate, enddatelocaldate);
+                System.out.println(Period.getAverageOutsideTemperature(startdatelocaldate, enddatelocaldate));
+                System.out.println(Period.getAverageInsideTemperature(startdatelocaldate, enddatelocaldate));
+
             } else if (type.equals("low")) {
 
             } else if (type.equals("high")) {

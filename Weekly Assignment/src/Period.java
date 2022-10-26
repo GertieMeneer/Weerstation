@@ -4,6 +4,7 @@ import java.time.temporal.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * A class to contain a period of time
@@ -117,6 +118,9 @@ public class Period {
      *
      * @return
      */
+
+
+
     public double getAverageOutsideTemperature(LocalDate beginPeriod, LocalDate endPeriod) {
         this.beginPeriod = beginPeriod;
         this.endPeriod = endPeriod;
