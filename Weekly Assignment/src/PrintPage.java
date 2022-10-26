@@ -163,10 +163,10 @@ public class PrintPage {
         IO.writeShort(0x42, 1);
     }
 
-    public static void selectTempPage() {
+    public static void selectCurrentOrCustomPage() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
-        String currenttemp = "Current temp";
+        String currenttemp = "Current value";
         String customtemp = "Custom info";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
@@ -231,24 +231,14 @@ public class PrintPage {
         }
     }
 
-    public static void selectCustomTempPeriod(String type) {
+    public static void selectCustomPeriod(String value, String type) {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
         String selectcustom = "Follow instructions \n in console";
         for (int i = 0; i < selectcustom.length(); i++) {
             IO.writeShort(0x40, selectcustom.charAt(i));
         }
-        if(type.equals("avg")) {
-            SelectOptions.selectCustomTempAveragePeriod();
-        } else if(type.equals("low")) {
-            SelectOptions.selectCustomTempLowestPeriod();
-        } else if(type.equals("high")) {
-            SelectOptions.selectCustomTempHighestPeriod();
-        } else if(type.equals("median")) {
-            SelectOptions.selectCustomTempMedianPeriod();
-        } else if(type.equals("mode")) {
-            SelectOptions.selectCustomTempModePeriod();
-        }
+        SelectOptions.selectCustomPeriod(value, type);
     }
 
 }

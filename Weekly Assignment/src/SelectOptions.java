@@ -371,32 +371,127 @@ public class SelectOptions {
         PrintPage.homePage();
     }
 
-    public static void selectCustomTempAveragePeriod() {
-        System.out.println("Inupt date hereererrere (yyyy-mm-dd ofzo): ");
-        //dan de berekening doen
+    public static void selectCustomPeriod(String value, String type) {
+//        System.out.println(value + " " + type);
+        if(value.equals("temp")) {
+            if(type.equals("avg")) {
+            } else if (type.equals("low")) {
+
+            } else if (type.equals("high")) {
+
+            } else if (type.equals("median")) {
+
+            } else if (type.equals("mode")) {
+
+            }
+        } else if (value.equals("hum")) {
+            if(type.equals("avg")) {
+
+            } else if (type.equals("low")) {
+
+            } else if (type.equals("high")) {
+
+            } else if (type.equals("median")) {
+
+            } else if (type.equals("mode")) {
+
+            }
+        } else if (value.equals("wind")) {
+            if(type.equals("avg")) {
+
+            } else if (type.equals("low")) {
+
+            } else if (type.equals("high")) {
+
+            } else if (type.equals("median")) {
+
+            } else if (type.equals("mode")) {
+
+            }
+        } else if (value.equals("airpressure")) {
+            if(type.equals("avg")) {
+
+            } else if (type.equals("low")) {
+
+            } else if (type.equals("high")) {
+
+            } else if (type.equals("median")) {
+
+            } else if (type.equals("mode")) {
+
+            }
+        } else if (value.equals("rain")) {
+            if(type.equals("avg")) {
+
+            } else if (type.equals("low")) {
+
+            } else if (type.equals("high")) {
+
+            } else if (type.equals("median")) {
+
+            } else if (type.equals("mode")) {
+
+            }
+        } else if (value.equals("uv")) {
+            if(type.equals("avg")) {
+
+            } else if (type.equals("low")) {
+
+            } else if (type.equals("high")) {
+
+            } else if (type.equals("median")) {
+
+            } else if (type.equals("mode")) {
+
+            }
+        } else if (value.equals("solarrad")) {
+            if(type.equals("avg")) {
+
+            } else if (type.equals("low")) {
+
+            } else if (type.equals("high")) {
+
+            } else if (type.equals("median")) {
+
+            } else if (type.equals("mode")) {
+
+            }
+        } else if (value.equals("dewpoint")) {
+            if(type.equals("avg")) {
+
+            } else if (type.equals("low")) {
+
+            } else if (type.equals("high")) {
+
+            } else if (type.equals("median")) {
+
+            } else if (type.equals("mode")) {
+
+            }
+        } else if (value.equals("windchill")) {
+            if(type.equals("avg")) {
+
+            } else if (type.equals("low")) {
+
+            } else if (type.equals("high")) {
+
+            } else if (type.equals("median")) {
+
+            } else if (type.equals("mode")) {
+
+            }
+        } else if (value.equals("heatindex")) {
+            if(type.equals("avg")) {
+
+            } else if (type.equals("low")) {
+
+            } else if (type.equals("high")) {
+
+            } else if (type.equals("median")) {
+
+            } else if (type.equals("mode")) {
+
+            }
+        }
     }
-
-    public static void selectCustomTempLowestPeriod() {
-        System.out.println("Inupt date hereererrere (yyyy-mm-dd ofzo): ");
-        //dan de berekening doen
-    }
-
-    public static void selectCustomTempHighestPeriod() {
-        System.out.println("Inupt date hereererrere (yyyy-mm-dd ofzo): ");
-        //dan de berekening doen
-    }
-
-    public static void selectCustomTempMedianPeriod() {
-        System.out.println("Inupt date hereererrere (yyyy-mm-dd ofzo): ");
-        //dan de berekening doen
-    }
-
-    public static void selectCustomTempModePeriod() {
-        System.out.println("Inupt date hereererrere (yyyy-mm-dd ofzo): ");
-        //dan de berekening doen
-    }
-
-
-
-
 }

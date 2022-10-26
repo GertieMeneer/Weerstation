@@ -3,8 +3,8 @@ public class PageSelectors {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                PrintPage.selectTempPage();
-                PageSelectors.selectTempPage();
+                PrintPage.selectCurrentOrCustomPage();
+                PageSelectors.selectCurrentOrCustomPage("temp");
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -14,7 +14,8 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectHum();
+                PrintPage.selectCurrentOrCustomPage();
+                PageSelectors.selectCurrentOrCustomPage("hum");
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
@@ -24,7 +25,8 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectWind();
+                PrintPage.selectCurrentOrCustomPage();
+                PageSelectors.selectCurrentOrCustomPage("wind");
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -40,7 +42,8 @@ public class PageSelectors {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectAirpressure();
+                PrintPage.selectCurrentOrCustomPage();
+                PageSelectors.selectCurrentOrCustomPage("airpressure");
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
@@ -50,7 +53,8 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectRainrate();
+                PrintPage.selectCurrentOrCustomPage();
+                PageSelectors.selectCurrentOrCustomPage("rain");
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -60,7 +64,8 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectUV();
+                PrintPage.selectCurrentOrCustomPage();
+                PageSelectors.selectCurrentOrCustomPage("uv");
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
@@ -76,7 +81,8 @@ public class PageSelectors {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectSolarrad();
+                PrintPage.selectCurrentOrCustomPage();
+                PageSelectors.selectCurrentOrCustomPage("solarrad");
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -112,7 +118,8 @@ public class PageSelectors {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectDewpoint();
+                PrintPage.selectCurrentOrCustomPage();
+                PageSelectors.selectCurrentOrCustomPage("dewpoint");
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
@@ -122,7 +129,8 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectWindchill();
+                PrintPage.selectCurrentOrCustomPage();
+                PageSelectors.selectCurrentOrCustomPage("windchill");
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -132,7 +140,8 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectHeatindex();
+                PrintPage.selectCurrentOrCustomPage();
+                PageSelectors.selectCurrentOrCustomPage("heatindex");
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
@@ -166,11 +175,53 @@ public class PageSelectors {
         }
     }
 
-    public static void selectTempPage() {
+    public static void selectCurrentOrCustomPage(String value) {
         firstPos();
+        int selectoption = 0;
+        if(value.equals("temp")) {
+            selectoption = 0;
+        } else if (value.equals("hum")) {
+            selectoption = 1;
+        } else if (value.equals("wind")) {
+            selectoption = 2;
+        } else if (value.equals("airpressure")) {
+            selectoption = 3;
+        } else if (value.equals("rain")) {
+            selectoption = 4;
+        } else if (value.equals("uv")) {
+            selectoption = 5;
+        } else if (value.equals("solarrad")) {
+            selectoption = 6;
+        } else if (value.equals("dewpoint")) {
+            selectoption = 7;
+        } else if (value.equals("windchill")) {
+            selectoption = 8;
+        } else if (value.equals("heatindex")) {
+            selectoption = 9;
+        }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 0) {
-                SelectOptions.selectCurrentTemp();
+                if (selectoption == 0) {
+                    SelectOptions.selectCurrentTemp();
+                } else if (selectoption == 1) {
+                    SelectOptions.selectHum();
+                } else if (selectoption == 2) {
+                    SelectOptions.selectWind();
+                } else if (selectoption == 3) {
+                    SelectOptions.selectAirpressure();
+                } else if (selectoption == 4) {
+                    SelectOptions.selectRainrate();
+                } else if (selectoption == 5) {
+                    SelectOptions.selectUV();
+                } else if (selectoption == 6) {
+                    SelectOptions.selectSolarrad();
+                } else if (selectoption == 7) {
+                    SelectOptions.selectDewpoint();
+                } else if (selectoption == 8) {
+                    SelectOptions.selectWind();
+                } else if (selectoption == 9) {
+                    SelectOptions.selectHeatindex();
+                }
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -181,22 +232,22 @@ public class PageSelectors {
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 0) {
                 PrintPage.selectCustomInfoPage1();
-                PageSelectors.selectCustomInfoTempPage1();
+                PageSelectors.selectCustomInfoTempPage1(value);
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
                 firstPos();
-                selectTempPage();
+                selectCurrentOrCustomPage(value);
                 i = -1;
             }
         }
     }
 
-    public static void selectCustomInfoTempPage1() {
+    public static void selectCustomInfoTempPage1(String value) {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                PrintPage.selectCustomTempPeriod("avg");
+                PrintPage.selectCustomPeriod(value, "avg");
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
@@ -206,7 +257,7 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                PrintPage.selectCustomTempPeriod("low");
+                PrintPage.selectCustomPeriod(value, "low");
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -216,21 +267,21 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                PrintPage.selectCustomTempPeriod("high");
+                PrintPage.selectCustomPeriod(value, "high");
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
                 PrintPage.selectCustomInfoPage2();
-                selectCustomInfoTempPage2();
+                selectCustomInfoTempPage2(value);
                 i--;
             }
         }
     }
-    public static void selectCustomInfoTempPage2() {
+    public static void selectCustomInfoTempPage2(String value) {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                PrintPage.selectCustomTempPeriod("median");
+                PrintPage.selectCustomPeriod(value, "median");
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -240,12 +291,12 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                PrintPage.selectCustomTempPeriod("mode");
+                PrintPage.selectCustomPeriod(value, "mode");
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
                 PrintPage.selectCustomInfoPage1();
-                selectCustomInfoTempPage1();
+                selectCustomInfoTempPage1(value);
                 firstPos();
                 i--;
             }
