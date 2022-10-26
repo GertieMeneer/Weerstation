@@ -384,8 +384,8 @@ public class SelectOptions {
                 LocalDate startdatelocaldate = LocalDate.parse(startdate);
                 LocalDate enddatelocaldate = LocalDate.parse(enddate);
                 Period test = new Period(startdatelocaldate, enddatelocaldate);
-//                System.out.println(Period.getAverageOutsideTemperature(startdatelocaldate, enddatelocaldate));
-//                System.out.println(Period.getAverageInsideTemperature(startdatelocaldate, enddatelocaldate));
+                System.out.println("Average outside temp: " + test.getAverageOutsideTemperature(startdatelocaldate, enddatelocaldate));
+                System.out.println("Average inside temp: " + test.getAverageInsideTemperature(startdatelocaldate, enddatelocaldate));
 
             } else if (type.equals("low")) {
 
