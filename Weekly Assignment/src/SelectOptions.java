@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SelectOptions {
+
+    private static int negativeSign = 0b10100000;
     public static void selectCurrentTemp() {
         GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
@@ -398,7 +400,9 @@ public class SelectOptions {
                     IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
                     IO.writeShort(0x20, avgoutside.charAt(3));
                 } else if (Double.parseDouble(avgoutside) < 0) {
-
+                    IO.writeShort(0x20, 0x100 | negativeSign);
+                    IO.writeShort(0x22, 0x100 | secondDigit("" + avgoutside.charAt(1)));
+                    IO.writeShort(0x24, avgoutside.charAt(2));
                 }
                 IO.writeShort(0x34, avginside.charAt(0));
                 IO.writeShort(0x32, 0x100 | secondDigit("" + avginside.charAt(1)));
