@@ -412,10 +412,25 @@ public class SelectOptions {
 
     public static void selectOtherOutsideWarmerAmount() {
 
+
     }
 
     public static void selectOtherBiggestDifference() {
-
+        GuiBoardUtilities.clrDMDisplay();
+        PrintPage.followInstructionsInConsole();
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Input start date (yyyy-mm-dd): ");
+        String startdate = reader.nextLine();
+        System.out.println("Input end date (yyyy-mm-dd): ");
+        String enddate = reader.nextLine();
+        LocalDate startdatelocaldate = LocalDate.parse(startdate);
+        LocalDate enddatelocaldate = LocalDate.parse(enddate);
+        Period test = new Period(startdatelocaldate, enddatelocaldate);
+        GuiBoardUtilities.clrDMDisplay();
+        String biggestDiff = test.biggestDifference();
+        for (int i = 0; i < biggestDiff.length(); i++) {
+            IO.writeShort(0x40, test.biggestDifference().charAt(i));
+        }
     }
 
     public static void selectOtherMostRain() {
@@ -658,7 +673,32 @@ public class SelectOptions {
                         }
                         PageSelectors.returnToFirstPage();
                     }
-                    case "deviation" -> System.out.println(test.standardDeviation("insideTemperature"));
+                    case "deviation" -> {
+                        String deviationIns = "" + test.standardDeviation("insideTemperature");
+                        String deviationOut = "" + test.standardDeviation("outsideTemperature");
+                        String deviationDMD = "Standard deviation \n Left = inside \n Right = outside";
+                        if (Double.parseDouble(deviationIns) < 10) {
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(0)));
+                            IO.writeShort(0x20, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x24, deviationIns.charAt(0));
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(1)));
+                            IO.writeShort(0x20, deviationIns.charAt(3));
+                        }
+                        if (Double.parseDouble(deviationOut) < 10) {
+                            IO.writeShort(0x32, 0x100 | secondDigit("" + deviationOut.charAt(0)));
+                            IO.writeShort(0x30, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x34, deviationOut.charAt(0));
+                            IO.writeShort(0x32, 0x100 | secondDigit("" + deviationOut.charAt(1)));
+                            IO.writeShort(0x30, deviationOut.charAt(3));
+                        }
+                        GuiBoardUtilities.clrDMDisplay();
+                        for (int i = 0; i < deviationDMD.length(); i++) {
+                            IO.writeShort(0x40, deviationDMD.charAt(i));
+                        }
+                        PageSelectors.returnToFirstPage();
+                    }
                 }
                 break;
             case "hum":
@@ -789,14 +829,36 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                     }
                     case "deviation" -> {
-                        System.out.println(test.standardDeviation("insideTemperature"));
-                        System.out.println(test.standardDeviation("outsideTemperature"));
+                        String deviationIns = "" + test.standardDeviation("insideHumidity");
+                        String deviationOut = "" + test.standardDeviation("outsideHumidity");
+                        String deviationDMD = "Standard deviation \n Left = inside \n Right = outside";
+                        if (Double.parseDouble(deviationIns) < 10) {
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(0)));
+                            IO.writeShort(0x20, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x24, deviationIns.charAt(0));
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(1)));
+                            IO.writeShort(0x20, deviationIns.charAt(3));
+                        }
+                        if (Double.parseDouble(deviationOut) < 10) {
+                            IO.writeShort(0x32, 0x100 | secondDigit("" + deviationOut.charAt(0)));
+                            IO.writeShort(0x30, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x34, deviationOut.charAt(0));
+                            IO.writeShort(0x32, 0x100 | secondDigit("" + deviationOut.charAt(1)));
+                            IO.writeShort(0x30, deviationOut.charAt(3));
+                        }
+                        GuiBoardUtilities.clrDMDisplay();
+                        for (int i = 0; i < deviationDMD.length(); i++) {
+                            IO.writeShort(0x40, deviationDMD.charAt(i));
+                        }
+                        PageSelectors.returnToFirstPage();
                     }
                 }
                 break;
             case "wind":
                 switch (type) {
-                    case "avg": {
+                    case "avg" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getAverageWindSpeed());
@@ -828,7 +890,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "low": {
+                    case "low" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getLowestWindSpeed());
@@ -860,7 +922,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "high": {
+                    case "high" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getHighestWindSpeed());
@@ -893,7 +955,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "median": {
+                    case "median" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getHighestWindSpeed());
@@ -925,7 +987,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "mode": {
+                    case "mode" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getModeWindspeed());
@@ -957,14 +1019,28 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "deviation":
-
-                        break;
+                    case "deviation" -> {
+                        String deviationIns = "" + test.standardDeviation("windSpeed");
+                        String deviationDMD = "Standard deviation";
+                        if (Double.parseDouble(deviationIns) < 10) {
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(0)));
+                            IO.writeShort(0x20, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x24, deviationIns.charAt(0));
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(1)));
+                            IO.writeShort(0x20, deviationIns.charAt(3));
+                        }
+                        GuiBoardUtilities.clrDMDisplay();
+                        for (int i = 0; i < deviationDMD.length(); i++) {
+                            IO.writeShort(0x40, deviationDMD.charAt(i));
+                        }
+                        PageSelectors.returnToFirstPage();
+                    }
                 }
                 break;
             case "airpressure":
                 switch (type) {
-                    case "avg": {
+                    case "avg" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getAverageAirPressure());
@@ -993,7 +1069,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "low": {
+                    case "low" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getLowestAirpressure());
@@ -1022,7 +1098,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "high": {
+                    case "high" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getHighestAirpressure());
@@ -1051,7 +1127,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "median": {
+                    case "median" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getMedianAirPressure());
@@ -1080,7 +1156,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "mode": {
+                    case "mode" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getModeAirpressure()
@@ -1110,14 +1186,28 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "deviation":
-
-                        break;
+                    case "deviation" -> {
+                        String deviationIns = "" + test.standardDeviation("airPressure");
+                        String deviationDMD = "Standard deviation";
+                        if (Double.parseDouble(deviationIns) < 10) {
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(0)));
+                            IO.writeShort(0x20, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x24, deviationIns.charAt(0));
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(1)));
+                            IO.writeShort(0x20, deviationIns.charAt(3));
+                        }
+                        GuiBoardUtilities.clrDMDisplay();
+                        for (int i = 0; i < deviationDMD.length(); i++) {
+                            IO.writeShort(0x40, deviationDMD.charAt(i));
+                        }
+                        PageSelectors.returnToFirstPage();
+                    }
                 }
                 break;
             case "rain":
                 switch (type) {
-                    case "avg": {
+                    case "avg" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getAverageRain());
@@ -1146,7 +1236,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "low": {
+                    case "low" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getLeastRain());
@@ -1175,7 +1265,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "high": {
+                    case "high" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getMostRain());
@@ -1204,7 +1294,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "median": {
+                    case "median" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getMedianRain());
@@ -1233,7 +1323,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "mode": {
+                    case "mode" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getModeRain());
@@ -1262,14 +1352,28 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "deviation":
-
-                        break;
+                    case "deviation" -> {
+                        String deviationIns = "" + test.standardDeviation("rain");
+                        String deviationDMD = "Standard deviation";
+                        if (Double.parseDouble(deviationIns) < 10) {
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(0)));
+                            IO.writeShort(0x20, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x24, deviationIns.charAt(0));
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(1)));
+                            IO.writeShort(0x20, deviationIns.charAt(3));
+                        }
+                        GuiBoardUtilities.clrDMDisplay();
+                        for (int i = 0; i < deviationDMD.length(); i++) {
+                            IO.writeShort(0x40, deviationDMD.charAt(i));
+                        }
+                        PageSelectors.returnToFirstPage();
+                    }
                 }
                 break;
             case "uv":
                 switch (type) {
-                    case "avg": {
+                    case "avg" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getAverageUV());
@@ -1294,7 +1398,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "low": {
+                    case "low" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getLowestUV());
@@ -1319,7 +1423,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "high": {
+                    case "high" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getHighestUV());
@@ -1344,7 +1448,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "median": {
+                    case "median" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getMedianUV());
@@ -1369,7 +1473,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "mode": {
+                    case "mode" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getModeUV());
@@ -1394,14 +1498,28 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "deviation":
-
-                        break;
+                    case "deviation" -> {
+                        String deviationIns = "" + test.standardDeviation("UV");
+                        String deviationDMD = "Standard deviation";
+                        if (Double.parseDouble(deviationIns) < 10) {
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(0)));
+                            IO.writeShort(0x20, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x24, deviationIns.charAt(0));
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(1)));
+                            IO.writeShort(0x20, deviationIns.charAt(3));
+                        }
+                        GuiBoardUtilities.clrDMDisplay();
+                        for (int i = 0; i < deviationDMD.length(); i++) {
+                            IO.writeShort(0x40, deviationDMD.charAt(i));
+                        }
+                        PageSelectors.returnToFirstPage();
+                    }
                 }
                 break;
             case "solarrad":
                 switch (type) {
-                    case "avg": {
+                    case "avg" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getAverageSolarrad());
@@ -1430,7 +1548,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "low": {
+                    case "low" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getLowestSolarrad());
@@ -1459,7 +1577,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "high": {
+                    case "high" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getHighestSolarrad());
@@ -1488,7 +1606,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "median": {
+                    case "median" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getMedianSolarrad());
@@ -1517,7 +1635,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "mode": {
+                    case "mode" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getModeSolarrad());
@@ -1546,14 +1664,28 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "deviation":
-
-                        break;
+                    case "deviation" -> {
+                        String deviationIns = "" + test.standardDeviation("solarRad");
+                        String deviationDMD = "Standard deviation";
+                        if (Double.parseDouble(deviationIns) < 10) {
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(0)));
+                            IO.writeShort(0x20, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x24, deviationIns.charAt(0));
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(1)));
+                            IO.writeShort(0x20, deviationIns.charAt(3));
+                        }
+                        GuiBoardUtilities.clrDMDisplay();
+                        for (int i = 0; i < deviationDMD.length(); i++) {
+                            IO.writeShort(0x40, deviationDMD.charAt(i));
+                        }
+                        PageSelectors.returnToFirstPage();
+                    }
                 }
                 break;
             case "dewpoint":
                 switch (type) {
-                    case "avg": {
+                    case "avg" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getAverageDewpoint());
@@ -1586,7 +1718,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "low": {
+                    case "low" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getLowestDewpoint());
@@ -1619,7 +1751,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "high": {
+                    case "high" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getHighestDewpoint());
@@ -1652,7 +1784,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "median": {
+                    case "median" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getMedianDewpoint());
@@ -1685,7 +1817,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "mode": {
+                    case "mode" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getModeDewpoint());
@@ -1718,14 +1850,28 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "deviation":
-
-                        break;
+                    case "deviation" -> {
+                        String deviationIns = "" + test.standardDeviation("dewPoint");
+                        String deviationDMD = "Standard deviation";
+                        if (Double.parseDouble(deviationIns) < 10) {
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(0)));
+                            IO.writeShort(0x20, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x24, deviationIns.charAt(0));
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(1)));
+                            IO.writeShort(0x20, deviationIns.charAt(3));
+                        }
+                        GuiBoardUtilities.clrDMDisplay();
+                        for (int i = 0; i < deviationDMD.length(); i++) {
+                            IO.writeShort(0x40, deviationDMD.charAt(i));
+                        }
+                        PageSelectors.returnToFirstPage();
+                    }
                 }
                 break;
             case "windchill":
                 switch (type) {
-                    case "avg": {
+                    case "avg" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getAverageWindchill());
@@ -1758,7 +1904,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "low": {
+                    case "low" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getLowestWindchill());
@@ -1791,7 +1937,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "high": {
+                    case "high" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getHighestWindchill());
@@ -1824,7 +1970,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "median": {
+                    case "median" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getMedianWindchill());
@@ -1857,7 +2003,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "mode": {
+                    case "mode" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getModeWindchill());
@@ -1890,14 +2036,28 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "deviation":
-
-                        break;
+                    case "deviation" -> {
+                        String deviationIns = "" + test.standardDeviation("windChill");
+                        String deviationDMD = "Standard deviation \n Left = inside \n Right = outside";
+                        if (Double.parseDouble(deviationIns) < 10) {
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(0)));
+                            IO.writeShort(0x20, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x24, deviationIns.charAt(0));
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(1)));
+                            IO.writeShort(0x20, deviationIns.charAt(3));
+                        }
+                        GuiBoardUtilities.clrDMDisplay();
+                        for (int i = 0; i < deviationDMD.length(); i++) {
+                            IO.writeShort(0x40, deviationDMD.charAt(i));
+                        }
+                        PageSelectors.returnToFirstPage();
+                    }
                 }
                 break;
             case "heatindex":
                 switch (type) {
-                    case "avg": {
+                    case "avg" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getAverageHeatindex());
@@ -1930,7 +2090,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "low": {
+                    case "low" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getLowestHeatindex());
@@ -1963,7 +2123,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "high": {
+                    case "high" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getHighestHeatindex());
@@ -1996,7 +2156,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "median": {
+                    case "median" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getMedianHeatindex());
@@ -2029,7 +2189,7 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "mode": {
+                    case "mode" -> {
                         GuiBoardUtilities.clrDMDisplay();
                         GuiBoardUtilities.clrSevenSegment();
                         String avgoutside = "" + Utilities.rounder(test.getModeHeatindex());
@@ -2062,9 +2222,23 @@ public class SelectOptions {
                         PageSelectors.returnToFirstPage();
                         break;
                     }
-                    case "deviation":
-
-                        break;
+                    case "deviation" -> {
+                        String deviationIns = "" + test.standardDeviation("heatIndex");
+                        String deviationDMD = "Standard deviation \n Left = inside \n Right = outside";
+                        if (Double.parseDouble(deviationIns) < 10) {
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(0)));
+                            IO.writeShort(0x20, deviationIns.charAt(2));
+                        } else {
+                            IO.writeShort(0x24, deviationIns.charAt(0));
+                            IO.writeShort(0x22, 0x100 | secondDigit("" + deviationIns.charAt(1)));
+                            IO.writeShort(0x20, deviationIns.charAt(3));
+                        }
+                        GuiBoardUtilities.clrDMDisplay();
+                        for (int i = 0; i < deviationDMD.length(); i++) {
+                            IO.writeShort(0x40, deviationDMD.charAt(i));
+                        }
+                        PageSelectors.returnToFirstPage();
+                    }
                 }
                 break;
         }

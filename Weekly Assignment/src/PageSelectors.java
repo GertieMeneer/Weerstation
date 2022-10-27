@@ -230,9 +230,9 @@ public class PageSelectors {
             if (IO.readShort(0x80) == 0) {
                 SelectOptions.selectOtherDifferenceWindchillTemp();
                 i = -1;
-            } else if (IO.readShort(0x100) == 0) {
+            } else if (IO.readShort(0x100) == 1) {
                 noSelection();
-                thirdPos();
+                otherPage2Selector();
                 i = -1;
             }
         }

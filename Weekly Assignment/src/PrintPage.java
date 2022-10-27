@@ -147,7 +147,7 @@ public class PrintPage {
     public static void fifthPage() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
-        String other = "Other      5/5";
+        String other = "Other           5/5";
         String gototop = "Return home";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
@@ -167,8 +167,8 @@ public class PrintPage {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
         String degreedays = "Degree days";
-        String outsidewarmeramount = "Outside warmer amount";
-        String biggestdifference = "Biggest temp difference";
+        String outsidewarmeramount = "Out warmer than ins";
+        String biggestdifference = "Biggest temp diff";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
         for (int i = 0; i < degreedays.length(); i++) {
@@ -193,7 +193,7 @@ public class PrintPage {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
         String mostrain = "Most rain in year";
-        String niek = "Difference windchill temp";
+        String niek = "Diff windchill temp";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
         for (int i = 0; i < mostrain.length(); i++) {

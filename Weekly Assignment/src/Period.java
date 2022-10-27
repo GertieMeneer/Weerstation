@@ -1154,9 +1154,7 @@ public class Period {
         return amount;
     }
 
-    public String biggestDifference(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public String biggestDifference() {
         LocalDate currentDay = beginPeriod;
         LocalDate bigDifferenceDate = beginPeriod;
         double highest;
@@ -1173,7 +1171,7 @@ public class Period {
                 bigDifferenceDate = currentDay;
             }
         }
-        return ("On " + bigDifferenceDate + " there was a difference of " + biggestDifference + "°C");
+        return ("Date = " + bigDifferenceDate + "\n Difference = " + Utilities.rounder(biggestDifference) + " C");
     }
 
     public String mostRainInGivenYear() {
