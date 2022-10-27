@@ -382,7 +382,32 @@ public class SelectOptions {
     }
 
     public static void selectOtherDegreeDays() {
-
+        Scanner reader = new Scanner(System.in);
+        PrintPage.followInstructionsInConsole();
+        System.out.println("Input start date (yyyy-mm-dd): ");
+        String startdate = reader.nextLine();
+        System.out.println("Input end date (yyyy-mm-dd): ");
+        String enddate = reader.nextLine();
+        LocalDate startdatelocaldate = LocalDate.parse(startdate);
+        LocalDate enddatelocaldate = LocalDate.parse(enddate);
+        Period test = new Period(startdatelocaldate, enddatelocaldate);
+        GuiBoardUtilities.clrSevenSegment();
+        GuiBoardUtilities.clrDMDisplay();
+        String graaddagen = "Left: \n Degree days amount";
+        String amount = "" + Utilities.rounder(test.aantalGraaddagen());
+        for (int i = 0; i < graaddagen.length(); i++) {
+            IO.writeShort(0x40, graaddagen.charAt(i));
+        }
+        if(Double.parseDouble(amount) < 10) {
+            IO.writeShort(0x24, 0x100 | secondDigit("" + amount.charAt(0)));
+            IO.writeShort(0x22, amount.charAt(2));
+        } else {
+            IO.writeShort(0x24, amount.charAt(0));
+            IO.writeShort(0x22, 0x100 | secondDigit("" + amount.charAt(1)));
+            IO.writeShort(0x20, amount.charAt(3));
+        }
+        IO.writeShort(0x42, 1);
+        PageSelectors.returnToFirstPage();
     }
 
     public static void selectOtherOutsideWarmerAmount() {

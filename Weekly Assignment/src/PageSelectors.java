@@ -158,7 +158,7 @@ public class PageSelectors {
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
                 PrintPage.selectOtherPage1();
-
+                otherPage1Selector();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -183,7 +183,7 @@ public class PageSelectors {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 0) {
-                PrintPage.selectOtherPage1();
+                SelectOptions.selectOtherDegreeDays();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -193,8 +193,7 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 0) {
-                PrintPage.selectOtherPage1();
-
+                SelectOptions.selectOtherOutsideWarmerAmount();
                 i = -1;
             } else if (IO.readShort(0x100) == 0) {
                 noSelection();
@@ -204,8 +203,7 @@ public class PageSelectors {
         }
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 0) {
-                PrintPage.selectOtherPage1();
-
+                SelectOptions.selectOtherBiggestDifference();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -218,6 +216,26 @@ public class PageSelectors {
 
     public static void otherPage2Selector() {
         firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                SelectOptions.selectOtherMostRain();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                SelectOptions.selectOtherDifferenceWindchillTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                thirdPos();
+                i = -1;
+            }
+        }
     }
 
     public static void  selectCurrentOrCustomPage(String value) {

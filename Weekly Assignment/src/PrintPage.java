@@ -147,12 +147,12 @@ public class PrintPage {
     public static void fifthPage() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
-        String returnhome = "Among us      5/5";
-        String gototop = "Other";
+        String other = "Other      5/5";
+        String gototop = "Return home";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
-        for (int i = 0; i < returnhome.length() ; i++) {
-            IO.writeShort(0x40, returnhome.charAt(i));
+        for (int i = 0; i < other.length() ; i++) {
+            IO.writeShort(0x40, other.charAt(i));
         }
         IO.writeShort(0x40, '\n');
         IO.writeShort(0x40, ' ');
@@ -284,6 +284,15 @@ public class PrintPage {
             IO.writeShort(0x40, selectcustom.charAt(i));
         }
         SelectOptions.selectCustomPeriod(value, type);
+    }
+
+    public static void followInstructionsInConsole() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String selectcustom = "Follow instructions \n in console";
+        for (int i = 0; i < selectcustom.length(); i++) {
+            IO.writeShort(0x40, selectcustom.charAt(i));
+        }
     }
 
 
