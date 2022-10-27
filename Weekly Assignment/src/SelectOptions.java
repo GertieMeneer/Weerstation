@@ -419,7 +419,18 @@ public class SelectOptions {
     }
 
     public static void selectOtherMostRain() {
-
+        GuiBoardUtilities.clrDMDisplay();
+        PrintPage.followInstructionsInConsole();
+        Scanner reader = new Scanner(System.in);
+        System.out.print("Enter a year: ");
+        String year = reader.nextLine();
+        Period yearToCheck = new Period(year);
+        String monthDMD = "Month with \n most rain: \n " + yearToCheck.mostRainInGivenYear();
+        GuiBoardUtilities.clrDMDisplay();
+        for (int i = 0; i < monthDMD.length(); i++) {
+            IO.writeShort(0x40, monthDMD.charAt(i));
+        }
+        PageSelectors.returnToFirstPage();
     }
 
     public static void selectOtherDifferenceWindchillTemp() {

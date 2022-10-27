@@ -1318,7 +1318,7 @@ public class Period {
             case 11 -> "december";
             default -> "null";
         };
-        return "The month with the most rain in " + year + " was " + monthWithMostRain;
+        return monthWithMostRain;
     }
 }
 
