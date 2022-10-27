@@ -5,6 +5,22 @@ import java.util.Scanner;
 public class SelectOptions {
 
     private static int negativeSign = 0x40;
+
+    public static int secondDigit(String secondDigit) {
+        return switch (secondDigit) {
+            case "0" -> 0b10111111;
+            case "1" -> 0b10000110;
+            case "2" -> 0b11011011;
+            case "3" -> 0b11001111;
+            case "4" -> 0b11100110;
+            case "5" -> 0b11101101;
+            case "6" -> 0b11111101;
+            case "7" -> 0b10000111;
+            case "8" -> 0b11111111;
+            case "9" -> 0b11101111;
+            default -> throw new IllegalStateException("Unexpected value");
+        };
+    }
     public static void selectCurrentTemp() {
         GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
@@ -365,21 +381,27 @@ public class SelectOptions {
         PageSelectors.returnToFirstPage();
     }
 
-    public static int secondDigit(String secondDigit) {
-        return switch (secondDigit) {
-            case "0" -> 0b10111111;
-            case "1" -> 0b10000110;
-            case "2" -> 0b11011011;
-            case "3" -> 0b11001111;
-            case "4" -> 0b11100110;
-            case "5" -> 0b11101101;
-            case "6" -> 0b11111101;
-            case "7" -> 0b10000111;
-            case "8" -> 0b11111111;
-            case "9" -> 0b11101111;
-            default -> throw new IllegalStateException("Unexpected value");
-        };
+    public static void selectOtherDegreeDays() {
+
     }
+
+    public static void selectOtherOutsideWarmerAmount() {
+
+    }
+
+    public static void selectOtherBiggestDifference() {
+
+    }
+
+    public static void selectOtherMostRain() {
+
+    }
+
+    public static void selectOtherDifferenceWindchillTemp() {
+
+    }
+
+
 
     public static void selectReturnHome() {
         GuiBoardUtilities.clrDMDisplay();

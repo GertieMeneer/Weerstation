@@ -157,7 +157,8 @@ public class PageSelectors {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectReturnHome();
+                PrintPage.selectOtherPage1();
+
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -171,8 +172,52 @@ public class PageSelectors {
                 PrintPage.firstPage();
                 firstPageSelector();
                 i = -1;
+            } else if (IO.readShort(0x80) == 1) {
+                SelectOptions.selectReturnHome();
+                i = -1;
             }
         }
+    }
+
+    public static void otherPage1Selector() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                PrintPage.selectOtherPage1();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                PrintPage.selectOtherPage1();
+
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                thirdPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                PrintPage.selectOtherPage1();
+
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                PrintPage.selectOtherPage2();
+                otherPage2Selector();
+                i = -1;
+            }
+        }
+    }
+
+    public static void otherPage2Selector() {
+        firstPos();
     }
 
     public static void  selectCurrentOrCustomPage(String value) {
