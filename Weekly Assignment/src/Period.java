@@ -125,12 +125,7 @@ public class Period {
         double value = 0;
         int measurementCount = measurements.size();
         for (Measurement measurement : measurements) {
-            if (measurement.getOutsideTemperature() < 50) {
-                value += measurement.getOutsideTemperature();
-            } else {
-                measurementCount--;
-            }
-
+            value += measurement.getOutsideTemperature();
         }
         value /= measurementCount;
         return Utilities.rounder(value);
@@ -141,11 +136,7 @@ public class Period {
         double value = 0;
         int measurementCount = measurements.size();
         for (Measurement measurement : measurements) {
-            if (measurement.getInsideTemperature() < 50) {
-                value += measurement.getInsideTemperature();
-            } else {
-                measurementCount--;
-            }
+            value += measurement.getInsideTemperature();
         }
         value /= measurementCount;
         return Utilities.rounder(value);
@@ -174,10 +165,11 @@ public class Period {
     public double getAverageAirPressure() {
         getMeasurements();
         double value = 0;
+        int measurementCount = measurements.size();
         for (Measurement measurement : measurements) {
             value += measurement.getAirPressure();
         }
-        value /= measurements.size();
+        value /= measurementCount;
         return Utilities.rounder(value);
     }
 
@@ -201,8 +193,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getOutsideTemperature() < value) {
                 value = measures.getOutsideTemperature();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -220,8 +210,6 @@ public class Period {
     }
 
     public double getLowestInsideTemp() {
-//        this.beginPeriod = beginPeriod;
-//        this.endPeriod = endPeriod;
         getMeasurements();
         double value = measurements.get(0).getInsideTemperature();
         for (Measurement measures : measurements) {
@@ -553,7 +541,7 @@ public class Period {
         getMeasurements();
         double value = 0;
         for (Measurement measurement : measurements) {
-            value += measurement.getWindSpeed();
+                value += measurement.getWindSpeed();
         }
         value /= measurements.size();
         return Utilities.rounder(value);
@@ -623,8 +611,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() < value) {
                 value = measures.getRainRate();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -636,8 +622,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() > value) {
                 value = measures.getRainRate();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -695,8 +679,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() < value) {
                 value = measures.getUVLevel();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -708,8 +690,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() > value) {
                 value = measures.getUVLevel();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -767,8 +747,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() < value) {
                 value = measures.getSolarRad();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -780,8 +758,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() > value) {
                 value = measures.getSolarRad();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -839,8 +815,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() < value) {
                 value = measures.getDewPoint();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -852,8 +826,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() > value) {
                 value = measures.getDewPoint();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -911,8 +883,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() < value) {
                 value = measures.getWindChill();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -924,8 +894,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() > value) {
                 value = measures.getWindChill();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -983,8 +951,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() < value) {
                 value = measures.getHeatIndex();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);
@@ -996,8 +962,6 @@ public class Period {
         for (Measurement measures : measurements) {
             if (measures.getRainRate() > value) {
                 value = measures.getHeatIndex();
-            } else {
-                value = value;
             }
         }
         return Utilities.rounder(value);

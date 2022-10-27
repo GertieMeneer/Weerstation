@@ -142,7 +142,8 @@ public class Measurement {
     }
 
     public boolean isValid() {
-        return true;
+        return outsideTemperature < 50 && outsideTemperature > -20 && insideTemperature < 50 && insideTemperature > -20 && airPressure > 950 && airPressure < 1050
+                && windSpeed < 140 && rainRate < 50;
     }
 
 
