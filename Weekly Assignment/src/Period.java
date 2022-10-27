@@ -1295,7 +1295,7 @@ public class Period {
         }
         rain.add(decemberRain);
         //for each that finds the month with the most amount of rain
-        double mostRain = 0;
+        double mostRain = 0.0;
         int indexOfMostRain = 0;
         for (double rainAmount : rain) {
             if (rainAmount > mostRain) {
@@ -1303,7 +1303,7 @@ public class Period {
                 indexOfMostRain = rain.indexOf(rainAmount);
             }
         }
-        String monthWithMostRain = switch (indexOfMostRain) {
+        return switch (indexOfMostRain) {
             case 0 -> "january";
             case 1 -> "february";
             case 2 -> "march";
@@ -1318,7 +1318,6 @@ public class Period {
             case 11 -> "december";
             default -> "null";
         };
-        return monthWithMostRain;
     }
 }
 
