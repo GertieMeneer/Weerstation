@@ -147,7 +147,7 @@ public class PrintPage {
     public static void fifthPage() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
-        String returnhome = "Return home    5/5";
+        String returnhome = "Return home     5/5";
         String gototop = "END OF LIST";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');

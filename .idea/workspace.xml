@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8166e110-434b-4922-aca4-26cd764ea230" name="Changes" comment="newest">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/PageSelectors.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/PageSelectors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Weekly Assignment/src/PrintPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Weekly Assignment/src/PrintPage.java" afterDir="false" />
     </list>
@@ -145,6 +146,8 @@
       <workItem from="1666707063267" duration="4850000" />
       <workItem from="1666766892421" duration="921000" />
       <workItem from="1666768596531" duration="5092000" />
+      <workItem from="1666808424692" duration="2657000" />
+      <workItem from="1666852399484" duration="54000" />
     </task>
     <task id="LOCAL-00001" summary="yes">
       <created>1666005657038</created>
@@ -363,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666791630162</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="newest">
+      <created>1666792109710</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1666792109710</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="ToolWindowManager">

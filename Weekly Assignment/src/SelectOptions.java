@@ -30,9 +30,22 @@ public class SelectOptions {
 
     public static void displayTemps(Period now, ArrayList<Measurement> measurements) {
         String outsideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideTemperature());
-        IO.writeShort(0x24, outsideTemp.charAt(0));
-        IO.writeShort(0x22, 0x100 | secondDigit("" + outsideTemp.charAt(1)));
-        IO.writeShort(0x20, outsideTemp.charAt(3));
+        if (Double.parseDouble(outsideTemp) >= 0 && Double.parseDouble(outsideTemp) < 10) {
+            IO.writeShort(0x24, 0x100 | secondDigit("" + outsideTemp.charAt(0)));
+            IO.writeShort(0x22, outsideTemp.charAt(2));
+        } else if (Double.parseDouble(outsideTemp) >= 10 && Double.parseDouble(outsideTemp) < 100) {
+            IO.writeShort(0x24, outsideTemp.charAt(0));
+            IO.writeShort(0x22, 0x100 | secondDigit("" + outsideTemp.charAt(1)));
+            IO.writeShort(0x20, outsideTemp.charAt(3));
+        } else if (Double.parseDouble(outsideTemp) < 0 && Double.parseDouble(outsideTemp) > -10) {
+            IO.writeShort(0x24, 0x100 | negativeSign);
+            IO.writeShort(0x22, 0x100 | secondDigit("" + outsideTemp.charAt(1)));
+            IO.writeShort(0x20, outsideTemp.charAt(3));
+        } else if (Double.parseDouble(outsideTemp) < -10) {
+            IO.writeShort(0x24, 0x100 | negativeSign);
+            IO.writeShort(0x22, outsideTemp.charAt(1));
+            IO.writeShort(0x22, outsideTemp.charAt(2));
+        }
         String insideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getInsideTemperature());
         IO.writeShort(0x34, insideTemp.charAt(0));
         IO.writeShort(0x32, 0x100 | secondDigit("" + insideTemp.charAt(1)));

@@ -175,10 +175,10 @@ public class PageSelectors {
         }
     }
 
-    public static void selectCurrentOrCustomPage(String value) {
+    public static void  selectCurrentOrCustomPage(String value) {
         firstPos();
         int selectoption = 0;
-        if(value.equals("temp")) {
+        if (value.equals("temp")) {
             selectoption = 0;
         } else if (value.equals("hum")) {
             selectoption = 1;
@@ -227,6 +227,9 @@ public class PageSelectors {
                 noSelection();
                 secondPos();
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -239,6 +242,9 @@ public class PageSelectors {
                 firstPos();
                 selectCurrentOrCustomPage(value);
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
     }
@@ -253,6 +259,9 @@ public class PageSelectors {
                 noSelection();
                 secondPos();
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -263,6 +272,9 @@ public class PageSelectors {
                 noSelection();
                 thirdPos();
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -274,9 +286,13 @@ public class PageSelectors {
                 PrintPage.selectCustomInfoPage2();
                 selectCustomInfoTempPage2(value);
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
     }
+
     public static void selectCustomInfoTempPage2(String value) {
         firstPos();
         for (int i = 1; i > 0; i++) {
@@ -287,6 +303,9 @@ public class PageSelectors {
                 noSelection();
                 secondPos();
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -297,6 +316,9 @@ public class PageSelectors {
                 noSelection();
                 thirdPos();
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -309,6 +331,9 @@ public class PageSelectors {
                 PrintPage.selectCustomInfoPage1();
                 selectCustomInfoTempPage1(value);
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
     }
