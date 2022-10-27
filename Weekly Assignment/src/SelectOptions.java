@@ -5,6 +5,22 @@ import java.util.Scanner;
 public class SelectOptions {
 
     private static int negativeSign = 0x40;
+
+    public static int secondDigit(String secondDigit) {
+        return switch (secondDigit) {
+            case "0" -> 0b10111111;
+            case "1" -> 0b10000110;
+            case "2" -> 0b11011011;
+            case "3" -> 0b11001111;
+            case "4" -> 0b11100110;
+            case "5" -> 0b11101101;
+            case "6" -> 0b11111101;
+            case "7" -> 0b10000111;
+            case "8" -> 0b11111111;
+            case "9" -> 0b11101111;
+            default -> throw new IllegalStateException("Unexpected value");
+        };
+    }
     public static void selectCurrentTemp() {
         GuiBoardUtilities.clrDMDisplay();
         Period now = new Period();
@@ -30,9 +46,22 @@ public class SelectOptions {
 
     public static void displayTemps(Period now, ArrayList<Measurement> measurements) {
         String outsideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getOutsideTemperature());
-        IO.writeShort(0x24, outsideTemp.charAt(0));
-        IO.writeShort(0x22, 0x100 | secondDigit("" + outsideTemp.charAt(1)));
-        IO.writeShort(0x20, outsideTemp.charAt(3));
+        if (Double.parseDouble(outsideTemp) >= 0 && Double.parseDouble(outsideTemp) < 10) {
+            IO.writeShort(0x24, 0x100 | secondDigit("" + outsideTemp.charAt(0)));
+            IO.writeShort(0x22, outsideTemp.charAt(2));
+        } else if (Double.parseDouble(outsideTemp) >= 10 && Double.parseDouble(outsideTemp) < 100) {
+            IO.writeShort(0x24, outsideTemp.charAt(0));
+            IO.writeShort(0x22, 0x100 | secondDigit("" + outsideTemp.charAt(1)));
+            IO.writeShort(0x20, outsideTemp.charAt(3));
+        } else if (Double.parseDouble(outsideTemp) < 0 && Double.parseDouble(outsideTemp) > -10) {
+            IO.writeShort(0x24, 0x100 | negativeSign);
+            IO.writeShort(0x22, 0x100 | secondDigit("" + outsideTemp.charAt(1)));
+            IO.writeShort(0x20, outsideTemp.charAt(3));
+        } else if (Double.parseDouble(outsideTemp) < -10) {
+            IO.writeShort(0x24, 0x100 | negativeSign);
+            IO.writeShort(0x22, outsideTemp.charAt(1));
+            IO.writeShort(0x22, outsideTemp.charAt(2));
+        }
         String insideTemp = "" + Utilities.rounder(now.getMeasurements().get(measurements.size() - 1).getInsideTemperature());
         IO.writeShort(0x34, insideTemp.charAt(0));
         IO.writeShort(0x32, 0x100 | secondDigit("" + insideTemp.charAt(1)));
@@ -352,21 +381,52 @@ public class SelectOptions {
         PageSelectors.returnToFirstPage();
     }
 
-    public static int secondDigit(String secondDigit) {
-        return switch (secondDigit) {
-            case "0" -> 0b10111111;
-            case "1" -> 0b10000110;
-            case "2" -> 0b11011011;
-            case "3" -> 0b11001111;
-            case "4" -> 0b11100110;
-            case "5" -> 0b11101101;
-            case "6" -> 0b11111101;
-            case "7" -> 0b10000111;
-            case "8" -> 0b11111111;
-            case "9" -> 0b11101111;
-            default -> throw new IllegalStateException("Unexpected value");
-        };
+    public static void selectOtherDegreeDays() {
+        Scanner reader = new Scanner(System.in);
+        PrintPage.followInstructionsInConsole();
+        System.out.println("Input start date (yyyy-mm-dd): ");
+        String startdate = reader.nextLine();
+        System.out.println("Input end date (yyyy-mm-dd): ");
+        String enddate = reader.nextLine();
+        LocalDate startdatelocaldate = LocalDate.parse(startdate);
+        LocalDate enddatelocaldate = LocalDate.parse(enddate);
+        Period test = new Period(startdatelocaldate, enddatelocaldate);
+        GuiBoardUtilities.clrSevenSegment();
+        GuiBoardUtilities.clrDMDisplay();
+        String graaddagen = "Left: \n Degree days amount";
+        String amount = "" + Utilities.rounder(test.aantalGraaddagen());
+        for (int i = 0; i < graaddagen.length(); i++) {
+            IO.writeShort(0x40, graaddagen.charAt(i));
+        }
+        if(Double.parseDouble(amount) < 10) {
+            IO.writeShort(0x24, 0x100 | secondDigit("" + amount.charAt(0)));
+            IO.writeShort(0x22, amount.charAt(2));
+        } else {
+            IO.writeShort(0x24, amount.charAt(0));
+            IO.writeShort(0x22, 0x100 | secondDigit("" + amount.charAt(1)));
+            IO.writeShort(0x20, amount.charAt(3));
+        }
+        IO.writeShort(0x42, 1);
+        PageSelectors.returnToFirstPage();
     }
+
+    public static void selectOtherOutsideWarmerAmount() {
+
+    }
+
+    public static void selectOtherBiggestDifference() {
+
+    }
+
+    public static void selectOtherMostRain() {
+
+    }
+
+    public static void selectOtherDifferenceWindchillTemp() {
+
+    }
+
+
 
     public static void selectReturnHome() {
         GuiBoardUtilities.clrDMDisplay();

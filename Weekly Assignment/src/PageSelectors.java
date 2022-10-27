@@ -157,7 +157,8 @@ public class PageSelectors {
         firstPos();
         for (int i = 1; i > 0; i++) {
             if (IO.readShort(0x80) == 1) {
-                SelectOptions.selectReturnHome();
+                PrintPage.selectOtherPage1();
+                otherPage1Selector();
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
@@ -171,14 +172,76 @@ public class PageSelectors {
                 PrintPage.firstPage();
                 firstPageSelector();
                 i = -1;
+            } else if (IO.readShort(0x80) == 1) {
+                SelectOptions.selectReturnHome();
+                i = -1;
             }
         }
     }
 
-    public static void selectCurrentOrCustomPage(String value) {
+    public static void otherPage1Selector() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                SelectOptions.selectOtherDegreeDays();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                SelectOptions.selectOtherOutsideWarmerAmount();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                thirdPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                SelectOptions.selectOtherBiggestDifference();
+                i = -1;
+            } else if (IO.readShort(0x100) == 1) {
+                noSelection();
+                PrintPage.selectOtherPage2();
+                otherPage2Selector();
+                i = -1;
+            }
+        }
+    }
+
+    public static void otherPage2Selector() {
+        firstPos();
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                SelectOptions.selectOtherMostRain();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                secondPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x80) == 0) {
+                SelectOptions.selectOtherDifferenceWindchillTemp();
+                i = -1;
+            } else if (IO.readShort(0x100) == 0) {
+                noSelection();
+                thirdPos();
+                i = -1;
+            }
+        }
+    }
+
+    public static void  selectCurrentOrCustomPage(String value) {
         firstPos();
         int selectoption = 0;
-        if(value.equals("temp")) {
+        if (value.equals("temp")) {
             selectoption = 0;
         } else if (value.equals("hum")) {
             selectoption = 1;
@@ -227,6 +290,9 @@ public class PageSelectors {
                 noSelection();
                 secondPos();
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -239,6 +305,9 @@ public class PageSelectors {
                 firstPos();
                 selectCurrentOrCustomPage(value);
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
     }
@@ -253,6 +322,9 @@ public class PageSelectors {
                 noSelection();
                 secondPos();
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -263,6 +335,9 @@ public class PageSelectors {
                 noSelection();
                 thirdPos();
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -274,9 +349,13 @@ public class PageSelectors {
                 PrintPage.selectCustomInfoPage2();
                 selectCustomInfoTempPage2(value);
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
     }
+
     public static void selectCustomInfoTempPage2(String value) {
         firstPos();
         for (int i = 1; i > 0; i++) {
@@ -287,6 +366,9 @@ public class PageSelectors {
                 noSelection();
                 secondPos();
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -297,6 +379,9 @@ public class PageSelectors {
                 noSelection();
                 thirdPos();
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
         for (int i = 1; i > 0; i++) {
@@ -309,6 +394,9 @@ public class PageSelectors {
                 PrintPage.selectCustomInfoPage1();
                 selectCustomInfoTempPage1(value);
                 i = -1;
+            } else if (IO.readShort(0x90) == 1) {
+                noSelection();
+                returnToFirstPage();
             }
         }
     }

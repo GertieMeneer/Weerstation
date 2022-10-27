@@ -147,18 +147,63 @@ public class PrintPage {
     public static void fifthPage() {
         GuiBoardUtilities.clrDMDisplay();
         GuiBoardUtilities.clrSevenSegment();
-        String returnhome = "Return home    5/5";
-        String gototop = "END OF LIST";
+        String other = "Other      5/5";
+        String gototop = "Return home";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
-        for (int i = 0; i < returnhome.length() ; i++) {
-            IO.writeShort(0x40, returnhome.charAt(i));
+        for (int i = 0; i < other.length() ; i++) {
+            IO.writeShort(0x40, other.charAt(i));
         }
         IO.writeShort(0x40, '\n');
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
         for (int i = 0; i < gototop.length(); i++) {
             IO.writeShort(0x40, gototop.charAt(i));
+        }
+        IO.writeShort(0x42, 1);
+    }
+
+    public static void selectOtherPage1() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String degreedays = "Degree days";
+        String outsidewarmeramount = "Outside warmer amount";
+        String biggestdifference = "Biggest temp difference";
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < degreedays.length(); i++) {
+            IO.writeShort(0x40, degreedays.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < outsidewarmeramount.length(); i++) {
+            IO.writeShort(0x40, outsidewarmeramount.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < biggestdifference.length(); i++) {
+            IO.writeShort(0x40, biggestdifference.charAt(i));
+        }
+        IO.writeShort(0x42, 1);
+    }
+
+    public static void selectOtherPage2() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String mostrain = "Most rain in year";
+        String niek = "Difference windchill temp";
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < mostrain.length(); i++) {
+            IO.writeShort(0x40, mostrain.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < niek.length(); i++) {
+            IO.writeShort(0x40, niek.charAt(i));
         }
         IO.writeShort(0x42, 1);
     }
@@ -239,6 +284,15 @@ public class PrintPage {
             IO.writeShort(0x40, selectcustom.charAt(i));
         }
         SelectOptions.selectCustomPeriod(value, type);
+    }
+
+    public static void followInstructionsInConsole() {
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String selectcustom = "Follow instructions \n in console";
+        for (int i = 0; i < selectcustom.length(); i++) {
+            IO.writeShort(0x40, selectcustom.charAt(i));
+        }
     }
 
 
