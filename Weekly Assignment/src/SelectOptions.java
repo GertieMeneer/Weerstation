@@ -311,7 +311,7 @@ public class SelectOptions {
             IO.writeShort(0x32, otherbatt.charAt(1));
             IO.writeShort(0x30, otherbatt.charAt(2));
         }
-        String battsDMD = "Current battery stats \n Left: xmit (%) \n Right: otherbat";
+        String battsDMD = "Current battery stats \n Left: xmit bat (%) \n Right: other bat";
         for (int i = 0; i < battsDMD.length(); i++) {
             IO.writeShort(0x40, battsDMD.charAt(i));
         }
