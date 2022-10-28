@@ -422,6 +422,11 @@ public class SelectOptions {
         Period test = new Period(startdatelocaldate, enddatelocaldate);
         GuiBoardUtilities.clrSevenSegment();
         GuiBoardUtilities.clrDMDisplay();
+        String overtakes = "Amount of overtakes: \n" + test.getTempDifference();
+        for (int i = 0; i < overtakes.length() - 2; i++) {
+            IO.writeShort(0x40, overtakes.charAt(i));
+        }
+        PageSelectors.returnToFirstPage();
 
 
     }
