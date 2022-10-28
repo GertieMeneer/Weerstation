@@ -194,6 +194,7 @@ public class PrintPage {
         GuiBoardUtilities.clrSevenSegment();
         String mostrain = "Most rain in year";
         String niek = "Diff windchill temp";
+        String endpage = "End of list";
         IO.writeShort(0x40, ' ');
         IO.writeShort(0x40, ' ');
         for (int i = 0; i < mostrain.length(); i++) {
@@ -204,6 +205,12 @@ public class PrintPage {
         IO.writeShort(0x40, ' ');
         for (int i = 0; i < niek.length(); i++) {
             IO.writeShort(0x40, niek.charAt(i));
+        }
+        IO.writeShort(0x40, '\n');
+        IO.writeShort(0x40, ' ');
+        IO.writeShort(0x40, ' ');
+        for (int i = 0; i < endpage.length(); i++) {
+            IO.writeShort(0x40, endpage.charAt(i));
         }
         IO.writeShort(0x42, 1);
     }

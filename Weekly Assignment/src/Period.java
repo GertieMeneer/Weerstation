@@ -173,19 +173,6 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    /**
-     * Todo
-     */
-    public ArrayList<Period> hasHeatWave() {
-        return null;
-    }
-
-    /**
-     * Todo
-     */
-    public Period longestDraught() {
-        return new Period();
-    }
 
     public double getLowestOutsideTemp() {
         getMeasurements();
@@ -297,9 +284,6 @@ public class Period {
         return Utilities.rounder(value);
     }
 
-    /**
-     * Todo more methods
-     */
     public double getTempDifference() {
         boolean higher = false; // false inside true outside
         boolean raise1 = false;
@@ -333,9 +317,7 @@ public class Period {
         return outsideCount + insideCount;
     }
 
-    public String windChillAndOutsideTemperatureDifference(LocalDate beginPeriod, LocalDate endPeriod) {
-        this.beginPeriod = beginPeriod;
-        this.endPeriod = endPeriod;
+    public String windChillAndOutsideTemperatureDifference() {
         getMeasurements();
         double outsideTemperature = measurements.get(0).getOutsideTemperature();
         double windChill = measurements.get(0).getWindChill();
@@ -353,7 +335,7 @@ public class Period {
                 date = beginPeriod.plusDays((int) Math.floor(i / 1440));
             }
         }
-        return "Grootste verschil tussen outsideTemperature en windChill = " + Utilities.rounder(highestDifference) + "\nDate = " + date;
+        return "" + Utilities.rounder(highestDifference) + " on " + date;
     }
 
     public double getMedianOutsideTemperature() {

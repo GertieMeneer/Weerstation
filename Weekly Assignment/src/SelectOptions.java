@@ -411,6 +411,17 @@ public class SelectOptions {
     }
 
     public static void selectOtherOutsideWarmerAmount() {
+        Scanner reader = new Scanner(System.in);
+        PrintPage.followInstructionsInConsole();
+        System.out.println("Input start date (yyyy-mm-dd): ");
+        String startdate = reader.nextLine();
+        System.out.println("Input end date (yyyy-mm-dd): ");
+        String enddate = reader.nextLine();
+        LocalDate startdatelocaldate = LocalDate.parse(startdate);
+        LocalDate enddatelocaldate = LocalDate.parse(enddate);
+        Period test = new Period(startdatelocaldate, enddatelocaldate);
+        GuiBoardUtilities.clrSevenSegment();
+        GuiBoardUtilities.clrDMDisplay();
 
 
     }
@@ -449,7 +460,22 @@ public class SelectOptions {
     }
 
     public static void selectOtherDifferenceWindchillTemp() {
-
+        PrintPage.followInstructionsInConsole();
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Input start date (yyyy-mm-dd): ");
+        String startdate = reader.nextLine();
+        System.out.println("Input end date (yyyy-mm-dd): ");
+        String enddate = reader.nextLine();
+        LocalDate startdatelocaldate = LocalDate.parse(startdate);
+        LocalDate enddatelocaldate = LocalDate.parse(enddate);
+        Period test = new Period(startdatelocaldate, enddatelocaldate);
+        GuiBoardUtilities.clrDMDisplay();
+        GuiBoardUtilities.clrSevenSegment();
+        String text = "Biggest difference \n windchill & temp is \n" + test.windChillAndOutsideTemperatureDifference();
+        for (int i = 0; i < text.length(); i++) {
+            IO.writeShort(0x40, text.charAt(i));
+        }
+        PageSelectors.returnToFirstPage();
     }
 
 

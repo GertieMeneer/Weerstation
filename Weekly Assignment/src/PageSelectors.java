@@ -232,7 +232,15 @@ public class PageSelectors {
                 i = -1;
             } else if (IO.readShort(0x100) == 1) {
                 noSelection();
-                otherPage2Selector();
+                thirdPos();
+                i = -1;
+            }
+        }
+        for (int i = 1; i > 0; i++) {
+            if (IO.readShort(0x100) == 0) {
+                noSelection();
+                PrintPage.selectOtherPage1();
+                otherPage1Selector();
                 i = -1;
             }
         }
