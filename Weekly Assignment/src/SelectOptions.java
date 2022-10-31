@@ -445,8 +445,9 @@ public class SelectOptions {
         GuiBoardUtilities.clrDMDisplay();
         String biggestDiff = test.biggestDifference();
         for (int i = 0; i < biggestDiff.length(); i++) {
-            IO.writeShort(0x40, test.biggestDifference().charAt(i));
+            IO.writeShort(0x40, biggestDiff.charAt(i));
         }
+        PageSelectors.returnToFirstPage();
     }
 
     public static void selectOtherMostRain() {
